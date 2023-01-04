@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collisions">
+      <UniqueIdentifier>{b21c75b1-3344-47ec-9cce-ae18c8f772b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ch_MainCharacter.cpp" />
+    <ClCompile Include="AC_FirstPersonCamera.cpp" />
+    <ClCompile Include="P_Collision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Gravity.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ch_MainCharacter.h" />
+    <ClInclude Include="AC_FirstPersonCamera.h" />
+    <ClInclude Include="P_Collision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Gravity.h" />
+  </ItemGroup>
+</Project>
