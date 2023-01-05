@@ -16,6 +16,7 @@ public:
 	void Update();
 
 	Camera& GetCamera() { return camera.GetCamera(); }
+	AC_FirstPersonCamera& GetFirstPersonCam() { return camera; }
 
 	void ProcessInputs();
 

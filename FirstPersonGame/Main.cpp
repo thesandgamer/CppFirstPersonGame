@@ -9,7 +9,12 @@
 #include "CollisionManager.h"
 #include "CubeActor.h"
 
+
+//++ToDo Graphiques à faire:
 //++ToDo rajouter une skybox https://www.raylib.com/examples/models/loader.html?name=models_skybox
+//++ToDo rajouter lighting https://www.raylib.com/examples/shaders/loader.html?name=shaders_basic_lighting
+//++ToDo rajouter post process hachurer et le colorer pour rendu cool https://www.raylib.com/examples/shaders/loader.html?name=shaders_postprocessing
+//++ToDO rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
 
 using namespace std;
 
@@ -26,7 +31,7 @@ int const screenHeight = 540;
 Ch_MainCharacter character;
 CollisionManager collisionManager;
 
-std::vector<CubeActor*> Terrain;
+std::vector<CubeActor*> Terrain; //Stoquage des acteurs obstacles et sol
 
 
 int main(int argc, char* argv[])
@@ -71,7 +76,7 @@ void Start()
 
 
     
-    const int MAX_COLUMNS = 16;
+    const int MAX_COLUMNS = 30;
 
     float heights[MAX_COLUMNS] = { 0 };
     Vector3 positions[MAX_COLUMNS] = { 0 };
@@ -79,8 +84,8 @@ void Start()
 
     for (int i = 0; i < MAX_COLUMNS; i++)
     {
-        Vector3 scale = { GetRandomValue(1, 15), GetRandomValue(1, 15), GetRandomValue(1,12) };
-        Vector3 positions = { (float)GetRandomValue(-15, 15), scale.y / 2.0f, (float)GetRandomValue(-15, 15) };
+        Vector3 scale = { GetRandomValue(1, 5), GetRandomValue(4, 15), GetRandomValue(1,8) };
+        Vector3 positions = { GetRandomValue(-15, 15), GetRandomValue(scale.y / 2.0f,scale.y ), GetRandomValue(-15, 15) };
         Color color = { GetRandomValue(169, 122), GetRandomValue(109, 89), GetRandomValue(163, 128), 255 };
         Terrain.push_back(new CubeActor(
             positions,
@@ -137,5 +142,8 @@ void Draw()
 
 void DrawUi()
 {
+    DrawText(TextFormat("rot x: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.x), 10, 10, 10, WHITE);
+    DrawText(TextFormat("rot y: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.y), 10, 20 , 10, WHITE);
+    DrawText(TextFormat("rot z: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.z), 10, 30, 10, WHITE);
 
 }

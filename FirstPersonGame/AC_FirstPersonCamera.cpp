@@ -85,6 +85,8 @@ void AC_FirstPersonCamera::CameraControl()
     transform->translation = cam.position;
     transform->rotation = QuaternionFromMatrix(rotation);*/
 
+    offsetTransform.rotation = QuaternionFromMatrix(rotation);
+
 
 
     //---------------Head wobble-----------------

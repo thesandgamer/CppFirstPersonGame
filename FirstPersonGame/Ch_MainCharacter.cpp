@@ -142,17 +142,16 @@ void Ch_MainCharacter::MoveWithEasing(float xValue, float yValue)
 void Ch_MainCharacter::Jump()
 {
     //++ToDo: jump fonctionnel et good
-    // 
    // gravity.Velocity = { 0,2,0 };
-   // gravity.canFall = false;
    // gravity.InvertGravity();
     pos.y += 5 * GetFrameTime();
+    gravity.canFall = false;
     inJump = true;
 }
 
 void Ch_MainCharacter::StopJumping()
 {
-    //gravity.canFall = true;
+    gravity.canFall = true;
     inJump = false;
 
 
