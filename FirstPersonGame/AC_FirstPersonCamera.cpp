@@ -73,11 +73,16 @@ void AC_FirstPersonCamera::CameraControl()
     // Recalculate camera target considering translation and rotation
     Matrix translation = MatrixTranslate(0, 0, (camData.targetDistance / 5.1f));
     Matrix rotation = MatrixRotateXYZ({ PI * 2 - camData.angle.y, PI * 2 - camData.angle.x, 0 });
-    Matrix transform = MatrixMultiply(translation, rotation);
+    Matrix transfor = MatrixMultiply(translation, rotation);
 
-    cam.target.x = cam.position.x - transform.m12;
-    cam.target.y = cam.position.y - transform.m13;
-    cam.target.z = cam.position.z - transform.m14;
+    cam.target.x = cam.position.x - transfor.m12;
+    cam.target.y = cam.position.y - transfor.m13;
+    cam.target.z = cam.position.z - transfor.m14;
+
+    transform.translation = cam.position;
+    transform.rotation = QuaternionFromMatrix(rotation);
+
+
 
     //---------------Head wobble-----------------
     /*

@@ -15,11 +15,15 @@ BoxCollision::~BoxCollision()
 
 void BoxCollision::Draw()
 {
-	DrawBoundingBox(GetBoundingBox(), (isColliding) ? RED : GREEN );
+	DrawBoundingBox(GetBoundingBox(), (IsColliding()) ? RED : GREEN);
 }
 
 BoundingBox BoxCollision::GetBoundingBox()
 {
-	return  { Vector3{ pos->x - size.x / 2, pos->y - size.y / 2, pos->z - size.z / 2 },
-		Vector3{pos->x + size.x / 2,pos->y + size.y / 2,pos->z + size.z / 2} };;
+	return  { Vector3{ pos->x - size.x / 2 + Offset.x, 
+						pos->y - size.y / 2 + Offset.y,
+						pos->z - size.z / 2 + Offset.z},
+			Vector3{pos->x + size.x / 2 + Offset.x,
+					pos->y + size.y / 2 + Offset.y,
+					pos->z + size.z / 2 + Offset.z} };;
 }

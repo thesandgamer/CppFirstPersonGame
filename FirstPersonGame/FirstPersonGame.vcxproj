@@ -174,6 +174,7 @@
     <ClCompile Include="Ch_MainCharacter.cpp" />
     <ClCompile Include="AC_FirstPersonCamera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="CubeActor.cpp" />
     <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="P_Collision.cpp" />
@@ -188,6 +189,8 @@
     <ClInclude Include="Ch_MainCharacter.h" />
     <ClInclude Include="AC_FirstPersonCamera.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="ComponentParent.h" />
+    <ClInclude Include="CubeActor.h" />
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="P_Collision.h" />
   </ItemGroup>

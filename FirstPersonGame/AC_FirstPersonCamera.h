@@ -27,10 +27,12 @@ public:
 private:
 	//Position
 	//Rotation
-
+	Transform transform{};
+	Transform offsetTransform{};
 	//Camera
 	Camera cam{ 0 };
 	CameraData camData{};
+
 
 
 	void CameraControl();

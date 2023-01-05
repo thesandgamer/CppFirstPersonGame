@@ -5,14 +5,18 @@ void Ch_MainCharacter::Start()
     camera.Start();
     gravity.SetPos(&pos);
 
+    groundBox.Offset = { 0,-1.8f,0 };//Set la boite sous les pieds
+
 }
 
 void Ch_MainCharacter::Draw()
 {
     camera.Draw();
-    DrawCube({pos.x,pos.y-0.5f,pos.z}, 0.1f, 0.1f, 0.1f, LIME);
-    DrawCube({0,0,0}, 1.0f, 1.0f, 1.0f, BLUE);
-    collisionBox.Draw();
+    DrawCube({pos.x,pos.y-0.5f,pos.z}, 0.1f, 0.1f, 0.1f, LIME);//Dessine son corps
+   
+
+    groundBox.Draw();
+    bodyBox.Draw();
 
 }
 
@@ -26,11 +30,8 @@ void Ch_MainCharacter::Update()
     camera.Update();
 
 
-    //+ToDo: un raycast petit sous les pieds du perso pour savoir si on est au sol
-    if (!inJump)
-    {
-        gravity.canFall = (collisionBox.isColliding) ? false : true;
-    }
+    gravity.canFall = (groundBox.IsColliding()) ? false : true;
+
 
 
 }
@@ -42,9 +43,10 @@ void Ch_MainCharacter::ProcessInputs()
     dir[2] = IsKeyDown(KEY_D);
     dir[3] = IsKeyDown(KEY_A);
 
+    /*
     if (IsKeyDown(KEY_SPACE)) Jump();
     if (IsKeyReleased(KEY_SPACE)) StopJumping();
-
+    */
 }
 
 
@@ -71,9 +73,14 @@ void Ch_MainCharacter::Move()
     //------------------Va déplacer le character
    // BaseMovement(xValue, yValue);
     AccelerationFrictionMove(xValue, yValue);
+    /*
+    Matrix translation = MatrixTranslate(pos.x, pos.y, pos.z);
+    Matrix rotation = MatrixRotateXYZ({ PI * 2 - camera.GetAngle().y, PI * 2 - camera.GetAngle().x, 0});
+    transform = MatrixMultiply(translation, rotation);
 
-
-
+    */
+   // transform = MatrixTranslate(pos.x, pos.y, pos.z);
+    transf.translation = pos;
 }
 
 void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
@@ -127,14 +134,17 @@ void Ch_MainCharacter::MoveWithEasing(float xValue, float yValue)
 
 void Ch_MainCharacter::Jump()
 {
-    gravity.canFall = false;
-    pos.y += 5 * GetFrameTime();
+    //++ToDo: jump fonctionnel
+    gravity.Velocity = { 4,0,0 };
+   // gravity.canFall = false;
+   // gravity.InvertGravity();
+   // pos.y += 5 * GetFrameTime();
     inJump = true;
 }
 
 void Ch_MainCharacter::StopJumping()
 {
-    gravity.canFall = true;
+    //gravity.canFall = true;
     inJump = false;
 
 
