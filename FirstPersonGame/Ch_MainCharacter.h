@@ -39,7 +39,7 @@ private:
 	//Boite de collision orienté, besoin transform de rotation
 	Ray frontRay;
 	Ray backRay;
-	Ray leftRay;
+	Ray leftRay; 
 	Ray rightRay;
 
 	//----------- Transform ------------
