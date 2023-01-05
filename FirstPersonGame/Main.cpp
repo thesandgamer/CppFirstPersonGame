@@ -66,7 +66,7 @@ void Start()
     collisionManager.AddCollider(character.GetGroundCollider());
     collisionManager.AddCollider(character.GetBodyCollider());
 
-    Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },GRAY));//Créer le sol
+    Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },{239, 123, 69, 255}));//Créer le sol
     //Terrain.at(0)->GetCollision()->checkingCollision = true;
 
 
@@ -81,7 +81,7 @@ void Start()
     {
         Vector3 scale = { GetRandomValue(1, 15), GetRandomValue(1, 15), GetRandomValue(1,12) };
         Vector3 positions = { (float)GetRandomValue(-15, 15), scale.y / 2.0f, (float)GetRandomValue(-15, 15) };
-        Color color = { GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255 };
+        Color color = { GetRandomValue(169, 122), GetRandomValue(109, 89), GetRandomValue(163, 128), 255 };
         Terrain.push_back(new CubeActor(
             positions,
             scale,
@@ -114,7 +114,7 @@ void Update()
 void Draw()
 {
     BeginDrawing();
-    ClearBackground(RED);
+    ClearBackground({4,42,43,255});
 
     BeginMode3D(character.GetCamera());
 

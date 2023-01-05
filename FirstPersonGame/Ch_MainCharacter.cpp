@@ -36,8 +36,8 @@ void Ch_MainCharacter::Update()
     //camera.MoveCamera(pos);//On replace la camera à la postion du chara
     camera.Update();
 
-
-    gravity.canFall = (groundBox.IsColliding()) ? false : true;
+    if (!inJump)
+      gravity.canFall = (groundBox.IsColliding()) ? false : true;
 
 
 
@@ -50,10 +50,10 @@ void Ch_MainCharacter::ProcessInputs()
     dir[2] = IsKeyDown(KEY_D);
     dir[3] = IsKeyDown(KEY_A);
 
-    /*
+    
     if (IsKeyDown(KEY_SPACE)) Jump();
     if (IsKeyReleased(KEY_SPACE)) StopJumping();
-    */
+    
 }
 
 
@@ -141,11 +141,12 @@ void Ch_MainCharacter::MoveWithEasing(float xValue, float yValue)
 
 void Ch_MainCharacter::Jump()
 {
-    //++ToDo: jump fonctionnel
-    gravity.Velocity = { 4,0,0 };
+    //++ToDo: jump fonctionnel et good
+    // 
+   // gravity.Velocity = { 0,2,0 };
    // gravity.canFall = false;
    // gravity.InvertGravity();
-   // pos.y += 5 * GetFrameTime();
+    pos.y += 5 * GetFrameTime();
     inJump = true;
 }
 
