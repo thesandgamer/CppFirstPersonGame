@@ -4,9 +4,9 @@ BoxCollision::BoxCollision()
 {
 }
 
-BoxCollision::BoxCollision(Vector3* posP, Vector3 sizeP) : pos{ posP }, size{ sizeP }
+BoxCollision::BoxCollision(Vector3 sizeP)
 {
-	
+	Offset.scale = sizeP;
 }
 
 BoxCollision::~BoxCollision()
@@ -20,10 +20,10 @@ void BoxCollision::Draw()
 
 BoundingBox BoxCollision::GetBoundingBox()
 {
-	return  { Vector3{ pos->x - size.x / 2 + Offset.x, 
-						pos->y - size.y / 2 + Offset.y,
-						pos->z - size.z / 2 + Offset.z},
-			Vector3{pos->x + size.x / 2 + Offset.x,
-					pos->y + size.y / 2 + Offset.y,
-					pos->z + size.z / 2 + Offset.z} };;
+	return  { Vector3{ (Transform->translation.x + Offset.translation.x) - (Transform->scale.x * Offset.scale.x / 2) ,
+						(Transform->translation.y + Offset.translation.y) - (Transform->scale.y * Offset.scale.y / 2 ),
+						(Transform->translation.z + Offset.translation.z) - (Transform->scale.z * Offset.scale.z / 2 )},
+			Vector3{(Transform->translation.x +Offset.translation.x) + (Transform->scale.x * Offset.scale.x / 2 ) ,
+					(Transform->translation.y + Offset.translation.y) + (Transform->scale.y * Offset.scale.y / 2 ) ,
+					(Transform->translation.z + Offset.translation.z) + (Transform->scale.z * Offset.scale.z / 2 ) } };;
 }

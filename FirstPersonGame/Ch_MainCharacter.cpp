@@ -2,10 +2,17 @@
 
 void Ch_MainCharacter::Start()
 {
+    camera.SetParent(&transf);
+
+    groundBox.SetParent(&transf);
+    bodyBox.SetParent(&transf);
+
     camera.Start();
     gravity.SetPos(&pos);
 
-    groundBox.Offset = { 0,-1.8f,0 };//Set la boite sous les pieds
+    groundBox.Offset.translation = { 0,-1.8f,0 };//Set la boite sous les pieds
+    groundBox.checkingCollision = true;
+    bodyBox.checkingCollision = true;
 
 }
 
@@ -26,7 +33,7 @@ void Ch_MainCharacter::Update()
 
     ProcessInputs();
     Move();
-    camera.MoveCamera(pos);//On replace la camera à la postion du chara
+    //camera.MoveCamera(pos);//On replace la camera à la postion du chara
     camera.Update();
 
 

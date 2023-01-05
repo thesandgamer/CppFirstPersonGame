@@ -8,20 +8,18 @@ class BoxCollision :
 {
 public:
 	BoxCollision();
-	BoxCollision(Vector3* posP, Vector3 sizeP);
+	BoxCollision(Vector3 sizeP);
 	~BoxCollision();
 
 	void Draw();
 
 	BoundingBox GetBoundingBox(); //++Todo Renvoyer un pointeur de bounding box
 
-	Vector3 GetPosition() { return *pos; };
+	Vector3 GetPosition() { return Transform->translation; };
 
 
 
 private:
-	Vector3* pos{nullptr};
-	Vector3 size{ -1 };
 
 
 	//++ToDo trouver un moyen de créer une box avec comme param une pointeur vers une valeur

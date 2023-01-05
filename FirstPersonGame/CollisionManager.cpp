@@ -17,6 +17,7 @@ void CollisionManager::ProcessColisions()
 {
 	for each (P_Collision * collider in colliders)
 	{
+		if (!collider->checkingCollision)continue;
 		switch (collider->collisionType)
 		{
 		case BoxCollider:
@@ -33,7 +34,7 @@ void CollisionManager::DoCollisionBoxsCheck(BoxCollision* colliderToCheck)
 {
 	for each (P_Collision* collider in colliders)
 	{
-		if (colliderToCheck == collider) return;
+		if (colliderToCheck == collider) continue;
 		bool collide = CheckCollisionBoxes(colliderToCheck->GetBoundingBox(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
 		if (collide)
 		{

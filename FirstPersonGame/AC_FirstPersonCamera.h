@@ -24,11 +24,15 @@ public:
 
 	Vector2 GetAngle() { return camData.angle; }
 
+	void SetParent(Transform* parentTransform) { transform = parentTransform; }
+
+	Transform* transform{};
+	Transform offsetTransform{};
+
 private:
 	//Position
 	//Rotation
-	Transform transform{};
-	Transform offsetTransform{};
+
 	//Camera
 	Camera cam{ 0 };
 	CameraData camData{};

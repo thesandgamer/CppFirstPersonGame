@@ -28,19 +28,6 @@ CollisionManager collisionManager;
 
 std::vector<CubeActor*> Terrain;
 
-/*
-struct Transform {
-    Matrix transform;
-
-    Vector3 GetLocation() {
-        return { transform.m12,transform.m13,transform.m14 };
-    }
-    void SetLocation(Vector3 newLocation)
-    {
-        transform = MatrixTranslate(newLocation.x, newLocation.y, newLocation.z);
-    }
-    
-};*/
 
 int main(int argc, char* argv[])
 {
@@ -71,8 +58,6 @@ int main(int argc, char* argv[])
 
 }
 
-BoxCollision groundCol;
-
 void Start()
 {
     character.Start();
@@ -81,7 +66,8 @@ void Start()
     collisionManager.AddCollider(character.GetGroundCollider());
     collisionManager.AddCollider(character.GetBodyCollider());
 
-    Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.2f, 32.0f },GRAY));
+    Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },GRAY));//Créer le sol
+    //Terrain.at(0)->GetCollision()->checkingCollision = true;
 
 
     

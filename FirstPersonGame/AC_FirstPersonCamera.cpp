@@ -4,7 +4,7 @@ void AC_FirstPersonCamera::Start()
 {
     //-----------Setup les valeurs de la camera------------
 
-    cam.position = { 4.0f, 2.0f, 4.0f };    //Sa position
+    cam.position = Vector3Add(transform->translation, offsetTransform.translation);    //Sa position
     cam.target = { 0.0f, 1.8f, 0.0f };      //où elle regarde
     cam.up = { 0.0f, 1.0f, 0.0f };          //son vecteur up(où est le haut)
     cam.fovy = 60.0f;                       //son field of view
@@ -37,6 +37,8 @@ void AC_FirstPersonCamera::Draw()
 
 void AC_FirstPersonCamera::Update()
 {
+    cam.position =Vector3Add( transform->translation ,offsetTransform.translation);
+
     CameraControl();
 }
 
@@ -79,8 +81,9 @@ void AC_FirstPersonCamera::CameraControl()
     cam.target.y = cam.position.y - transfor.m13;
     cam.target.z = cam.position.z - transfor.m14;
 
-    transform.translation = cam.position;
-    transform.rotation = QuaternionFromMatrix(rotation);
+    /*
+    transform->translation = cam.position;
+    transform->rotation = QuaternionFromMatrix(rotation);*/
 
 
 

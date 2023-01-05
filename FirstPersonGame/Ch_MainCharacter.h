@@ -29,8 +29,8 @@ private:
 	Gravity gravity;
 
 	//----
-	BoxCollision bodyBox{ &pos,Vector3{1,1.80f,1} };
-	BoxCollision groundBox{ &pos,Vector3{0.8,0.2f,0.8f} };
+	BoxCollision bodyBox{ Vector3{1,1.80f,1} };
+	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
 
 	//Créer 4 boites de collisions 
 	std::uint8_t collisionDirection;
@@ -47,7 +47,7 @@ private:
 	Vector3 pos{4,20,4};
 	Vector3 forwardVector{ 1,0,0 };
 
-	Transform transf{};
+	Transform transf{ {0},{0},{1,1,1} };
 	//----Jump ---------
 	//++ToDo: state machine saut, marche,...
 	void Jump();

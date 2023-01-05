@@ -12,15 +12,16 @@ public:
 	void Draw();
 	void Update();
 
-	Vector3* GetPos() { return &pos; }
-	Vector3* GetSize() { return &size; }
+	Vector3* GetPos() { return &transform.translation; }
+	Vector3* GetSize() { return &transform.scale; }
 
 	BoxCollision* GetCollision() { return &collision; }
 
+	Transform transform{{0,0,0},{0,0,0,0},{1,1,1}};
+
+
 private:
-	Vector3 pos{0,0,0};
-	Vector3 size{1,1,1};
-	BoxCollision collision{&pos,size};
+	BoxCollision collision{ transform.scale};
 	Color color{ PURPLE };
 };
 

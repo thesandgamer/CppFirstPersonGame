@@ -4,8 +4,13 @@ CubeActor::CubeActor()
 {
 }
 
-CubeActor::CubeActor(Vector3 posP, Vector3 sizeP,Color colorP): pos{posP},size{sizeP}, color(colorP)
+CubeActor::CubeActor(Vector3 posP, Vector3 sizeP,Color colorP): color(colorP)
 {
+	transform.translation = posP;
+	transform.scale = sizeP;
+
+	collision.SetParent(&transform);
+
 }
 
 CubeActor::~CubeActor()
@@ -18,7 +23,7 @@ void CubeActor::Start()
 
 void CubeActor::Draw()
 {
-	DrawCube(pos, size.x, size.y, size.z, color);
+	DrawCube(transform.translation, transform.scale.x, transform.scale.y, transform.scale.z, color);
 	collision.Draw();
 
 }
