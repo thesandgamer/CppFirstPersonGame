@@ -20,7 +20,6 @@ public:
 	void Update();
 
 	Camera& GetCamera() { return cam; }
-	void MoveCamera(Vector3 newPos);
 
 	Vector2 GetAngle() { return camData.angle; }
 

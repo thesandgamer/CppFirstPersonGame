@@ -29,7 +29,7 @@ public:
 	void ProcessInputs();
 
 	P_Collision* GetGroundCollider() { return &groundBox; }
-	P_Collision* GetGroundRay() { return &groundRay; }
+	P_Collision* GetForwardRayRay() { return &forwardRay; }
 	P_Collision* GetBodyCollider() { return &bodyBox; }
 
 	Gravity gravity;
@@ -45,7 +45,8 @@ private:
 	//----
 	BoxCollision bodyBox{ Vector3{1,1.80f,1} };
 	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
-	RaycastCollision groundRay{ {1,0,0},2 };
+
+	RaycastCollision forwardRay{ {1,0,0},5.0f };
 
 	//Créer 4 boites de collisions 
 	std::uint8_t collisionDirection;

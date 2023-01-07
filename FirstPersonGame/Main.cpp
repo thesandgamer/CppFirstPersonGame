@@ -68,8 +68,8 @@ void Start()
     character.Start();
     collisionManager.Start();
 
-    collisionManager.AddCollider(character.GetGroundRay());
-    collisionManager.AddCollider(character.GetBodyCollider());
+    collisionManager.AddCollider(character.GetForwardRayRay());
+    //collisionManager.AddCollider(character.GetBodyCollider());
     collisionManager.AddCollider(character.GetGroundCollider());
 
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },{239, 123, 69, 255}));//Créer le sol
@@ -106,14 +106,16 @@ void Start()
 
 void Update()
 {
+    collisionManager.Update();//Check les collisions
+
     character.Update();
+
 
     for each (CubeActor * element in Terrain)
     {
-        element->Draw();
+        element->Update();
     }
 
-    collisionManager.Update();
 }
 
 void Draw()

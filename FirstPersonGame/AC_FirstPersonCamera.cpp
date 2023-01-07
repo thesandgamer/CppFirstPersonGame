@@ -85,7 +85,7 @@ void AC_FirstPersonCamera::CameraControl()
     transform->translation = cam.position;
     transform->rotation = QuaternionFromMatrix(rotation);*/
 
-    offsetTransform.rotation = QuaternionFromMatrix(rotation);
+    offsetTransform.rotation = QuaternionFromMatrix(transfor);
 
 
 
@@ -103,9 +103,4 @@ void AC_FirstPersonCamera::CameraControl()
 
 
 
-}
-
-void AC_FirstPersonCamera::MoveCamera(Vector3 newPos)
-{
-    cam.position = newPos;
 }

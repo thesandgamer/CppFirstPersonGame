@@ -39,12 +39,14 @@
     <ClInclude Include="BoxCollision.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="ComponentParent.h" />
     <ClInclude Include="CubeActor.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="RaycastCollision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
       <Filter>Collisions</Filter>
     </ClInclude>
   </ItemGroup>

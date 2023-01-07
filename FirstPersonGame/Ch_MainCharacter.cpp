@@ -6,17 +6,19 @@ void Ch_MainCharacter::Start()
 
     groundBox.SetParent(&transf);
     bodyBox.SetParent(&transf);
-    groundRay.SetParent(&transf);//Ajoute le component
+    forwardRay.SetParent(&transf);//Ajoute le component
 
     camera.Start();
     gravity.SetPos(&pos);
 
-    groundBox.Offset.translation = { 0,-1.8f,0 };//Set la boite sous les pieds
-    groundBox.checkingCollision = true;
+    forwardRay.Offset.translation = { 0,-1.f,0 };
+
     bodyBox.checkingCollision = true;
 
-    groundRay.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
-    groundRay.checkingCollision = true;
+    groundBox.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
+    groundBox.checkingCollision = true;
+
+    forwardRay.checkingCollision = true;
 
 }
 
@@ -25,30 +27,36 @@ void Ch_MainCharacter::Draw()
     camera.Draw();
     DrawCube({pos.x,pos.y-0.5f,pos.z}, 0.1f, 0.1f, 0.1f, LIME);//Dessine son corps
    
+    if (forwardRay.IsColliding()) DrawText("Col ray", 50, 50, 20, WHITE);
 
     groundBox.Draw();
     bodyBox.Draw();
 
-    groundRay.Draw();
+    forwardRay.Draw();
 
 
 }
 
 void Ch_MainCharacter::Update()
 {
+    //Process Gravity
+    gravity.canFall = (groundBox.IsColliding()) ? false : true;
     gravity.Update();
 
+    //Process inputs
     ProcessInputs();
+
+    //Change State
+    state = (groundBox.IsColliding()) ? InAir : Grounded;
+
 
     Move();
 
     camera.Update();
 
-    gravity.canFall = (groundBox.IsColliding()) ? false : true;
-    state = (groundBox.IsColliding()) ? InAir : Grounded;
-    
     ProcessJump();
 
+    //++ToDo: faire en sorte que le rayon forward rotate en fonction de la rotation de la camera
 
 }
 
@@ -96,6 +104,8 @@ void Ch_MainCharacter::Move()
     */
    // transform = MatrixTranslate(pos.x, pos.y, pos.z);
     transf.translation = pos;
+    //++ToDo: ajouter la rotation dans le transform
+    transf.rotation = camera.offsetTransform.rotation;
 }
 
 void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
@@ -151,7 +161,7 @@ void Ch_MainCharacter::Jump()
 {
    // if (state == InAir) return;
     gravity.velocity = { 0,jumpVelocity,0 };//Ajoute une force de saut
-
+    inJump = true;
     //Pour désactiver la collision pour pouvoir décoller du sol
     groundBox.checkingCollision = false;
     groundBox.collisions = {};

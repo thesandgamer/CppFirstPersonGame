@@ -18,6 +18,7 @@ void CollisionManager::ProcessColisions()
 	for each (P_Collision* collider in colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
 	{
 		if (!collider->checkingCollision)continue;
+		//++ToDo: checker si les deux collider ont le même parent, ou si l'un est parent de l'autre, et avoir un bool pour savoir si on veut désactiver les collisons entre eux
 		switch (collider->collisionType)
 		{
 		case BoxCollider:

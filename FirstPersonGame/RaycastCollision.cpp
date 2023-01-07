@@ -21,5 +21,6 @@ void RaycastCollision::Draw()
 
 Ray RaycastCollision::GetRay()
 {
+    //return {Vector3Add( Transform->translation, Offset.translation),Vector3RotateByQuaternion(direction,Transform->rotation) };
     return {Vector3Add( Transform->translation, Offset.translation),direction };
 }
