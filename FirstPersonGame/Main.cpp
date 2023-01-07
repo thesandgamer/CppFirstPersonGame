@@ -14,7 +14,7 @@
 //++ToDo rajouter une skybox https://www.raylib.com/examples/models/loader.html?name=models_skybox
 //++ToDo rajouter lighting https://www.raylib.com/examples/shaders/loader.html?name=shaders_basic_lighting
 //++ToDo rajouter post process hachurer et le colorer pour rendu cool https://www.raylib.com/examples/shaders/loader.html?name=shaders_postprocessing
-//++ToDO rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
+//++ToDo rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
 
 using namespace std;
 
@@ -68,14 +68,14 @@ void Start()
     character.Start();
     collisionManager.Start();
 
-    collisionManager.AddCollider(character.GetGroundCollider());
+    collisionManager.AddCollider(character.GetGroundRay());
     collisionManager.AddCollider(character.GetBodyCollider());
+    collisionManager.AddCollider(character.GetGroundCollider());
 
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },{239, 123, 69, 255}));//Créer le sol
-    //Terrain.at(0)->GetCollision()->checkingCollision = true;
 
 
-    
+    //----------Création aléatire du terrain---------
     const int MAX_COLUMNS = 30;
 
     float heights[MAX_COLUMNS] = { 0 };
@@ -99,7 +99,7 @@ void Start()
         collisionManager.AddCollider( element->GetCollision());
     }
 
-    std::cout << "end \n";
+    //-----------------------
     
     
 }
@@ -142,8 +142,11 @@ void Draw()
 
 void DrawUi()
 {
+    /*
     DrawText(TextFormat("rot x: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.x), 10, 10, 10, WHITE);
     DrawText(TextFormat("rot y: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.y), 10, 20 , 10, WHITE);
     DrawText(TextFormat("rot z: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.z), 10, 30, 10, WHITE);
+    */
 
+    DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
 }

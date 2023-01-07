@@ -20,9 +20,15 @@
     <ClCompile Include="BoxCollision.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="CubeActor.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="RaycastCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -37,5 +43,9 @@
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="ComponentParent.h" />
     <ClInclude Include="CubeActor.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="RaycastCollision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

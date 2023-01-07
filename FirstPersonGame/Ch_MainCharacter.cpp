@@ -6,6 +6,7 @@ void Ch_MainCharacter::Start()
 
     groundBox.SetParent(&transf);
     bodyBox.SetParent(&transf);
+    groundRay.SetParent(&transf);//Ajoute le component
 
     camera.Start();
     gravity.SetPos(&pos);
@@ -13,6 +14,9 @@ void Ch_MainCharacter::Start()
     groundBox.Offset.translation = { 0,-1.8f,0 };//Set la boite sous les pieds
     groundBox.checkingCollision = true;
     bodyBox.checkingCollision = true;
+
+    groundRay.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
+    groundRay.checkingCollision = true;
 
 }
 
@@ -25,6 +29,9 @@ void Ch_MainCharacter::Draw()
     groundBox.Draw();
     bodyBox.Draw();
 
+    groundRay.Draw();
+
+
 }
 
 void Ch_MainCharacter::Update()
@@ -32,13 +39,15 @@ void Ch_MainCharacter::Update()
     gravity.Update();
 
     ProcessInputs();
+
     Move();
-    //camera.MoveCamera(pos);//On replace la camera à la postion du chara
+
     camera.Update();
 
-    if (!inJump)
-      gravity.canFall = (groundBox.IsColliding()) ? false : true;
-
+    gravity.canFall = (groundBox.IsColliding()) ? false : true;
+    state = (groundBox.IsColliding()) ? InAir : Grounded;
+    
+    ProcessJump();
 
 
 }
@@ -50,8 +59,7 @@ void Ch_MainCharacter::ProcessInputs()
     dir[2] = IsKeyDown(KEY_D);
     dir[3] = IsKeyDown(KEY_A);
 
-    
-    if (IsKeyDown(KEY_SPACE)) Jump();
+    if (IsKeyPressed(KEY_SPACE)) Jump();
     if (IsKeyReleased(KEY_SPACE)) StopJumping();
     
 }
@@ -141,18 +149,34 @@ void Ch_MainCharacter::MoveWithEasing(float xValue, float yValue)
 
 void Ch_MainCharacter::Jump()
 {
-    //++ToDo: jump fonctionnel et good
-   // gravity.Velocity = { 0,2,0 };
-   // gravity.InvertGravity();
-    pos.y += 5 * GetFrameTime();
-    gravity.canFall = false;
-    inJump = true;
+   // if (state == InAir) return;
+    gravity.velocity = { 0,jumpVelocity,0 };//Ajoute une force de saut
+
+    //Pour désactiver la collision pour pouvoir décoller du sol
+    groundBox.checkingCollision = false;
+    groundBox.collisions = {};
+
+}
+
+void Ch_MainCharacter::ProcessJump()
+{
+    float dt = GetFrameTime();
+
+    if (gravity.velocity.y < 0) //Quand on chute
+    {
+        gravity.velocity.y += 1 * -GRAVITY_VALUE * (fallMultiplier - 1) * dt;
+        groundBox.checkingCollision = true;
+
+
+    }
+    else if (gravity.velocity.y > 0 && !IsKeyDown(KEY_SPACE))//Quand on est en saut sans appuyer sur la touche de saut
+    {
+        gravity.velocity.y += 1 * -GRAVITY_VALUE * (lowJumpMultiplier - 1) * dt;
+
+    }
 }
 
 void Ch_MainCharacter::StopJumping()
 {
-    gravity.canFall = true;
-    inJump = false;
-
 
 }

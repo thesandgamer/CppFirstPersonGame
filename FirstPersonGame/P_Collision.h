@@ -16,6 +16,7 @@ enum CollisionType {
 	BoxCollider,
 	SphereCollider,
 	MeshCollider,
+	RayCollider,
 };
 
 class P_Collision
@@ -24,7 +25,8 @@ public:
 	CollisionType collisionType{ BoxCollider };
 	bool trigger{false};
 	bool checkingCollision{ false };
-	virtual Vector3 GetPosition();
+
+    Vector3 GetPosition() { return Transform->translation; }
 
 	bool IsColliding() { return collisions.size() > 0; }
 
@@ -32,10 +34,12 @@ public:
 
 	std::set<P_Collision*> collisions{};
 
-	Transform Offset{ {0,0,0},{0,0,0},{1,1,1} };
 
+	Transform Offset{ {0,0,0},{0,0,0},{1,1,1} };//Offset de transform
+	Transform* Transform{};	//Transform du parent
+
+	virtual void Test() {};
 	//++ToDo: mettre en place le transform et le offset transform
-	Transform* Transform{};//++ToDo: le transform du componenet doit est le même que celui du owner
 
 
 

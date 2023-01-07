@@ -1,6 +1,7 @@
 #pragma once
 #include "P_Collision.h"
 #include "BoxCollision.h"
+#include "RaycastCollision.h"
 #include <vector>
 
 #include <iostream>
@@ -22,6 +23,7 @@ private:
 	void ProcessColisions();
 
 	void DoCollisionBoxsCheck(BoxCollision* colliderToCheck);
+	void DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck);
 
 	//++ToDo faire une fonction pour check uniquement les collider proche les uns des autres
 

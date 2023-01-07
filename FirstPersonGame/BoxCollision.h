@@ -2,7 +2,9 @@
 #include "P_Collision.h"
 
 
-//++ToDo faire un parent compoenent avec une fonction vrtuelle de start draw update
+//++ToDo faire un parent compoenent avec une fonction virtuelle de start draw update
+
+
 class BoxCollision :
     public P_Collision
 {
@@ -15,8 +17,7 @@ public:
 
 	BoundingBox GetBoundingBox(); //++Todo Renvoyer un pointeur de bounding box
 
-	Vector3 GetPosition() { return Transform->translation; };
-
+	void Test() {};
 
 
 private:

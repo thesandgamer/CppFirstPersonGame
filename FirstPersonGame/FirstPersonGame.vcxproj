@@ -177,7 +177,9 @@
     <ClCompile Include="CubeActor.cpp" />
     <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="P_Collision.cpp" />
+    <ClCompile Include="RaycastCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -192,7 +194,9 @@
     <ClInclude Include="ComponentParent.h" />
     <ClInclude Include="CubeActor.h" />
     <ClInclude Include="Gravity.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="P_Collision.h" />
+    <ClInclude Include="RaycastCollision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

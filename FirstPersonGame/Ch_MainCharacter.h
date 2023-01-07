@@ -1,11 +1,19 @@
 #pragma once
 
+#include <iostream>
+//#include "reasings.h"             
+
 #include "P_Collision.h"
 #include "BoxCollision.h"
+#include "RaycastCollision.h"
+
 #include "AC_FirstPersonCamera.h"
 #include "Gravity.h"
-#include <iostream>
-//#include "reasings.h"                // Required for easing functions
+
+enum CharacterMovementState {
+	Grounded,
+	InAir,
+};
 
 class Ch_MainCharacter
 {
@@ -21,17 +29,23 @@ public:
 	void ProcessInputs();
 
 	P_Collision* GetGroundCollider() { return &groundBox; }
+	P_Collision* GetGroundRay() { return &groundRay; }
 	P_Collision* GetBodyCollider() { return &bodyBox; }
+
+	Gravity gravity;
+
+	CharacterMovementState state{ Grounded };
+
 
 private:
 	//----------COmponenets---------
 	//++ToDo: vector de component parent*
 	AC_FirstPersonCamera camera{};
-	Gravity gravity;
 
 	//----
 	BoxCollision bodyBox{ Vector3{1,1.80f,1} };
 	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
+	RaycastCollision groundRay{ {1,0,0},2 };
 
 	//Créer 4 boites de collisions 
 	std::uint8_t collisionDirection;
@@ -52,9 +66,15 @@ private:
 	//----Jump ---------
 	//++ToDo: state machine saut, marche,...
 	void Jump();
+	void ProcessJump();
 	void StopJumping();
 
+	float jumpVelocity = 8;
+	float fallMultiplier = 2.5f;
+	float lowJumpMultiplier = 2.0f;
+
 	bool inJump;
+
 	//-----For movement
 	void Move();
 
