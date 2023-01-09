@@ -2,7 +2,7 @@
 #include "P_Collision.h"
 
 
-//++ToDo faire un parent compoenent avec une fonction virtuelle de start draw update
+//++ToDo faire un parent component avec une fonction virtuelle de start draw update
 
 
 class BoxCollision :

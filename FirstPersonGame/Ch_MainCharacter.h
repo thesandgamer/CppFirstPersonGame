@@ -9,6 +9,7 @@
 
 #include "AC_FirstPersonCamera.h"
 #include "Gravity.h"
+#include "AC_Shoot.h"
 
 enum CharacterMovementState {
 	Grounded,
@@ -59,13 +60,11 @@ private:
 
 	//----------- Transform ------------
 
-	//++ToDo: rajouter une matrice de transform pour avoir location/rotation/scale
 	Vector3 pos{4,20,4};
 	Vector3 forwardVector{ 1,0,0 };
 
 	Transform transf{ {0},{0},{1,1,1} };
 	//----Jump ---------
-	//++ToDo: state machine saut, marche,...
 	void Jump();
 	void ProcessJump();
 	void StopJumping();
@@ -92,6 +91,10 @@ private:
 
 	Vector2 acc{ 0,0 };
 	Vector2 vel{ 0,0 };
+
+	//---------For shoot ----------
+
+	AC_Shoot shootingComponent{};
 
 
 

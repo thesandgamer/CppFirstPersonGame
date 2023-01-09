@@ -15,11 +15,7 @@ public:
 
 	bool canFall{ true };
 
-
-	Vector3 Velocity{ 0,0,0 };
-
-
-
+	float acceleration{ 1 };
 	Vector3 velocity{ 0,0,0 };
 
 private:
@@ -30,10 +26,7 @@ private:
 
 
 
-	//------------
-	void ProcessVelocity();
-	float v_vel{ 0 };
-	float v_acc{ 0 };
+
 	
 };
 

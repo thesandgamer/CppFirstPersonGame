@@ -4,7 +4,7 @@ BoxCollision::BoxCollision()
 {
 }
 
-BoxCollision::BoxCollision(Vector3 sizeP)
+BoxCollision::BoxCollision(Vector3 sizeP) : P_Collision()
 {
 	Offset.scale = sizeP;
 }

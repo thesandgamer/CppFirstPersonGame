@@ -29,6 +29,7 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="AC_Shoot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -49,5 +50,6 @@
     <ClInclude Include="CollisionManager.h">
       <Filter>Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="AC_Shoot.h" />
   </ItemGroup>
 </Project>

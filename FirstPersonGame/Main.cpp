@@ -29,7 +29,7 @@ int const screenWidth = 960;
 int const screenHeight = 540;
 
 Ch_MainCharacter character;
-CollisionManager collisionManager;
+CollisionManager* CollisionManager::instance = nullptr;
 
 std::vector<CubeActor*> Terrain; //Stoquage des acteurs obstacles et sol
 
@@ -66,11 +66,8 @@ int main(int argc, char* argv[])
 void Start()
 {
     character.Start();
-    collisionManager.Start();
+    CollisionManager::GetInstance()->Start();
 
-    collisionManager.AddCollider(character.GetForwardRayRay());
-    //collisionManager.AddCollider(character.GetBodyCollider());
-    collisionManager.AddCollider(character.GetGroundCollider());
 
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },{239, 123, 69, 255}));//Créer le sol
 
@@ -93,12 +90,6 @@ void Start()
             color));
 
     }
-    
-    for each (CubeActor * element in Terrain)
-    {
-        collisionManager.AddCollider( element->GetCollision());
-    }
-
     //-----------------------
     
     
@@ -106,7 +97,7 @@ void Start()
 
 void Update()
 {
-    collisionManager.Update();//Check les collisions
+    CollisionManager::GetInstance()->Update();//Check les collisions
 
     character.Update();
 
@@ -125,7 +116,7 @@ void Draw()
 
     BeginMode3D(character.GetCamera());
 
-    collisionManager.Draw();
+    CollisionManager::GetInstance()->Draw();
 
     for each (CubeActor* element in Terrain)
     {

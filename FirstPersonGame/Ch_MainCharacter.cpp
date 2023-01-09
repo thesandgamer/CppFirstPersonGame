@@ -20,6 +20,8 @@ void Ch_MainCharacter::Start()
 
     forwardRay.checkingCollision = true;
 
+    shootingComponent.Start();
+
 }
 
 void Ch_MainCharacter::Draw()
@@ -33,6 +35,9 @@ void Ch_MainCharacter::Draw()
     bodyBox.Draw();
 
     forwardRay.Draw();
+
+    shootingComponent.Draw();
+
 
 
 }
@@ -56,6 +61,8 @@ void Ch_MainCharacter::Update()
 
     ProcessJump();
 
+    shootingComponent.Update();
+
     //++ToDo: faire en sorte que le rayon forward rotate en fonction de la rotation de la camera
 
 }
@@ -69,13 +76,14 @@ void Ch_MainCharacter::ProcessInputs()
 
     if (IsKeyPressed(KEY_SPACE)) Jump();
     if (IsKeyReleased(KEY_SPACE)) StopJumping();
+
+    if (IsMouseButtonDown(0)) shootingComponent.Shoot(transf.translation,{10,0,0});
     
 }
 
 
 
-//++ To do : faire accélération et décélération
-//++ camera bubble activable avec varaible exposé de force
+//ToDo++ camera bubble activable avec varaible exposé de force
 void Ch_MainCharacter::Move()
 {
     //---------------------Gère la direction dans laquelle aller

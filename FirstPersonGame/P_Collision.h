@@ -22,6 +22,8 @@ enum CollisionType {
 class P_Collision
 {
 public:
+	P_Collision();
+
 	CollisionType collisionType{ BoxCollider };
 	bool trigger{false};
 	bool checkingCollision{ false };
@@ -39,7 +41,6 @@ public:
 	Transform* Transform{};	//Transform du parent
 
 	virtual void Test() {};
-	//++ToDo: mettre en place le transform et le offset transform
 
 
 

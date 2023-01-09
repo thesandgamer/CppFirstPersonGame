@@ -9,15 +9,37 @@
 
 class CollisionManager
 {
-public:
-	void Start();
-	void Update();
-	void Draw();
 
-	void AddCollider(P_Collision* collider) { colliders.push_back(collider); }
+private:
+	CollisionManager() {};
+	static CollisionManager* instance;
+
+public:
+	CollisionManager(const CollisionManager& obj) = delete;
+	void operator=(const CollisionManager&) = delete;
+
+	static CollisionManager* GetInstance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new CollisionManager();
+		}
+		return instance;
+		
+	
+	}
+
+//-------------------
+public:
+	 void Start();
+	 void Update();
+	 void Draw();
+
+	 void AddCollider(P_Collision* collider) { colliders.push_back(collider); }
 
 
 private:
+
 	std::vector<P_Collision*> colliders;
 
 	void ProcessColisions();
