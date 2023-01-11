@@ -31,11 +31,13 @@ public:
 
 	P_Collision* GetGroundCollider() { return &groundBox; }
 	P_Collision* GetForwardRayRay() { return &forwardRay; }
-	P_Collision* GetBodyCollider() { return &bodyBox; }
+	//P_Collision* GetBodyCollider() { return &bodyBox; }
 
 	Gravity gravity;
 
 	CharacterMovementState state{ Grounded };
+
+	Transform transf{ {0},{0},{1,1,1} };
 
 
 private:
@@ -44,26 +46,23 @@ private:
 	AC_FirstPersonCamera camera{};
 
 	//----
-	BoxCollision bodyBox{ Vector3{1,1.80f,1} };
+	//BoxCollision bodyBox{ Vector3{1,1.80f,1} };
 	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
 
-	RaycastCollision forwardRay{ {1,0,0},5.0f };
+	RaycastCollision forwardRay{ {1,0,0},2.0f };
+	RaycastCollision rightRay{ {1,0,0},2.0f };
+	RaycastCollision backwarddRay{ {1,0,0},2.0f };
+	RaycastCollision leftRay{ {1,0,0},2.0f };
 
 	//Créer 4 boites de collisions 
 	std::uint8_t collisionDirection;
 	//++ToDo: faire en sorte de bloquer quand on arrive contre les murs
-	//Boite de collision orienté, besoin transform de rotation
-	Ray frontRay;
-	Ray backRay;
-	Ray leftRay; 
-	Ray rightRay;
 
 	//----------- Transform ------------
 
 	Vector3 pos{4,20,4};
 	Vector3 forwardVector{ 1,0,0 };
 
-	Transform transf{ {0},{0},{1,1,1} };
 	//----Jump ---------
 	void Jump();
 	void ProcessJump();
@@ -74,6 +73,7 @@ private:
 	float lowJumpMultiplier = 2.0f;
 
 	bool inJump;
+	bool isGrounded{ false };
 
 	//-----For movement
 	void Move();
@@ -93,6 +93,9 @@ private:
 	Vector2 vel{ 0,0 };
 
 	//---------For shoot ----------
+
+	Vector3 GetForwardVector();
+	Vector3 GetVector(Vector3 dir);
 
 	AC_Shoot shootingComponent{};
 

@@ -33,6 +33,7 @@ void AC_FirstPersonCamera::Start()
 
 void AC_FirstPersonCamera::Draw()
 {
+
 }
 
 void AC_FirstPersonCamera::Update()

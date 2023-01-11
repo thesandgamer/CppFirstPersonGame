@@ -5,15 +5,25 @@ void Ch_MainCharacter::Start()
     camera.SetParent(&transf);
 
     groundBox.SetParent(&transf);
-    bodyBox.SetParent(&transf);
+
+    groundBox.layer = Layer1;
+    forwardRay.layer = Layer1;
+    //bodyBox.SetParent(&transf);
+
     forwardRay.SetParent(&transf);//Ajoute le component
+    rightRay.SetParent(&transf);//Ajoute le component
+    backwarddRay.SetParent(&transf);//Ajoute le component
+    leftRay.SetParent(&transf);//Ajoute le component
 
     camera.Start();
     gravity.SetPos(&pos);
 
     forwardRay.Offset.translation = { 0,-1.f,0 };
+    rightRay.Offset.translation = { 0,-1.f,0 };
+    backwarddRay.Offset.translation = { 0,-1.f,0 };
+    leftRay.Offset.translation = { 0,-1.f,0 };
 
-    bodyBox.checkingCollision = true;
+    //bodyBox.checkingCollision = true;
 
     groundBox.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
     groundBox.checkingCollision = true;
@@ -29,16 +39,34 @@ void Ch_MainCharacter::Draw()
     camera.Draw();
     DrawCube({pos.x,pos.y-0.5f,pos.z}, 0.1f, 0.1f, 0.1f, LIME);//Dessine son corps
    
-    if (forwardRay.IsColliding()) DrawText("Col ray", 50, 50, 20, WHITE);
 
     groundBox.Draw();
-    bodyBox.Draw();
+   // bodyBox.Draw();
 
     forwardRay.Draw();
+    rightRay.Draw();
+   // leftRay.Draw();
+   // backwarddRay.Draw();
+
 
     shootingComponent.Draw();
 
+    //-----------
 
+    /*
+    Vector3 startPos = { transf.translation.x + 0,
+      transf.translation.y - 1.8f,
+      transf.translation.z + 0 };//Son origine
+
+    
+    Vector3 direction = { GetVector({0,0,1}).x*10,0,GetVector({0,0,1}).z*10 };
+    Vector3 endPos = Vector3Add(direction, startPos);
+    DrawLine3D(startPos, endPos, PURPLE);
+
+    direction = { GetVector({1,0,0}).x * 10,0,GetVector({1,0,0}).z * 10};
+    endPos = Vector3Add(direction, startPos);
+    DrawLine3D(startPos, endPos, PURPLE);
+    */
 
 }
 
@@ -51,8 +79,39 @@ void Ch_MainCharacter::Update()
     //Process inputs
     ProcessInputs();
 
+    //++ToDo: faire en sorte que la rotation en yaw du chara soit celle de la camera
+    Quaternion newAngle = QuaternionFromEuler( 0, 0, QuaternionToEuler(camera.offsetTransform.rotation).z * DEG2RAD);
+    transf.rotation = newAngle;
+    Vector3 eul = QuaternionToEuler(transf.rotation);
+    Vector3 camEul = QuaternionToEuler(camera.offsetTransform.rotation);
+    /*
+    std::cout << " Player: " << QuaternionToEuler(transf.rotation).z * DEG2RAD << "\n";
+    std::cout << " Camera: " << QuaternionToEuler(camera.offsetTransform.rotation).z * DEG2RAD << "\n \n";
+    */
+
+    //---------
+    
+    //Vector3 direction = { GetForwardVector().x,0,GetForwardVector().z };//{GetForwardVector().x ,0,GetForwardVector().z};
+    forwardRay.SetDirection(GetVector({0,0,-1}));
+    rightRay.SetDirection(GetVector({ 1,0,0 }));
+    backwarddRay.SetDirection(GetVector({ 0,0,1 }));
+    leftRay.SetDirection(GetVector({ -1,0,0 }));
+    
     //Change State
+
     state = (groundBox.IsColliding()) ? InAir : Grounded;
+    isGrounded = groundBox.IsColliding();
+
+    if (forwardRay.IsColliding())
+    {
+        collisionDirection |= Front;    //Ajoute collision front
+        dir[0] = false;
+
+    }
+    else
+    {
+        collisionDirection ^= Front;    //Enlève collision front
+    }
 
 
     Move();
@@ -69,6 +128,7 @@ void Ch_MainCharacter::Update()
 
 void Ch_MainCharacter::ProcessInputs()
 {
+
     dir[0] = IsKeyDown(KEY_W);
     dir[1] = IsKeyDown(KEY_S);
     dir[2] = IsKeyDown(KEY_D);
@@ -77,8 +137,12 @@ void Ch_MainCharacter::ProcessInputs()
     if (IsKeyPressed(KEY_SPACE)) Jump();
     if (IsKeyReleased(KEY_SPACE)) StopJumping();
 
-    if (IsMouseButtonDown(0)) shootingComponent.Shoot(transf.translation,{10,0,0});
-    
+
+    //++ToDo: faire en sorte de tirer avec la rotation de la camera
+    if (IsMouseButtonDown(0))
+    {  
+        shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{20,20,20}));
+    }
 }
 
 
@@ -104,16 +168,9 @@ void Ch_MainCharacter::Move()
     //------------------Va déplacer le character
    // BaseMovement(xValue, yValue);
     AccelerationFrictionMove(xValue, yValue);
-    /*
-    Matrix translation = MatrixTranslate(pos.x, pos.y, pos.z);
-    Matrix rotation = MatrixRotateXYZ({ PI * 2 - camera.GetAngle().y, PI * 2 - camera.GetAngle().x, 0});
-    transform = MatrixMultiply(translation, rotation);
 
-    */
-   // transform = MatrixTranslate(pos.x, pos.y, pos.z);
     transf.translation = pos;
-    //++ToDo: ajouter la rotation dans le transform
-    transf.rotation = camera.offsetTransform.rotation;
+    //transf.rotation = camera.offsetTransform.rotation; //Si on veut que la rotation du perso soit celle de la camera
 }
 
 void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
@@ -164,9 +221,25 @@ void Ch_MainCharacter::MoveWithEasing(float xValue, float yValue)
     //puis changer la position avec xValue * actual speed
 }
 
+Vector3 Ch_MainCharacter::GetForwardVector()
+{
+    Quaternion rotation = camera.offsetTransform.rotation;//{0,0.38268,0,0.92388};//Rotation à 45°
+    rotation = QuaternionInvert(rotation);
+    Vector3 dir = { 0,0,-1 };                  //Forward
+    return Vector3RotateByQuaternion(dir, rotation);
+}
+
+Vector3 Ch_MainCharacter::GetVector(Vector3 dir)
+{
+    Quaternion rotation = camera.offsetTransform.rotation;//{0,0.38268,0,0.92388};//Rotation à 45°
+    //Quaternion rotation = transf.rotation;
+    rotation = QuaternionInvert(rotation);
+    return Vector3RotateByQuaternion(dir, rotation);
+}
 
 void Ch_MainCharacter::Jump()
 {
+    if (!isGrounded) return;
    // if (state == InAir) return;
     gravity.velocity = { 0,jumpVelocity,0 };//Ajoute une force de saut
     inJump = true;

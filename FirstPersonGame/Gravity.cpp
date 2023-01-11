@@ -16,12 +16,14 @@ void Gravity::Fall()
 {
 	float dt = GetFrameTime();
 
+	//-----Gravité
 	if (canFall)
 		velocity.y -= GRAVITY_VALUE * dt;
 	else
 		velocity.y = 0;
 
 	refPos->y += ((dt * velocity.y) + (0.5f * GRAVITY_VALUE * dt * dt));
+
 
 	//++ToDo: refacto pour que ça fasse un truc qui marche vraiment bien
 	refPos->x += ((dt * velocity.x) + (0.5f * acceleration * dt * dt));

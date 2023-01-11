@@ -11,7 +11,6 @@ class BoxCollision :
 public:
 	BoxCollision();
 	BoxCollision(Vector3 sizeP);
-	~BoxCollision();
 
 	void Draw();
 

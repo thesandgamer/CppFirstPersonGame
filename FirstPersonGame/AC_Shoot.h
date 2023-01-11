@@ -22,6 +22,9 @@ private:
 
 	std::vector<Projectile*> projectiles;
 
+	bool timer{ false };
+	void StartTimer();
+
 
 };
 

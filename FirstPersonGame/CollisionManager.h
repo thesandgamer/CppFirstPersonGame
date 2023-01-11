@@ -36,6 +36,7 @@ public:
 	 void Draw();
 
 	 void AddCollider(P_Collision* collider) { colliders.push_back(collider); }
+	 void RemoveCollider(P_Collision* colliderToRemove);
 
 
 private:

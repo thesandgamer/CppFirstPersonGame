@@ -12,6 +12,19 @@ enum CollisionTouching {
 	Right =1 <<5,
 };
 
+
+//++ToDo: faire des layers des collison à check pour éviter que des collision se
+//fassent alors qu'elles ne devrait pas
+enum CollisionLayer {
+	Layer0 = 1 << 0,
+	Layer1 = 1 << 1,
+	Layer2 = 1 << 2,
+	Layer3 = 1 << 3,
+	Layer4 = 1 << 4,
+	Layer5 = 1 << 5,
+
+};
+
 enum CollisionType {
 	BoxCollider,
 	SphereCollider,
@@ -19,10 +32,13 @@ enum CollisionType {
 	RayCollider,
 };
 
+//++ToDo: system de layer de collisions 
+
 class P_Collision
 {
 public:
 	P_Collision();
+	~P_Collision();
 
 	CollisionType collisionType{ BoxCollider };
 	bool trigger{false};
@@ -41,6 +57,9 @@ public:
 	Transform* Transform{};	//Transform du parent
 
 	virtual void Test() {};
+
+	CollisionLayer layer{Layer0};
+	CollisionLayer collideWithLayer{Layer0};
 
 
 

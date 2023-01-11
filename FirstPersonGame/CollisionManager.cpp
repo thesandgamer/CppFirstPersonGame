@@ -13,6 +13,12 @@ void CollisionManager::Draw()
 {
 }
 
+void CollisionManager::RemoveCollider(P_Collision* colliderToRemove)
+{
+	colliders.erase(std::find(colliders.begin(), colliders.end(), colliderToRemove));
+	
+}
+
 void CollisionManager::ProcessColisions()
 {
 	for each (P_Collision* collider in colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
@@ -45,6 +51,8 @@ void CollisionManager::DoCollisionBoxsCheck(BoxCollision* colliderToCheck)
 	{
 		if (colliderToCheck == collider) continue;
 		if (collider->collisionType != BoxCollider) continue;
+		if (colliderToCheck->collideWithLayer != collider->layer) continue;
+
 		bool collide = CheckCollisionBoxes(colliderToCheck->GetBoundingBox(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
 		if (collide)
 		{
@@ -67,6 +75,7 @@ void CollisionManager::DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck)
 	{
 		if (colliderToCheck == collider) continue;
 		if (collider->collisionType != BoxCollider) continue;
+		if (colliderToCheck->collideWithLayer != collider->layer) continue;
 		
 		RayHitInfo collide = GetRayCollisionBox(colliderToCheck->GetRay(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
 		if (collide.hit && collide.distance <= colliderToCheck->GetLength())

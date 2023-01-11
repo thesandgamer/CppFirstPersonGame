@@ -18,9 +18,11 @@ public:
 
     float GetLength() { return length; }
 
+    void SetDirection(Vector3 dir) { direction = dir; }
+
 private:
     Vector3 direction{0,0,0};
-    float length;
+    float length{ 0 };
 
 };
 

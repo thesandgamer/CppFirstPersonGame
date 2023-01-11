@@ -97,7 +97,6 @@ void Start()
 
 void Update()
 {
-    CollisionManager::GetInstance()->Update();//Check les collisions
 
     character.Update();
 
@@ -106,6 +105,9 @@ void Update()
     {
         element->Update();
     }
+
+    CollisionManager::GetInstance()->Update();//Check les collisions
+
 
 }
 
@@ -135,11 +137,11 @@ void Draw()
 
 void DrawUi()
 {
-    /*
-    DrawText(TextFormat("rot x: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.x), 10, 10, 10, WHITE);
-    DrawText(TextFormat("rot y: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.y), 10, 20 , 10, WHITE);
-    DrawText(TextFormat("rot z: % 02.02f", character.GetFirstPersonCam().offsetTransform.rotation.z), 10, 30, 10, WHITE);
-    */
+    
+    DrawText(TextFormat("rot x: % 02.02f", character.transf.rotation.x), 10, 10, 10, WHITE);
+    DrawText(TextFormat("rot y: % 02.02f", character.transf.rotation.y), 10, 20 , 10, WHITE);
+    DrawText(TextFormat("rot z: % 02.02f", character.transf.rotation.z), 10, 30, 10, WHITE);
+    
 
-    DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
+    //DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
 }

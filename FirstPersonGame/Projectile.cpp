@@ -1,5 +1,6 @@
 #include "Projectile.h"
 
+#include "CollisionManager.h"
 
 Projectile::Projectile(Vector3 position, Vector3 launchForce)
 {
@@ -10,6 +11,7 @@ Projectile::Projectile(Vector3 position, Vector3 launchForce)
 
 Projectile::~Projectile()
 {
+	delete &collider;
 }
 
 void Projectile::Start()
@@ -29,6 +31,8 @@ void Projectile::Draw()
 void Projectile::Update()
 {
 	grav.Update();
+
+	//if (collider.IsColliding()) delete this;
 }
 
 void Projectile::AddForce(Vector3 force)
