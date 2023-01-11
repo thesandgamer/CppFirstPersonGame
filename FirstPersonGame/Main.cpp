@@ -72,6 +72,7 @@ void Start()
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },{239, 123, 69, 255}));//Créer le sol
 
 
+    
     //----------Création aléatire du terrain---------
     const int MAX_COLUMNS = 30;
 
@@ -138,9 +139,9 @@ void Draw()
 void DrawUi()
 {
     
-    DrawText(TextFormat("rot x: % 02.02f", character.transf.rotation.x), 10, 10, 10, WHITE);
-    DrawText(TextFormat("rot y: % 02.02f", character.transf.rotation.y), 10, 20 , 10, WHITE);
-    DrawText(TextFormat("rot z: % 02.02f", character.transf.rotation.z), 10, 30, 10, WHITE);
+    DrawText(TextFormat("rot x: % 02.02f", QuaternionToEuler(character.transf.rotation).x), 10, 10, 10, WHITE);
+    DrawText(TextFormat("rot y: % 02.02f", QuaternionToEuler(character.transf.rotation).y ), 10, 20 , 10, WHITE);
+    DrawText(TextFormat("rot z: % 02.02f", QuaternionToEuler(character.transf.rotation).z ), 10, 30, 10, WHITE);
     
 
     //DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);

@@ -91,10 +91,9 @@ void Ch_MainCharacter::Update()
     ProcessInputs();
 
     //++ToDo: faire en sorte que la rotation en yaw du chara soit celle de la camera
-    Quaternion newAngle = QuaternionFromEuler( 0, 0, QuaternionToEuler(camera.offsetTransform.rotation).z * DEG2RAD);
-    transf.rotation = newAngle;
-    Vector3 eul = QuaternionToEuler(transf.rotation);
-    Vector3 camEul = QuaternionToEuler(camera.offsetTransform.rotation);
+    //Quaternion newAngle = QuaternionFromEuler( 0, QuaternionToEuler(camera.offsetTransform.rotation).y * DEG2RAD,0);
+    //transf.rotation = newAngle;
+    transf.rotation = QuaternionFromMatrix(MatrixRotateXYZ({ 0, PI * 2 - camera.GetAngle().x, 0 }));
     /*
     std::cout << " Player: " << QuaternionToEuler(transf.rotation).z * DEG2RAD << "\n";
     std::cout << " Camera: " << QuaternionToEuler(camera.offsetTransform.rotation).z * DEG2RAD << "\n \n";
@@ -194,6 +193,7 @@ void Ch_MainCharacter::Move()
     AccelerationFrictionMove(xValue, yValue);
 
     transf.translation = pos;
+    //camera.offsetTransform.translation = pos;
     //transf.rotation = camera.offsetTransform.rotation; //Si on veut que la rotation du perso soit celle de la camera
 }
 
@@ -255,8 +255,8 @@ Vector3 Ch_MainCharacter::GetForwardVector()
 
 Vector3 Ch_MainCharacter::GetVector(Vector3 dir)
 {
-    Quaternion rotation = camera.offsetTransform.rotation;//{0,0.38268,0,0.92388};//Rotation à 45°
-    //Quaternion rotation = transf.rotation;
+    //Quaternion rotation = camera.offsetTransform.rotation;//{0,0.38268,0,0.92388};//Rotation à 45°
+    Quaternion rotation = transf.rotation;
     rotation = QuaternionInvert(rotation);
     return Vector3RotateByQuaternion(dir, rotation);
 }
