@@ -30,6 +30,8 @@
       <Filter>Collisions</Filter>
     </ClCompile>
     <ClCompile Include="AC_Shoot.cpp" />
+    <ClCompile Include="MapCreator.cpp" />
+    <ClCompile Include="Ennemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -51,5 +53,7 @@
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="AC_Shoot.h" />
+    <ClInclude Include="MapCreator.h" />
+    <ClInclude Include="Ennemy.h" />
   </ItemGroup>
 </Project>

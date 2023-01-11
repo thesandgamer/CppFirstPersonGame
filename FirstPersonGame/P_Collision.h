@@ -13,8 +13,6 @@ enum CollisionTouching {
 };
 
 
-//++ToDo: faire des layers des collison à check pour éviter que des collision se
-//fassent alors qu'elles ne devrait pas
 enum CollisionLayer {
 	Layer0 = 1 << 0,
 	Layer1 = 1 << 1,
@@ -32,7 +30,6 @@ enum CollisionType {
 	RayCollider,
 };
 
-//++ToDo: system de layer de collisions 
 
 class P_Collision
 {

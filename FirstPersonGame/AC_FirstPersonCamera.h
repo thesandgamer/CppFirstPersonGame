@@ -28,6 +28,8 @@ public:
 	Transform* transform{};
 	Transform offsetTransform{};
 
+	void HeadShake(float strength);
+
 private:
 	//Position
 	//Rotation

@@ -43,9 +43,23 @@ void AC_FirstPersonCamera::Update()
     CameraControl();
 }
 
+void AC_FirstPersonCamera::HeadShake(float strength)
+{
+    // NOT WORKING HAVE TO ADAPT WITH TRANSFORM SYSTEM
+    //---------------Head wobble-----------------
+    static int swingCounter = 0;    // Used for 1st person swinging movement
+    // 
+    // If movement detected (some key pressed), increase swinging
+    //for (int i = 0; i < 6; i++) if (direction[i]) { swingCounter++; break; }
+    swingCounter++;
+    cam.position.y = camData.playerEyesPosition - sinf(swingCounter / 8.0f) / 30.0f;
+
+    cam.up.x = sinf(swingCounter / (8.0f * 2)) / 200.0f;
+    cam.up.z = -sinf(swingCounter / (8.0f * 2)) / 200.0f;
+}
+
 void AC_FirstPersonCamera::CameraControl()
 {
-    static int swingCounter = 0;    // Used for 1st person swinging movement
 
     //-------------------Get les values de la souris-----------
 
@@ -82,25 +96,13 @@ void AC_FirstPersonCamera::CameraControl()
     cam.target.y = cam.position.y - transfor.m13;
     cam.target.z = cam.position.z - transfor.m14;
 
-    /*
-    transform->translation = cam.position;
-    transform->rotation = QuaternionFromMatrix(rotation);*/
-
     offsetTransform.rotation = QuaternionFromMatrix(transfor);
 
+   // HeadShake(2);
 
 
-    //---------------Head wobble-----------------
-    /*
-    // If movement detected (some key pressed), increase swinging
-    for (int i = 0; i < 6; i++) if (direction[i]) { swingCounter++; break; }
 
-
-    cam.position.y = camData.playerEyesPosition - sinf(swingCounter / 8.0f) / 30.0f;
-
-    cam.up.x = sinf(swingCounter / (8.0f * 2)) / 200.0f;
-    cam.up.z = -sinf(swingCounter / (8.0f * 2)) / 200.0f;
-    */
+    
 
 
 

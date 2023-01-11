@@ -90,50 +90,15 @@ void Ch_MainCharacter::Update()
     //Process inputs
     ProcessInputs();
 
-    //++ToDo: faire en sorte que la rotation en yaw du chara soit celle de la camera
-    //Quaternion newAngle = QuaternionFromEuler( 0, QuaternionToEuler(camera.offsetTransform.rotation).y * DEG2RAD,0);
-    //transf.rotation = newAngle;
+
+
+    //Set la rotation du chara en yaw: on fait une matrice de rotation avec le camera x (l'axe vertical)
     transf.rotation = QuaternionFromMatrix(MatrixRotateXYZ({ 0, PI * 2 - camera.GetAngle().x, 0 }));
-    /*
-    std::cout << " Player: " << QuaternionToEuler(transf.rotation).z * DEG2RAD << "\n";
-    std::cout << " Camera: " << QuaternionToEuler(camera.offsetTransform.rotation).z * DEG2RAD << "\n \n";
-    */
 
     //---------
     
-    //Vector3 direction = { GetForwardVector().x,0,GetForwardVector().z };//{GetForwardVector().x ,0,GetForwardVector().z};
-    forwardRay.SetDirection(GetVector({0,0,-1}));
-    rightRay.SetDirection(GetVector({ 1,0,0 }));
-    backwarddRay.SetDirection(GetVector({ 0,0,1 }));
-    leftRay.SetDirection(GetVector({ -1,0,0 }));
-    
-    //Change State
 
-    state = (groundBox.IsColliding()) ? InAir : Grounded;
-    isGrounded = groundBox.IsColliding();
 
-    //---------------
-    if (forwardRay.IsColliding()) {
-        collisionDirection |= Front;    //Ajoute collision front
-        dir[0] = false;
-    }else collisionDirection ^= Front;   
-    
-    if (rightRay.IsColliding()) {
-        collisionDirection |= Right;    //Ajoute collision 
-        dir[2] = false;
-    }else collisionDirection ^= Right;    //Enlève collision 
-
-    if (backwarddRay.IsColliding()) {
-        collisionDirection |= Back;    //Ajoute collision 
-        dir[1] = false;
-    }
-    else collisionDirection ^= Back;
-
-    if (leftRay.IsColliding()) {
-        collisionDirection |= Left;    //Ajoute collision 
-        dir[3] = false;
-    }
-    else collisionDirection ^= Left;
 
     //-------------
 
@@ -145,7 +110,6 @@ void Ch_MainCharacter::Update()
 
     shootingComponent.Update();
 
-    //++ToDo: faire en sorte que le rayon forward rotate en fonction de la rotation de la camera
 
 }
 
@@ -161,7 +125,6 @@ void Ch_MainCharacter::ProcessInputs()
     if (IsKeyReleased(KEY_SPACE)) StopJumping();
 
 
-    //++ToDo: faire en sorte de tirer avec la rotation de la camera
     if (IsMouseButtonDown(0))
     {  
         shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{20,20,20}));
@@ -170,22 +133,24 @@ void Ch_MainCharacter::ProcessInputs()
 
 
 
-//ToDo++ camera bubble activable avec varaible exposé de force
 void Ch_MainCharacter::Move()
 {
-    //---------------------Gère la direction dans laquelle aller
-    //On regarde tous les inputs pour faire les diagonales 
-    float xValue = 
-       (sinf(camera.GetAngle().x) * dir[1] -
-        sinf(camera.GetAngle().x) * dir[0] -
-        cosf(camera.GetAngle().x) * dir[3] +
-        cosf(camera.GetAngle().x) * dir[2]) ;
+    //ToDo++ camera bubble activable avec variable exposé de force
 
-    float yValue = 
-       (cosf(camera.GetAngle().x) * dir[1] -
-        cosf(camera.GetAngle().x) * dir[0] +
-        sinf(camera.GetAngle().x) * dir[3] -
-        sinf(camera.GetAngle().x) * dir[2]) ;
+    //---------------------Gère la direction dans laquelle aller
+    ProcessCollisions();
+    //On regarde tous les inputs pour faire les diagonales 
+    float xValue =
+        (sinf(camera.GetAngle().x) * dir[1] -
+            sinf(camera.GetAngle().x) * dir[0] -
+            cosf(camera.GetAngle().x) * dir[3] +
+            cosf(camera.GetAngle().x) * dir[2]);
+
+    float yValue =
+        (cosf(camera.GetAngle().x) * dir[1] -
+            cosf(camera.GetAngle().x) * dir[0] +
+            sinf(camera.GetAngle().x) * dir[3] -
+            sinf(camera.GetAngle().x) * dir[2]);
 
 
     //------------------Va déplacer le character
@@ -193,8 +158,6 @@ void Ch_MainCharacter::Move()
     AccelerationFrictionMove(xValue, yValue);
 
     transf.translation = pos;
-    //camera.offsetTransform.translation = pos;
-    //transf.rotation = camera.offsetTransform.rotation; //Si on veut que la rotation du perso soit celle de la camera
 }
 
 void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
@@ -259,6 +222,46 @@ Vector3 Ch_MainCharacter::GetVector(Vector3 dir)
     Quaternion rotation = transf.rotation;
     rotation = QuaternionInvert(rotation);
     return Vector3RotateByQuaternion(dir, rotation);
+}
+
+void Ch_MainCharacter::ProcessCollisions()
+{
+    //++ToDo: faire en sorte qu'en cas de collisions, replace à la position d'avant
+
+    forwardRay.SetDirection(GetVector({ 0,0,-1 }));
+    rightRay.SetDirection(GetVector({ 1,0,0 }));
+    backwarddRay.SetDirection(GetVector({ 0,0,1 }));
+    leftRay.SetDirection(GetVector({ -1,0,0 }));
+
+    //Change State
+
+    state = (groundBox.IsColliding()) ? InAir : Grounded;
+    isGrounded = groundBox.IsColliding();
+
+    //---------------
+    if (forwardRay.IsColliding()) {
+        collisionDirection |= Front;    //Ajoute collision front
+        dir[0] = false;
+    }
+    else collisionDirection ^= Front;
+
+    if (rightRay.IsColliding()) {
+        collisionDirection |= Right;    //Ajoute collision 
+        dir[2] = false;
+    }
+    else collisionDirection ^= Right;    //Enlève collision 
+
+    if (backwarddRay.IsColliding()) {
+        collisionDirection |= Back;    //Ajoute collision 
+        dir[1] = false;
+    }
+    else collisionDirection ^= Back;
+
+    if (leftRay.IsColliding()) {
+        collisionDirection |= Left;    //Ajoute collision 
+        dir[3] = false;
+    }
+    else collisionDirection ^= Left;
 }
 
 void Ch_MainCharacter::Jump()

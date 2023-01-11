@@ -47,6 +47,8 @@ private:
 
 	//----
 	//BoxCollision bodyBox{ Vector3{1,1.80f,1} };
+	void ProcessCollisions();
+
 	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
 
 	RaycastCollision forwardRay{ {1,0,0},2.0f };
