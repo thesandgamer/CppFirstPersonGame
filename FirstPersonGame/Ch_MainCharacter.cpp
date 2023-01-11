@@ -2,18 +2,26 @@
 
 void Ch_MainCharacter::Start()
 {
+    //-----------------
     camera.SetParent(&transf);
 
-    groundBox.SetParent(&transf);
-
-    groundBox.layer = Layer1;
-    forwardRay.layer = Layer1;
     //bodyBox.SetParent(&transf);
+
+    groundBox.SetParent(&transf);
 
     forwardRay.SetParent(&transf);//Ajoute le component
     rightRay.SetParent(&transf);//Ajoute le component
     backwarddRay.SetParent(&transf);//Ajoute le component
     leftRay.SetParent(&transf);//Ajoute le component
+
+    //--------------
+    groundBox.layer = Layer1;
+
+    forwardRay.layer = Layer1;
+    rightRay.layer = Layer1;
+    backwarddRay.layer = Layer1;
+    leftRay.layer = Layer1;
+    //-------------------
 
     camera.Start();
     gravity.SetPos(&pos);
@@ -29,6 +37,9 @@ void Ch_MainCharacter::Start()
     groundBox.checkingCollision = true;
 
     forwardRay.checkingCollision = true;
+    rightRay.checkingCollision = true;
+    backwarddRay.checkingCollision = true;
+    leftRay.checkingCollision = true;
 
     shootingComponent.Start();
 
@@ -45,8 +56,8 @@ void Ch_MainCharacter::Draw()
 
     forwardRay.Draw();
     rightRay.Draw();
-   // leftRay.Draw();
-   // backwarddRay.Draw();
+    leftRay.Draw();
+    backwarddRay.Draw();
 
 
     shootingComponent.Draw();
@@ -102,17 +113,30 @@ void Ch_MainCharacter::Update()
     state = (groundBox.IsColliding()) ? InAir : Grounded;
     isGrounded = groundBox.IsColliding();
 
-    if (forwardRay.IsColliding())
-    {
+    //---------------
+    if (forwardRay.IsColliding()) {
         collisionDirection |= Front;    //Ajoute collision front
         dir[0] = false;
+    }else collisionDirection ^= Front;   
+    
+    if (rightRay.IsColliding()) {
+        collisionDirection |= Right;    //Ajoute collision 
+        dir[2] = false;
+    }else collisionDirection ^= Right;    //Enlève collision 
 
+    if (backwarddRay.IsColliding()) {
+        collisionDirection |= Back;    //Ajoute collision 
+        dir[1] = false;
     }
-    else
-    {
-        collisionDirection ^= Front;    //Enlève collision front
-    }
+    else collisionDirection ^= Back;
 
+    if (leftRay.IsColliding()) {
+        collisionDirection |= Left;    //Ajoute collision 
+        dir[3] = false;
+    }
+    else collisionDirection ^= Left;
+
+    //-------------
 
     Move();
 
