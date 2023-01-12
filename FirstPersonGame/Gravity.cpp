@@ -3,13 +3,6 @@
 void Gravity::Update()
 {
 	Fall();
-	/*
-	if (!canFall) 
-	{
-		velocity.y = 0;
-		//std::cout << "Vel: " << vel << "\n";
-	}*/
-
 }
 
 void Gravity::Fall()

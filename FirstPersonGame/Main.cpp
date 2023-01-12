@@ -16,6 +16,9 @@
 //++ToDo rajouter post process hachurer et le colorer pour rendu cool https://www.raylib.com/examples/shaders/loader.html?name=shaders_postprocessing
 //++ToDo rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
 
+//++ToDo: On à déjà: déplacement, saut, tir, il faudrait pour avoir un jeu: une carte, des ennemis, point de vie avec Ui, 
+//++ToDo: true game: main menu avec un bouton pour jouer, et un menu de fin
+
 using namespace std;
 
 //Editor Variable
@@ -69,11 +72,22 @@ void Start()
     CollisionManager::GetInstance()->Start();
 
 
-    Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f },{239, 123, 69, 255}));//Créer le sol
 
 
     
     //----------Création aléatire du terrain---------
+    Color color = { GetRandomValue(169, 122), GetRandomValue(109, 89), GetRandomValue(163, 128), 255 };
+    vector<CubeActor* > cubes = {
+        new CubeActor({ 0,1,0 }, { 3,2, 3 },color),
+        new CubeActor({ 5,2,5 }, { 2,4, 2 },color),
+
+
+    };
+    Terrain.assign(cubes.begin(), cubes.end());
+
+    Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f }, { 239, 123, 69, 255 }));//Créer le sol
+
+    /*
     const int MAX_COLUMNS = 30;
 
     float heights[MAX_COLUMNS] = { 0 };
@@ -90,7 +104,7 @@ void Start()
             scale,
             color));
 
-    }
+    }*/
     //-----------------------
     
     
@@ -125,7 +139,6 @@ void Draw()
     {
         element->Draw();
     }
-    DrawCube({ 0,0,0 }, 1.0f, 1.0f, 1.0f, BLUE);
 
     character.Draw();
 
@@ -138,11 +151,13 @@ void Draw()
 
 void DrawUi()
 {
-    
+    /*
     DrawText(TextFormat("rot x: % 02.02f", QuaternionToEuler(character.transf.rotation).x), 10, 10, 10, WHITE);
     DrawText(TextFormat("rot y: % 02.02f", QuaternionToEuler(character.transf.rotation).y ), 10, 20 , 10, WHITE);
     DrawText(TextFormat("rot z: % 02.02f", QuaternionToEuler(character.transf.rotation).z ), 10, 30, 10, WHITE);
-    
-
+    */
+    DrawText(TextFormat("pos x: % 02.02f", character.transf.translation.x), 10, 10, 10, WHITE);
+    DrawText(TextFormat("pos y: % 02.02f", character.transf.translation.y), 10, 20, 10, WHITE);
+    DrawText(TextFormat("pos z: % 02.02f", character.transf.translation.z), 10, 30, 10, WHITE);
     //DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
 }

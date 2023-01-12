@@ -5,5 +5,10 @@
 
 class MapCreator
 {
+public:
+	MapCreator();
+
+private:
+
 };
 

@@ -32,6 +32,7 @@
     <ClCompile Include="AC_Shoot.cpp" />
     <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="Ennemy.cpp" />
+    <ClCompile Include="Ac_LifeSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -55,5 +56,6 @@
     <ClInclude Include="AC_Shoot.h" />
     <ClInclude Include="MapCreator.h" />
     <ClInclude Include="Ennemy.h" />
+    <ClInclude Include="Ac_LifeSystem.h" />
   </ItemGroup>
 </Project>

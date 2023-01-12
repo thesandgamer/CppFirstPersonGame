@@ -170,6 +170,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ac_LifeSystem.cpp" />
     <ClCompile Include="AC_Shoot.cpp" />
     <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Ch_MainCharacter.cpp" />
@@ -190,6 +191,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ac_LifeSystem.h" />
     <ClInclude Include="AC_Shoot.h" />
     <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Ch_MainCharacter.h" />

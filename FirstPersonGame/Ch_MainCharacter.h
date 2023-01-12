@@ -37,7 +37,7 @@ public:
 
 	CharacterMovementState state{ Grounded };
 
-	Transform transf{ {0},{0},{1,1,1} };
+	Transform transf{ {0,0,0},{0,0,0,0},{1,1,1} };
 
 
 private:
@@ -76,6 +76,8 @@ private:
 
 	bool inJump;
 	bool isGrounded{ false };
+
+	float airControl{ 0.1f };
 
 	//-----For movement
 	void Move();

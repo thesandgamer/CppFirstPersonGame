@@ -48,11 +48,11 @@ void Ch_MainCharacter::Start()
 void Ch_MainCharacter::Draw()
 {
     camera.Draw();
-    DrawCube({pos.x,pos.y-0.5f,pos.z}, 0.1f, 0.1f, 0.1f, LIME);//Dessine son corps
+    DrawCube({transf.translation.x,transf.translation.y-0.5f,transf.translation.z}, 0.1f, 0.1f, 0.1f, LIME);//Dessine son corps
    
 
     groundBox.Draw();
-   // bodyBox.Draw();
+    //bodyBox.Draw();
 
     forwardRay.Draw();
     rightRay.Draw();
@@ -64,26 +64,13 @@ void Ch_MainCharacter::Draw()
 
     //-----------
 
-    /*
-    Vector3 startPos = { transf.translation.x + 0,
-      transf.translation.y - 1.8f,
-      transf.translation.z + 0 };//Son origine
-
-    
-    Vector3 direction = { GetVector({0,0,1}).x*10,0,GetVector({0,0,1}).z*10 };
-    Vector3 endPos = Vector3Add(direction, startPos);
-    DrawLine3D(startPos, endPos, PURPLE);
-
-    direction = { GetVector({1,0,0}).x * 10,0,GetVector({1,0,0}).z * 10};
-    endPos = Vector3Add(direction, startPos);
-    DrawLine3D(startPos, endPos, PURPLE);
-    */
 
 }
 
 void Ch_MainCharacter::Update()
 {
     //Process Gravity
+
     gravity.canFall = (groundBox.IsColliding()) ? false : true;
     gravity.Update();
 
@@ -97,9 +84,6 @@ void Ch_MainCharacter::Update()
 
     //---------
     
-
-
-
     //-------------
 
     Move();
@@ -109,6 +93,9 @@ void Ch_MainCharacter::Update()
     ProcessJump();
 
     shootingComponent.Update();
+
+    ProcessCollisions();
+
 
 
 }
@@ -138,7 +125,6 @@ void Ch_MainCharacter::Move()
     //ToDo++ camera bubble activable avec variable exposé de force
 
     //---------------------Gère la direction dans laquelle aller
-    ProcessCollisions();
     //On regarde tous les inputs pour faire les diagonales 
     float xValue =
         (sinf(camera.GetAngle().x) * dir[1] -
@@ -155,9 +141,10 @@ void Ch_MainCharacter::Move()
 
     //------------------Va déplacer le character
    // BaseMovement(xValue, yValue);
-    AccelerationFrictionMove(xValue, yValue);
+    AccelerationFrictionMove(xValue, yValue); //Bouge la position 
 
-    transf.translation = pos;
+
+    //transf.translation = pos;   //Bouge le transform du character 
 }
 
 void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
@@ -174,6 +161,19 @@ void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
 void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
 {
     float dt = GetFrameTime();
+
+    if (isGrounded)
+    {
+        maxSpeed = 100;
+        deceleration = -8;
+        acceleration = 8;
+    }
+    else
+    {
+        maxSpeed = 100 * airControl;
+        deceleration = -8 * airControl;
+        acceleration = 8 * airControl;
+    }
 
     maxSpeed = 100;
     deceleration = -8;
@@ -227,11 +227,18 @@ Vector3 Ch_MainCharacter::GetVector(Vector3 dir)
 void Ch_MainCharacter::ProcessCollisions()
 {
     //++ToDo: faire en sorte qu'en cas de collisions, replace à la position d'avant
+    //Voir la prochaine position, voir si ça collide, si ça collide on avance pas 
 
     forwardRay.SetDirection(GetVector({ 0,0,-1 }));
     rightRay.SetDirection(GetVector({ 1,0,0 }));
     backwarddRay.SetDirection(GetVector({ 0,0,1 }));
     leftRay.SetDirection(GetVector({ -1,0,0 }));
+
+    //Place Ray to futur position
+    forwardRay.Transform->translation = pos;
+    rightRay.Transform->translation = pos;
+    backwarddRay.Transform->translation = pos;
+    leftRay.Transform->translation = pos;
 
     //Change State
 
@@ -241,25 +248,25 @@ void Ch_MainCharacter::ProcessCollisions()
     //---------------
     if (forwardRay.IsColliding()) {
         collisionDirection |= Front;    //Ajoute collision front
-        dir[0] = false;
+       // dir[0] = false;
     }
     else collisionDirection ^= Front;
 
     if (rightRay.IsColliding()) {
         collisionDirection |= Right;    //Ajoute collision 
-        dir[2] = false;
+        //dir[2] = false;
     }
     else collisionDirection ^= Right;    //Enlève collision 
 
     if (backwarddRay.IsColliding()) {
         collisionDirection |= Back;    //Ajoute collision 
-        dir[1] = false;
+        //dir[1] = false;
     }
     else collisionDirection ^= Back;
 
     if (leftRay.IsColliding()) {
         collisionDirection |= Left;    //Ajoute collision 
-        dir[3] = false;
+       // dir[3] = false;
     }
     else collisionDirection ^= Left;
 }
