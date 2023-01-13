@@ -5,7 +5,9 @@
 
 //++ToDo: projectile
 //++ToDo: rempalcer par Sphere collision
-//++ToDo: Détruit quand touche
+//++ToDo: Détruit quand touche : remplacer pointeurs par smart pointers
+
+
 
 class Projectile
 {

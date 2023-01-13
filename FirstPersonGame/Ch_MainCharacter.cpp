@@ -86,6 +86,8 @@ void Ch_MainCharacter::Update()
     
     //-------------
 
+    ProcessCollisions();
+
     Move();
 
     camera.Update();
@@ -94,7 +96,7 @@ void Ch_MainCharacter::Update()
 
     shootingComponent.Update();
 
-    ProcessCollisions();
+   
 
 
 
@@ -143,8 +145,10 @@ void Ch_MainCharacter::Move()
    // BaseMovement(xValue, yValue);
     AccelerationFrictionMove(xValue, yValue); //Bouge la position 
 
+    transf.translation = pos;   //Bouge le transform du character 
 
-    //transf.translation = pos;   //Bouge le transform du character 
+
+
 }
 
 void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
@@ -174,10 +178,6 @@ void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
         deceleration = -8 * airControl;
         acceleration = 8 * airControl;
     }
-
-    maxSpeed = 100;
-    deceleration = -8;
-    acceleration = 8;
 
     //On défnit les valeur maxes
     xValue *= maxSpeed;
@@ -245,28 +245,34 @@ void Ch_MainCharacter::ProcessCollisions()
     state = (groundBox.IsColliding()) ? InAir : Grounded;
     isGrounded = groundBox.IsColliding();
 
+    //std::cout << "X: " << vel.x << " Y: " << vel.y << "\n";
+    //++ToDo: faire en sorte de bien faire les collisions
     //---------------
     if (forwardRay.IsColliding()) {
         collisionDirection |= Front;    //Ajoute collision front
-       // dir[0] = false;
+        dir[0] = false;
+        vel = { 0,0 };
     }
     else collisionDirection ^= Front;
 
     if (rightRay.IsColliding()) {
         collisionDirection |= Right;    //Ajoute collision 
-        //dir[2] = false;
+        dir[2] = false;
+        vel = { 0,0 };
     }
     else collisionDirection ^= Right;    //Enlève collision 
 
     if (backwarddRay.IsColliding()) {
         collisionDirection |= Back;    //Ajoute collision 
-        //dir[1] = false;
+        dir[1] = false;
+        vel = { 0,0 };
     }
     else collisionDirection ^= Back;
 
     if (leftRay.IsColliding()) {
         collisionDirection |= Left;    //Ajoute collision 
-       // dir[3] = false;
+        dir[3] = false;
+        vel = { 0,0 };
     }
     else collisionDirection ^= Left;
 }

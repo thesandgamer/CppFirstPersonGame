@@ -51,10 +51,10 @@ private:
 
 	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
 
-	RaycastCollision forwardRay{ {1,0,0},2.0f };
-	RaycastCollision rightRay{ {1,0,0},2.0f };
-	RaycastCollision backwarddRay{ {1,0,0},2.0f };
-	RaycastCollision leftRay{ {1,0,0},2.0f };
+	RaycastCollision forwardRay{ {1,0,0},.50f };
+	RaycastCollision rightRay{ {1,0,0},.50f };
+	RaycastCollision backwarddRay{ {1,0,0},.50f };
+	RaycastCollision leftRay{ {1,0,0},0.50f };
 
 	//Créer 4 boites de collisions 
 	std::uint8_t collisionDirection;
