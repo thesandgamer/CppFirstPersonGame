@@ -5,7 +5,7 @@
       <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Collisions">
-      <UniqueIdentifier>{b21c75b1-3344-47ec-9cce-ae18c8f772b9}</UniqueIdentifier>
+      <UniqueIdentifier>{d82eb43a-3756-44a6-be47-4feabe73d1d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -14,48 +14,48 @@
     </ClCompile>
     <ClCompile Include="Ch_MainCharacter.cpp" />
     <ClCompile Include="AC_FirstPersonCamera.cpp" />
+    <ClCompile Include="Gravity.cpp" />
+    <ClCompile Include="CubeActor.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="AC_Shoot.cpp" />
+    <ClCompile Include="MapCreator.cpp" />
+    <ClCompile Include="Ennemy.cpp" />
+    <ClCompile Include="Ac_LifeSystem.cpp" />
     <ClCompile Include="P_Collision.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollision.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="Gravity.cpp" />
-    <ClCompile Include="CubeActor.cpp" />
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="RaycastCollision.cpp">
-      <Filter>Collisions</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="AC_Shoot.cpp" />
-    <ClCompile Include="MapCreator.cpp" />
-    <ClCompile Include="Ennemy.cpp" />
-    <ClCompile Include="Ac_LifeSystem.cpp" />
+    <ClCompile Include="SphereCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
     <ClInclude Include="AC_FirstPersonCamera.h" />
+    <ClInclude Include="Gravity.h" />
+    <ClInclude Include="ComponentParent.h" />
+    <ClInclude Include="CubeActor.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="AC_Shoot.h" />
+    <ClInclude Include="MapCreator.h" />
+    <ClInclude Include="Ennemy.h" />
+    <ClInclude Include="Ac_LifeSystem.h" />
     <ClInclude Include="P_Collision.h">
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollision.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="Gravity.h" />
-    <ClInclude Include="ComponentParent.h" />
-    <ClInclude Include="CubeActor.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="RaycastCollision.h">
+    <ClInclude Include="SphereCollision.h">
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="AC_Shoot.h" />
-    <ClInclude Include="MapCreator.h" />
-    <ClInclude Include="Ennemy.h" />
-    <ClInclude Include="Ac_LifeSystem.h" />
   </ItemGroup>
 </Project>

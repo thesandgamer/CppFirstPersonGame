@@ -183,7 +183,7 @@
     <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="P_Collision.cpp" />
-    <ClCompile Include="RaycastCollision.cpp" />
+    <ClCompile Include="SphereCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -204,7 +204,7 @@
     <ClInclude Include="MapCreator.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="P_Collision.h" />
-    <ClInclude Include="RaycastCollision.h" />
+    <ClInclude Include="SphereCollision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

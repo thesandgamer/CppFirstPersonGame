@@ -1440,6 +1440,7 @@ RLAPI RayHitInfo GetCollisionRayModel(Ray ray, Model model);                    
 RLAPI RayHitInfo GetCollisionRayTriangle(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3);                  // Get collision info between ray and triangle
 RLAPI RayHitInfo GetCollisionRayGround(Ray ray, float groundHeight);                                    // Get collision info between ray and ground plane (Y-normal plane)
 RLAPI RayHitInfo GetRayCollisionBox(Ray ray, BoundingBox box);                                    // Get collision info between ray and box
+RLAPI RayHitInfo GetRayCollisionSphere(Ray ray, Vector3 center, float radius);                    // Get collision info between ray and sphere
 
 //------------------------------------------------------------------------------------
 // Audio Loading and Playing Functions (Module: audio)

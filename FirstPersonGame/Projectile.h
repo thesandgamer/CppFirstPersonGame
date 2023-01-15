@@ -21,7 +21,7 @@ public:
 
 	Gravity grav{};
 
-	P_Collision* GetCollider() { return &collider; }
+	std::shared_ptr<BoxCollision> GetCollider() { return std::make_shared<BoxCollision>(collider); }
 
 	void AddForce(Vector3 force);
 

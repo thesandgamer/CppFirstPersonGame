@@ -1,6 +1,7 @@
 #pragma once
 #include "Projectile.h"
 #include <vector>
+#include <iostream>
 
 class AC_Shoot
 {
@@ -20,7 +21,7 @@ private:
 	bool  canShoot{true};
 	
 
-	std::vector<Projectile*> projectiles;
+	std::vector<std::unique_ptr<Projectile>> projectiles;
 
 	bool timer{ false };
 	void StartTimer();

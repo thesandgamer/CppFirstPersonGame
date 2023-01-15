@@ -2,6 +2,7 @@
 #include "P_Collision.h"
 #include "BoxCollision.h"
 #include "RaycastCollision.h"
+#include "SphereCollision.h"
 #include <vector>
 
 #include <iostream>
@@ -9,7 +10,7 @@
 
 class CollisionManager
 {
-
+	//--------------Make it a singleton------------------
 private:
 	CollisionManager() {};
 	static CollisionManager* instance;
@@ -41,12 +42,19 @@ public:
 
 private:
 
+
 	std::vector<P_Collision*> colliders;
+	//std::vector<std::shared_ptr<P_Collision>> colliders;
 
 	void ProcessColisions();
 
+
+
 	void DoCollisionBoxsCheck(BoxCollision* colliderToCheck);
 	void DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck);
+	void DoSphereBoxCollisionCheck(SphereCollision* colliderToCheck);
+
+	void InsertCollision(bool insert, P_Collision* collider, P_Collision* colliderToCheck);
 
 	//++ToDo faire une fonction pour check uniquement les collider proche les uns des autres
 

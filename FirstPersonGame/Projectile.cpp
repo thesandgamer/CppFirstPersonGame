@@ -11,7 +11,7 @@ Projectile::Projectile(Vector3 position, Vector3 launchForce)
 
 Projectile::~Projectile()
 {
-	delete &collider;
+	//delete &collider;
 }
 
 void Projectile::Start()

@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include <set>
 #include "raymath.h"
+#include <iostream>
 
 enum CollisionTouching {
 	Up =1 <<0,
@@ -47,10 +48,12 @@ public:
 
 	void SetParent(Transform* parentTransform) { Transform = parentTransform; }
 
+	//std::set<std::shared_ptr<P_Collision>> collisions{};
 	std::set<P_Collision*> collisions{};
 
 
 	Transform Offset{ {0,0,0},{0,0,0},{1,1,1} };//Offset de transform
+	//std::shared_ptr<Transform> Transform{};	//Transform du parent
 	Transform* Transform{};	//Transform du parent
 
 	virtual void Test() {};

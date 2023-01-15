@@ -18,22 +18,24 @@ void AC_Shoot::Update()
 		}
 	}
 	//-----------
-	for each (Projectile * projectile in projectiles)
+	for (auto i = projectiles.begin(); i != projectiles.end(); i++)
 	{
-		if (projectile != nullptr)
+		if (*i)
 		{
-			projectile->Update();
+			(*i).get()->Update();
+
 		}
 	}
+
 }
 
 void AC_Shoot::Draw()
 {
-	for each (Projectile* projectile in projectiles)
+	for (auto i = projectiles.begin(); i != projectiles.end(); i++)
 	{
-		if (projectile != nullptr)
+		if (*i)
 		{
-			projectile->Draw();
+			(*i).get()->Draw();
 		}
 	}
 }

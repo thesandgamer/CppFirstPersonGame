@@ -3146,6 +3146,43 @@ RayHitInfo GetCollisionRayGround(Ray ray, float groundHeight)
     return result;
 }
 
+// Get collision info between ray and sphere
+RayHitInfo GetRayCollisionSphere(Ray ray, Vector3 center, float radius)
+{
+    RayHitInfo collision = { 0 };
+
+    Vector3 raySpherePos = Vector3Subtract(center, ray.position);
+    float vector = Vector3DotProduct(raySpherePos, ray.direction);
+    float distance = Vector3Length(raySpherePos);
+    float d = radius * radius - (distance * distance - vector * vector);
+
+    collision.hit = d >= 0.0f;
+
+    // Check if ray origin is inside the sphere to calculate the correct collision point
+    if (distance < radius)
+    {
+        collision.distance = vector + sqrtf(d);
+
+        // Calculate collision point
+        collision.position = Vector3Add(ray.position, Vector3Scale(ray.direction, collision.distance));
+
+        // Calculate collision normal (pointing outwards)
+        collision.normal = Vector3Negate(Vector3Normalize(Vector3Subtract(collision.position, center)));
+    }
+    else
+    {
+        collision.distance = vector - sqrtf(d);
+
+        // Calculate collision point
+        collision.position = Vector3Add(ray.position, Vector3Scale(ray.direction, collision.distance));
+
+        // Calculate collision normal (pointing inwards)
+        collision.normal = Vector3Normalize(Vector3Subtract(collision.position, center));
+    }
+
+    return collision;
+}
+
 // Get collision info between ray and box
 RayHitInfo GetRayCollisionBox(Ray ray, BoundingBox box)
 {
