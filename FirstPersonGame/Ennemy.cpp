@@ -21,7 +21,7 @@ Ennemy::~Ennemy()
 
 void Ennemy::Start()
 {
-	shootCOmponenet.Shoot();
+	shootCOmponenet.Start();
 }
 
 void Ennemy::Draw()
