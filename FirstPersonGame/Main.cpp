@@ -8,6 +8,7 @@
 #include "Ch_MainCharacter.h"
 #include "CollisionManager.h"
 #include "CubeActor.h"
+#include "Ennemy.h"
 
 
 //++ToDo Graphiques à faire:
@@ -35,6 +36,7 @@ Ch_MainCharacter character;
 CollisionManager* CollisionManager::instance = nullptr;
 
 std::vector<CubeActor*> Terrain; //Stoquage des acteurs obstacles et sol
+std::vector<Ennemy*> Ennemies; //Stoquage des acteurs obstacles et sol
 
 
 int main(int argc, char* argv[])
@@ -87,6 +89,8 @@ void Start()
 
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f }, { 239, 123, 69, 255 }));//Créer le sol
 
+    Ennemies.push_back(new Ennemy({ 15,5,10 }, 10));
+
     /*
     const int MAX_COLUMNS = 30;
 
@@ -120,6 +124,10 @@ void Update()
     {
         element->Update();
     }
+    for each (Ennemy * element in Ennemies)
+    {
+        element->Update();
+    }
 
     CollisionManager::GetInstance()->Update();//Check les collisions
 
@@ -136,6 +144,10 @@ void Draw()
     CollisionManager::GetInstance()->Draw();
 
     for each (CubeActor* element in Terrain)
+    {
+        element->Draw();
+    }
+    for each (Ennemy * element in Ennemies)
     {
         element->Draw();
     }

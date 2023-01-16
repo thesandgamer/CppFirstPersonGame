@@ -32,11 +32,11 @@ void CollisionManager::ProcessColisions()
 		break;
 
 		case RayCollider:
-			DoRayBoxCollisionCheck(dynamic_cast<RaycastCollision*>(collider));
+			DoRayBoxCollisionCheck(dynamic_cast<RaycastCollision*>(collider));	//Si c'est le rayon qui check ses collisions
 		break;
 
 		case SphereCollider:
-
+			DoSphereBoxCollisionCheck(dynamic_cast<SphereCollision*>(collider));
 		break;
 
 		default:
@@ -55,18 +55,18 @@ void CollisionManager::DoCollisionBoxsCheck(BoxCollision* colliderToCheck)
 	for each (P_Collision* collider in colliders)
 	{
 		if (colliderToCheck == collider) continue;
-		if (colliderToCheck->collideWithLayer != collider->layer) continue;
+		if (colliderToCheck->collideWithLayer != collider->layer) continue;	//Si le collider ne collide pas avec le layer de l'autre objet
 		bool collide = false;
 		switch (collider->collisionType)
 		{
-		case BoxCollider:
+		case BoxCollider:	//Si l'autre est une boite
 			collide = CheckCollisionBoxes(colliderToCheck->GetBoundingBox(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
 			break;
-		case RayCollider:
+		case RayCollider:	//Si l'autre est un rayon
 			RayHitInfo hitinfo = GetRayCollisionBox(dynamic_cast<RaycastCollision*>(collider)->GetRay(), colliderToCheck->GetBoundingBox());
 			collide = hitinfo.hit && hitinfo.distance <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
 			break;
-		case SphereCollider:
+		case SphereCollider:	//Si l'autre est une sphère
 			collide = CheckCollisionBoxSphere(colliderToCheck->GetBoundingBox(),
 				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center, dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius);
 			break;
@@ -90,15 +90,19 @@ void CollisionManager::DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck)
 
 		switch (collider->collisionType)
 		{
+
 		case BoxCollider:
 			RayHitInfo hitinfo = GetRayCollisionBox(colliderToCheck->GetRay(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
-			collide = hitinfo.hit && hitinfo.distance <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
+			collide = hitinfo.hit && hitinfo.distance <= colliderToCheck->GetLength();
 			break;
 
 		case SphereCollider:
 			RayHitInfo hit = GetRayCollisionSphere(colliderToCheck->GetRay(), 
 				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center, dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius);
-			collide = hit.hit && hit.distance <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
+			collide = hit.hit && hit.distance <= colliderToCheck->GetLength();
+			break;
+
+		default:
 			break;
 
 		}		
@@ -107,8 +111,40 @@ void CollisionManager::DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck)
 	}
 }
 
-void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToCheck)
+void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToCheck)//Une sphère va check les autres collisons
 {
+	for each (P_Collision * collider in colliders)
+	{
+		if (colliderToCheck == collider) continue;
+		if (colliderToCheck->collideWithLayer != collider->layer) continue;
+		bool collide = false;
+
+		switch (collider->collisionType)
+		{
+
+		case BoxCollider:
+			collide = CheckCollisionBoxSphere(dynamic_cast<BoxCollision*>(collider)->GetBoundingBox(),
+				colliderToCheck->GetCollider().Center, colliderToCheck->GetCollider().Radius);
+			break;
+
+		case RayCollider:
+			RayHitInfo hit = GetRayCollisionSphere(dynamic_cast<RaycastCollision*>(collider)->GetRay(),
+				colliderToCheck->GetCollider().Center, colliderToCheck->GetCollider().Radius);
+			collide = hit.hit && hit.distance <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
+			break;
+
+		case SphereCollider:
+			collide = CheckCollisionSpheres(colliderToCheck->GetCollider().Center, colliderToCheck->GetCollider().Radius,
+				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center, dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius);
+			break;
+
+		default:
+			break;
+
+		}
+		InsertCollision(collide, collider, colliderToCheck);
+
+	}
 }
 
 void CollisionManager::InsertCollision(bool insert, P_Collision* collider, P_Collision* colliderToCheck)

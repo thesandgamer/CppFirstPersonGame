@@ -6,12 +6,16 @@ SphereCollision::SphereCollision()
 
 SphereCollision::SphereCollision(float radius) : P_Collision()
 {
+    collisionType = SphereCollider;
     rad = radius;
 }
 
 void SphereCollision::Draw()
 {
-    DrawSphere(GetCollider().Center, GetCollider().Radius, (IsColliding()) ? RED : GREEN);
+    if (trigger)
+        DrawSphereWires(GetCollider().Center, GetCollider().Radius,20,20, (IsColliding()) ? RED : GREEN);
+    else
+        DrawSphere(GetCollider().Center, GetCollider().Radius, (IsColliding()) ? RED : GREEN);
 }
 
 Sphere SphereCollision::GetCollider()

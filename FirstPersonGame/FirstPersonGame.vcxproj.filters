@@ -33,6 +33,9 @@
     <ClCompile Include="SphereCollision.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="RaycastCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -55,6 +58,9 @@
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="RaycastCollision.h">
       <Filter>Collisions</Filter>
     </ClInclude>
   </ItemGroup>

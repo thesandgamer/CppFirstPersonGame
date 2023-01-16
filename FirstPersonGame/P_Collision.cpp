@@ -13,3 +13,19 @@ P_Collision::~P_Collision()
 	collisions.clear();
 	Transform = nullptr;
 }
+
+bool P_Collision::IsColliding()
+{
+
+	if (collisions.size() > 0)	//Si on à des collisions
+	{
+		for each (P_Collision* col in collisions)//Pour chaque collider avec lequel on collide
+		{
+			if (!col->trigger)//Si il ne trigger pas
+			{
+				return true;//Il y a collision
+			}
+		}
+	}
+	return false;//Sinob si pas de collision où que des trigger pas de colliding
+}

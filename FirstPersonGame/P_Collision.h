@@ -44,7 +44,7 @@ public:
 
     Vector3 GetPosition() { return Transform->translation; }
 
-	bool IsColliding() { return collisions.size() > 0; }
+	bool IsColliding();
 
 	void SetParent(Transform* parentTransform) { Transform = parentTransform; }
 
