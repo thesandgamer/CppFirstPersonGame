@@ -11,6 +11,7 @@ Ennemy::Ennemy(Vector3 pos, float detectionRadius)
 	collider.trigger = true; //Cette collision sera un trigger
 	collider.SetParent(&transform);
 	collider.collideWithLayer = Layer1;
+	collider.layer = Layer2;
 	collider.checkingCollision = true;
 }
 

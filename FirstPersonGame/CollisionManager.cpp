@@ -64,7 +64,7 @@ void CollisionManager::DoCollisionBoxsCheck(BoxCollision* colliderToCheck)
 			break;
 		case RayCollider:	//Si l'autre est un rayon
 			RayHitInfo hitinfo = GetRayCollisionBox(dynamic_cast<RaycastCollision*>(collider)->GetRay(), colliderToCheck->GetBoundingBox());
-			collide = hitinfo.hit && hitinfo.distance <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
+			collide = hitinfo.hit && abs( hitinfo.distance) <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
 			break;
 		case SphereCollider:	//Si l'autre est une sphère
 			collide = CheckCollisionBoxSphere(colliderToCheck->GetBoundingBox(),
@@ -93,13 +93,14 @@ void CollisionManager::DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck)
 
 		case BoxCollider:
 			RayHitInfo hitinfo = GetRayCollisionBox(colliderToCheck->GetRay(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
-			collide = hitinfo.hit && hitinfo.distance <= colliderToCheck->GetLength();
+			collide = hitinfo.hit && abs( hitinfo.distance) <= colliderToCheck->GetLength();
 			break;
 
 		case SphereCollider:
 			RayHitInfo hit = GetRayCollisionSphere(colliderToCheck->GetRay(), 
-				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center, dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius);
-			collide = hit.hit && hit.distance <= colliderToCheck->GetLength();
+				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center, 
+				dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius);
+			collide = hit.hit && abs(hit.distance) <= colliderToCheck->GetLength();
 			break;
 
 		default:
@@ -130,7 +131,8 @@ void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToChec
 		case RayCollider:
 			RayHitInfo hit = GetRayCollisionSphere(dynamic_cast<RaycastCollision*>(collider)->GetRay(),
 				colliderToCheck->GetCollider().Center, colliderToCheck->GetCollider().Radius);
-			collide = hit.hit && hit.distance <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
+			collide = hit.hit && abs(hit.distance) <= dynamic_cast<RaycastCollision*>(collider)->GetLength();
+
 			break;
 
 		case SphereCollider:
