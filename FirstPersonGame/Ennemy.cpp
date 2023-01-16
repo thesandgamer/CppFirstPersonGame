@@ -21,14 +21,41 @@ Ennemy::~Ennemy()
 
 void Ennemy::Start()
 {
+	shootCOmponenet.Shoot();
 }
 
 void Ennemy::Draw()
 {
+	shootCOmponenet.Draw();
 	DrawSphere(transform.translation, 2, RED);
 	collider.Draw();
 }
 
 void Ennemy::Update()
+{
+	shootCOmponenet.Update();
+	if (collider.IsColliding())
+	{
+		//++ToDo: si il y a une collision, il va prendre le focus sur le premier acteur à être rentré	
+		//Si il peut lui tirer dessus il va lui lancer un projectile
+		P_Collision* tar = *(collider.collisions.begin());
+		target = tar->Transform;
+
+	}
+	else
+	{
+		target = nullptr;
+	}
+
+	if (target) Shoot();//SI peut tirer et à une target tire
+
+}
+
+void Ennemy::Shoot()
+{
+	shootCOmponenet.Shoot(transform.translation, { 0,0,0 });//++ToDo: faire en sorte que la direction soit vers la target
+}
+
+void Ennemy::ReloadShoot()
 {
 }

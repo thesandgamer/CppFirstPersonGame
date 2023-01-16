@@ -6,7 +6,9 @@
 class AC_Shoot
 {
 public:
-
+	AC_Shoot();
+	~AC_Shoot();
+	AC_Shoot(float cooldown);
 
 	void Start();
 	void Update();

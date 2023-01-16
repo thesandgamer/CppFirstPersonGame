@@ -11,6 +11,8 @@
 #include "Ennemy.h"
 
 
+//++ToDo: Principe du jeu: homme de slime qui doit s'échapper, peut lancer des boules de slime
+
 //++ToDo Graphiques à faire:
 //++ToDo rajouter une skybox https://www.raylib.com/examples/models/loader.html?name=models_skybox
 //++ToDo rajouter lighting https://www.raylib.com/examples/shaders/loader.html?name=shaders_basic_lighting

@@ -1,6 +1,18 @@
 #include "AC_Shoot.h"
 
 
+AC_Shoot::AC_Shoot()
+{
+}
+
+AC_Shoot::~AC_Shoot()
+{
+}
+
+AC_Shoot::AC_Shoot(float cooldown):shootSpeed(cooldown)
+{
+}
+
 void AC_Shoot::Start()
 {
 }

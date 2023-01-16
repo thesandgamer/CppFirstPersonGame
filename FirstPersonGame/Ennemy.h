@@ -1,5 +1,6 @@
 #pragma once
 #include "SphereCollision.h"
+#include "AC_Shoot.h"
 
 //++ToDo: ennemi: neutre, quand quelque chose entre dans boite de collision va regarder et tirer sur ce qui rentre
 class Ennemy
@@ -22,5 +23,12 @@ public:
 private:
 
 	SphereCollision collider;
+	AC_Shoot shootCOmponenet{2};
+
+	void Shoot();
+	void ReloadShoot();
+
+
+	Transform* target{ nullptr }; //La target que va cibler l'ennemi
 };
 
