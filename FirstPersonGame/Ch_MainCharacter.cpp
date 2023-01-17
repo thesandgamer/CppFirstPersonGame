@@ -169,8 +169,8 @@ void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
     if (isGrounded)
     {
         maxSpeed = 100;
-        deceleration = -8;
-        acceleration = 8;
+        deceleration = -16;
+        acceleration = 16;
     }
     else
     {
