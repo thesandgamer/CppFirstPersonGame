@@ -165,7 +165,8 @@ void Ch_MainCharacter::BaseMovement(float xValue, float yValue)
 void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
 {
     float dt = GetFrameTime();
-
+    
+    /*
     if (isGrounded)
     {
         maxSpeed = 100;
@@ -177,7 +178,7 @@ void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
         maxSpeed = 100 * airControl;
         deceleration = -8 * airControl;
         acceleration = 8 * airControl;
-    }
+    }*/
 
     //On défnit les valeur maxes
     xValue *= maxSpeed;
