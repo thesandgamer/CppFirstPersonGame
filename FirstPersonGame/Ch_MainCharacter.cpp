@@ -166,20 +166,6 @@ void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
 {
     float dt = GetFrameTime();
     
-    /*
-    if (isGrounded)
-    {
-        maxSpeed = 100;
-        deceleration = -8;
-        acceleration = 8;
-    }
-    else
-    {
-        maxSpeed = 100 * airControl;
-        deceleration = -8 * airControl;
-        acceleration = 8 * airControl;
-    }*/
-
     //On défnit les valeur maxes
     xValue *= maxSpeed;
     yValue *= maxSpeed;
@@ -276,6 +262,10 @@ void Ch_MainCharacter::ProcessCollisions()
         vel = { 0,0 };
     }
     else collisionDirection ^= Left;
+
+
+    //Détécter si on touche un mur, arrète la chute, et on peut resauter
+
 }
 
 void Ch_MainCharacter::Jump()

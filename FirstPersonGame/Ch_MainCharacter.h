@@ -92,9 +92,9 @@ private:
 	Vector2 vel{ 0,0 };
 
 
-	float maxSpeed{10};
-	float acceleration{-8};
-	float deceleration{8};
+	float maxSpeed{100};
+	float acceleration{8};
+	float deceleration{-8};
 
 
 	//---------For shoot ----------
