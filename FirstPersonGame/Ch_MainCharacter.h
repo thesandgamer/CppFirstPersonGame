@@ -87,14 +87,15 @@ private:
 	void MoveWithEasing(float xValue, float yValue);
 
 	bool dir[4]{0,0,0,0};
-
 	float actualSpeed{0};
-	float maxSpeed{1};
-	float acceleration{0};
-	float deceleration{0};
-
 	Vector2 acc{ 0,0 };
 	Vector2 vel{ 0,0 };
+
+
+	float maxSpeed{10};
+	float acceleration{-8};
+	float deceleration{8};
+
 
 	//---------For shoot ----------
 
