@@ -71,7 +71,7 @@ private:
 	void StopJumping();
 
 	float jumpVelocity = 8;
-	float fallMultiplier = 2.5f;
+	float fallMultiplier = 3.5f;
 	float lowJumpMultiplier = 2.0f;
 
 	bool inJump;
@@ -92,9 +92,9 @@ private:
 	Vector2 vel{ 0,0 };
 
 
-	float maxSpeed{10};
-	float acceleration{-8};
-	float deceleration{8};
+	float maxSpeed{100};
+	float acceleration{8};
+	float deceleration{-8};
 
 
 	//---------For shoot ----------

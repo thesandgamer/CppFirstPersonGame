@@ -85,6 +85,7 @@ void Start()
         new CubeActor({ 0,1,0 }, { 3,2, 3 },color),
         new CubeActor({ 5,2,5 }, { 2,4, 2 },color),
         new CubeActor({0,4,17},{32,8,2},BLUE),
+        
 
 
     };
@@ -98,7 +99,9 @@ void Start()
     Ennemies.assign(ennmis.begin(), ennmis.end());
 
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,0.5f, 32.0f }, { 239, 123, 69, 255 }));//Créer le sol
-    Terrain.push_back(new CubeActor({ 0,0.5,-32 }, { 32.0f, 0.5f, 32.0f }, { 239, 123, 69, 255 }));
+    Terrain.push_back(new CubeActor({ 0,0,-35 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));
+    Terrain.push_back(new CubeActor({ 0,0,-60 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));
+    Terrain.push_back(new CubeActor({ 10,0,-60 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));
 
     /*
     const int MAX_COLUMNS = 30;
