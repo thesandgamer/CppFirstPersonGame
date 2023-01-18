@@ -38,7 +38,8 @@ public:
 	CharacterMovementState state{ Grounded };
 
 	Transform transf{ {0,0,0},{0,0,0,0},{1,1,1} };
-
+	
+	bool IsGrounded() { return isGrounded; }
 
 private:
 	//----------COmponenets---------

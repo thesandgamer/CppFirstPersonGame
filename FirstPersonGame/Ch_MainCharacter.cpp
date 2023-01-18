@@ -25,6 +25,7 @@ void Ch_MainCharacter::Start()
 
     camera.Start();
     gravity.SetPos(&pos);
+    gravity.SetColliderForCollisionCheck(&groundBox);//Set la boite de collision pour le check des cols de la gravité
 
     forwardRay.Offset.translation = { 0,-1.f,0 };
     rightRay.Offset.translation = { 0,-1.f,0 };
@@ -71,6 +72,8 @@ void Ch_MainCharacter::Update()
 {
     //Process Gravity
 
+    //--On va d'abord effectuer l'anticipation du mouvement de la gravité
+    //Si cette anticipation ne collide pas appliquer le mouvement
     gravity.canFall = (groundBox.IsColliding()) ? false : true;
     gravity.Update();
 
@@ -283,6 +286,7 @@ void Ch_MainCharacter::Jump()
 void Ch_MainCharacter::ProcessJump()
 {
     float dt = GetFrameTime();
+
 
     if (gravity.velocity.y < 0) //Quand on chute
     {
