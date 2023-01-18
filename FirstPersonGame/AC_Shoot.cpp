@@ -13,6 +13,11 @@ AC_Shoot::AC_Shoot(float cooldown):shootSpeed(cooldown)
 {
 }
 
+AC_Shoot::AC_Shoot(float cooldown, CollisionLayer layerToProjectileCollide) :shootSpeed(cooldown), projectileCollideWith{layerToProjectileCollide}
+{
+
+}
+
 void AC_Shoot::Start()
 {
 }
@@ -57,6 +62,8 @@ void AC_Shoot::Shoot(Vector3 position, Vector3 direction)
 {
 	if (canShoot)
 	{
+		Projectile* newProjectile = new Projectile(position, direction);
+		//newProjectile->GetCollider().get()->collideWithLayer = Layer3;//Pour faire que ça collide avec le body du player
 		canShoot = false;
 		projectiles.emplace_back(new Projectile(position, direction));
 		StartTimer();
