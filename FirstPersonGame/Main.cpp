@@ -85,12 +85,16 @@ void Start()
         new CubeActor({ 0,1,0 }, { 3,2, 3 },color),
         new CubeActor({ 5,2,5 }, { 2,4, 2 },color),
         new CubeActor({0,4,17},{32,8,2},BLUE),
-        //new CubeActor({10,4,-68},{10,8,2},GREEN),
-        //new CubeActor({6,4,-73},{2,8,10},GREEN),
-        //new CubeActor({-6,4,-73},{2,8,10},GREEN),
         new CubeActor({30,0,-90},{15,8,2},BLUE),
         new CubeActor({60,0,-65},{2,8,15},BLUE),
         new CubeActor({45,0,-45},{2,8,15},BLUE),
+
+        new CubeActor({-6,4,-35},{2,8,14},GREEN),//Mur 1
+        //new CubeActor({6,4,-35},{2,8,14},GREEN), //Mur 2
+        new CubeActor({6,4,-65},{2,8,25},GREEN), // Mur 3
+        new CubeActor({-6,4,-65},{2,8,25},GREEN),// Mur 4
+        new CubeActor({10,4,-77},{10,8,2},GREEN),// Mur 5
+        
 
     };
     Terrain.assign(cubes.begin(), cubes.end());
@@ -108,7 +112,8 @@ void Start()
     Terrain.push_back(new CubeActor({ 0,0,-70 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));// Sol C
     Terrain.push_back(new CubeActor({ 5,0,-81 }, { 20.0f, 0.5f, 7.0f }, { 239, 123, 69, 255 })); // Sol D
     Terrain.push_back(new CubeActor({ 50,0,-80 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));//Sol E
-    Terrain.push_back(new CubeActor({ 50,0,-30 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));//Sol F
+    Terrain.push_back(new CubeActor({ 85,0,-30 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));//Sol F
+    Terrain.push_back(new CubeActor({ 65,0,-30 }, { 10.0f, 0.5f, 15.0f }, { 239, 123, 69, 255 }));
     /*
     const int MAX_COLUMNS = 30;
 
