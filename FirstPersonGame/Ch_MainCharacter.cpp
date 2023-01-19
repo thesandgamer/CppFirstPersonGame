@@ -5,8 +5,8 @@ void Ch_MainCharacter::Start()
     //-----------------
     camera.SetParent(&transf);
 
-    //bodyBox.SetParent(&transf);
-
+    //---------------
+    bodyBox.SetParent(&transf);
     groundBox.SetParent(&transf);
 
     forwardRay.SetParent(&transf);//Ajoute le component
@@ -16,30 +16,38 @@ void Ch_MainCharacter::Start()
 
     //--------------
     groundBox.layer = Layer1;
+    bodyBox.layer = Layer3;
 
     forwardRay.layer = Layer1;
     rightRay.layer = Layer1;
     backwarddRay.layer = Layer1;
     leftRay.layer = Layer1;
     //-------------------
-
-    camera.Start();
-    gravity.SetPos(&pos);
+    bodyBox.collideWithLayer = Layer5;//Il ne collisionne avec personne
+   // bodyBox.trigger = true;
+    
+    //-------------//Offset des boites de collision //----------------------------
+    groundBox.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
 
     forwardRay.Offset.translation = { 0,-1.f,0 };
     rightRay.Offset.translation = { 0,-1.f,0 };
     backwarddRay.Offset.translation = { 0,-1.f,0 };
     leftRay.Offset.translation = { 0,-1.f,0 };
 
-    //bodyBox.checkingCollision = true;
-
-    groundBox.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
+    //-----------------
     groundBox.checkingCollision = true;
 
     forwardRay.checkingCollision = true;
     rightRay.checkingCollision = true;
     backwarddRay.checkingCollision = true;
     leftRay.checkingCollision = true;
+    //-------
+
+    camera.Start();
+
+    gravity.SetPos(&pos);
+    gravity.SetColliderForCollisionCheck(&groundBox);//Set la boite de collision pour le check des cols de la gravité
+
 
     shootingComponent.Start();
 
@@ -52,7 +60,7 @@ void Ch_MainCharacter::Draw()
    
 
     groundBox.Draw();
-    //bodyBox.Draw();
+    bodyBox.Draw();
 
     forwardRay.Draw();
     rightRay.Draw();
@@ -71,6 +79,8 @@ void Ch_MainCharacter::Update()
 {
     //Process Gravity
 
+    //--On va d'abord effectuer l'anticipation du mouvement de la gravité
+    //Si cette anticipation ne collide pas appliquer le mouvement
     gravity.canFall = (groundBox.IsColliding()) ? false : true;
     gravity.Update();
 
@@ -166,20 +176,6 @@ void Ch_MainCharacter::AccelerationFrictionMove(float xValue, float yValue)
 {
     float dt = GetFrameTime();
     
-    /*
-    if (isGrounded)
-    {
-        maxSpeed = 100;
-        deceleration = -16;
-        acceleration = 16;
-    }
-    else
-    {
-        maxSpeed = 100 * airControl;
-        deceleration = -8 * airControl;
-        acceleration = 8 * airControl;
-    }*/
-
     //On défnit les valeur maxes
     xValue *= maxSpeed;
     yValue *= maxSpeed;
@@ -276,6 +272,10 @@ void Ch_MainCharacter::ProcessCollisions()
         vel = { 0,0 };
     }
     else collisionDirection ^= Left;
+
+
+    //Détécter si on touche un mur, arrète la chute, et on peut resauter
+
 }
 
 void Ch_MainCharacter::Jump()
@@ -293,6 +293,7 @@ void Ch_MainCharacter::Jump()
 void Ch_MainCharacter::ProcessJump()
 {
     float dt = GetFrameTime();
+
 
     if (gravity.velocity.y < 0) //Quand on chute
     {

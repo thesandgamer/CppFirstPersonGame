@@ -31,14 +31,15 @@ public:
 
 	P_Collision* GetGroundCollider() { return &groundBox; }
 	P_Collision* GetForwardRayRay() { return &forwardRay; }
-	//P_Collision* GetBodyCollider() { return &bodyBox; }
+	P_Collision* GetBodyCollider() { return &bodyBox; }
 
 	Gravity gravity;
 
 	CharacterMovementState state{ Grounded };
 
 	Transform transf{ {0,0,0},{0,0,0,0},{1,1,1} };
-
+	
+	bool IsGrounded() { return isGrounded; }
 
 private:
 	//----------COmponenets---------
@@ -50,6 +51,7 @@ private:
 	void ProcessCollisions();
 
 	BoxCollision groundBox{Vector3{0.8,0.2f,0.8f} };
+	BoxCollision bodyBox{Vector3{0.5,1.5f,0.5f} };
 
 	RaycastCollision forwardRay{ {1,0,0},.50f };
 	RaycastCollision rightRay{ {1,0,0},.50f };

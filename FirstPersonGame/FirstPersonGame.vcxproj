@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="Ac_LifeSystem.cpp" />
     <ClCompile Include="AC_Shoot.cpp" />
+    <ClCompile Include="AnticipateCollisions.cpp" />
     <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Ch_MainCharacter.cpp" />
     <ClCompile Include="AC_FirstPersonCamera.cpp" />
@@ -194,6 +195,7 @@
   <ItemGroup>
     <ClInclude Include="Ac_LifeSystem.h" />
     <ClInclude Include="AC_Shoot.h" />
+    <ClInclude Include="AnticipateCollisions.h" />
     <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Ch_MainCharacter.h" />
     <ClInclude Include="AC_FirstPersonCamera.h" />

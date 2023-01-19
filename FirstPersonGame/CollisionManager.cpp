@@ -15,6 +15,7 @@ void CollisionManager::Draw()
 
 void CollisionManager::RemoveCollider(P_Collision* colliderToRemove)
 {
+	if (colliderToRemove == nullptr) return;
 	colliders.erase(std::find(colliders.begin(), colliders.end(), colliderToRemove));
 	
 }

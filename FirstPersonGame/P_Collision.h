@@ -4,6 +4,7 @@
 #include "raymath.h"
 #include <iostream>
 
+
 enum CollisionTouching {
 	Up =1 <<0,
 	Down =1 <<1,
@@ -13,7 +14,7 @@ enum CollisionTouching {
 	Right =1 <<5,
 };
 
-
+//++ToDo: faire un meilleur système de layer de collision, ou mieux l'utiliser
 enum CollisionLayer {
 	Layer0 = 1 << 0,
 	Layer1 = 1 << 1,
