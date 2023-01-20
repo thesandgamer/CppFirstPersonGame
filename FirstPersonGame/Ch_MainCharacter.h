@@ -106,6 +106,13 @@ private:
 
 	AC_Shoot shootingComponent{};
 
+	//-----------Dash----------
+
+	//++ToDo: faire en sorte qu'on puisse dash quand on est au sol(pb avec gravity)
+	void Dash();
+	float dashForce{ 20 };
+	bool canDash{ true };
+
 
 
 };

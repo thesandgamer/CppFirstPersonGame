@@ -106,6 +106,8 @@ void Ch_MainCharacter::Update()
 
     shootingComponent.Update();
 
+    if (isGrounded) canDash = true;
+
 
 
 
@@ -127,6 +129,10 @@ void Ch_MainCharacter::ProcessInputs()
     if (IsMouseButtonDown(0))
     {  
         shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{20,20,20}));
+    }
+    if (IsMouseButtonPressed(1))
+    {
+        Dash();
     }
 }
 
@@ -311,5 +317,16 @@ void Ch_MainCharacter::ProcessJump()
 
 void Ch_MainCharacter::StopJumping()
 {
+
+}
+
+
+void Ch_MainCharacter::Dash()
+{
+    if (canDash)
+    {
+        gravity.velocity = { GetForwardVector().x * dashForce,GetForwardVector().y * dashForce, GetForwardVector().z * dashForce };
+        canDash = false;
+    }
 
 }

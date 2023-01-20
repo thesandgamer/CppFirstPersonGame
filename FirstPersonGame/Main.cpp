@@ -22,6 +22,9 @@
 //++ToDo: On à déjà: déplacement, saut, tir, il faudrait pour avoir un jeu: une carte, des ennemis, point de vie avec Ui, 
 //++ToDo: true game: main menu avec un bouton pour jouer, et un menu de fin
 
+
+//++ToDo: Dead zone
+
 using namespace std;
 
 //Editor Variable
