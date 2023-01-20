@@ -15,7 +15,7 @@ enum CharacterMovementState {
 	Grounded,
 	InAir,
 };
-
+//++ToDo: Dash System : Lorsque le joueur appuie sur [touche] Si le [cooldown] le permet le personnage parcourt une [distance] vers le point où regarde le joueur . 
 class Ch_MainCharacter
 {
 public:
@@ -73,7 +73,7 @@ private:
 	void StopJumping();
 
 	float jumpVelocity = 8;
-	float fallMultiplier = 2.5f;
+	float fallMultiplier = 3.5f;
 	float lowJumpMultiplier = 2.0f;
 
 	bool inJump;
