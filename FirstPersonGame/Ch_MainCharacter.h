@@ -110,7 +110,8 @@ private:
 
 	//++ToDo: faire en sorte qu'on puisse dash quand on est au sol(pb avec gravity)
 	void Dash();
-	float dashForce{ 25 };
+	float dashForce{ 20 };
+	bool canDash{ true };
 
 
 

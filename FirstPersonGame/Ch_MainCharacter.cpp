@@ -106,6 +106,8 @@ void Ch_MainCharacter::Update()
 
     shootingComponent.Update();
 
+    if (isGrounded) canDash = true;
+
 
 
 
@@ -321,7 +323,10 @@ void Ch_MainCharacter::StopJumping()
 
 void Ch_MainCharacter::Dash()
 {
-    gravity.velocity = { GetForwardVector().x * dashForce,
-     GetForwardVector().y* dashForce, 
-     GetForwardVector().z* dashForce};
+    if (canDash)
+    {
+        gravity.velocity = { GetForwardVector().x * dashForce,GetForwardVector().y * dashForce, GetForwardVector().z * dashForce };
+        canDash = false;
+    }
+
 }
