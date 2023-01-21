@@ -20,6 +20,7 @@ void Projectile::Start()
 
 	collider.SetParent(&transform);
 	collider.checkingCollision = true;
+	collider.collideWithLayer = Layer2;
 }
 
 void Projectile::Draw()

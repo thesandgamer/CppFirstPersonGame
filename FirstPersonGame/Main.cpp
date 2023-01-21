@@ -9,6 +9,7 @@
 #include "CollisionManager.h"
 #include "CubeActor.h"
 #include "Ennemy.h"
+using namespace std;
 
 
 //++ToDo: Principe du jeu: homme de slime qui doit s'échapper, peut lancer des boules de slime
@@ -24,14 +25,16 @@
 
 
 //++ToDo: Dead zone
-
-using namespace std;
+//++ToDo: ajouter un timer qui se reset quand on reset le jeu: pour pousser le coté speerun
 
 //Editor Variable
 void Update();
 void Draw();
 void DrawUi();
 void Start();
+
+//
+void ResetGame();
 
 //Setup la taille de l'écran
 int const screenWidth = 960;
@@ -42,6 +45,8 @@ CollisionManager* CollisionManager::instance = nullptr;
 
 std::vector<CubeActor*> Terrain; //Stoquage des acteurs obstacles et sol
 std::vector<Ennemy*> Ennemies; //Stoquage des acteurs obstacles et sol
+
+CubeActor* deathzone;
 
 
 int main(int argc, char* argv[])
@@ -78,7 +83,9 @@ void Start()
     character.Start();
     CollisionManager::GetInstance()->Start();
 
-
+    deathzone = new CubeActor({0,-50,0}, { 256, 10, 256 },BLACK);
+    deathzone->GetCollision()->collideWithLayer = Layer3;
+    //deathzone->GetCollision()->checkingCollision = true;
 
 
     
@@ -154,8 +161,19 @@ void Update()
     {
         element->Update();
     }
+    deathzone->Update();
 
     CollisionManager::GetInstance()->Update();//Check les collisions
+
+    if (IsKeyPressed(KEY_R))
+    {
+        ResetGame();
+    }
+
+    if (deathzone->GetCollision()->IsColliding())
+    {
+        ResetGame();
+    }
 
 
 }
@@ -169,6 +187,7 @@ void Draw()
 
     CollisionManager::GetInstance()->Draw();
 
+
     for each (CubeActor* element in Terrain)
     {
         element->Draw();
@@ -177,6 +196,8 @@ void Draw()
     {
         element->Draw();
     }
+    deathzone->Draw();
+
 
     character.Draw();
 
@@ -200,4 +221,11 @@ void DrawUi()
     //DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
 
     DrawText(TextFormat("Is grounded: % 02i", character.IsGrounded()), 100, 10, 10, WHITE);
+}
+
+
+
+void ResetGame()
+{
+    character.SetPos({ 4,20,4 });
 }

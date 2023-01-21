@@ -5,6 +5,12 @@ class CubeActor
 {
 public:
 	CubeActor();
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="posP"></param>
+	/// <param name="sizeP"></param>
+	/// <param name="colorP"></param>
 	CubeActor(Vector3 posP,Vector3 sizeP,Color colorP);
 	~CubeActor();
 
