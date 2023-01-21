@@ -41,6 +41,8 @@ public:
 	
 	bool IsGrounded() { return isGrounded; }
 
+	
+	void SetPos(Vector3 newPos) { pos = newPos; }
 private:
 	//----------COmponenets---------
 	//++ToDo: vector de component parent*
