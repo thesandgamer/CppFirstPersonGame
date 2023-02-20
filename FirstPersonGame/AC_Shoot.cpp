@@ -58,14 +58,14 @@ void AC_Shoot::Draw()
 }
 
 
-void AC_Shoot::Shoot(Vector3 position, Vector3 direction)
+void AC_Shoot::Shoot(Vector3 position, Vector3 direction, float force)
 {
 	if (canShoot)
 	{
-		Projectile* newProjectile = new Projectile(position, direction);
+		//Projectile* newProjectile = new Projectile(position, direction);
 		//newProjectile->GetCollider().get()->collideWithLayer = Layer3;//Pour faire que ça collide avec le body du player
 		canShoot = false;
-		projectiles.emplace_back(new Projectile(position, direction));
+		projectiles.emplace_back(new Projectile(position, {direction.x*force,direction.y * force ,direction.z * force }));
 		StartTimer();
 	}
 }

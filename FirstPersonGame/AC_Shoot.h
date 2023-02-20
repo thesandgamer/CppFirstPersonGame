@@ -15,7 +15,7 @@ public:
 	void Update();
 	void Draw();
 
-	void Shoot(Vector3 position,Vector3 direction);
+	void Shoot(Vector3 position,Vector3 direction, float force = 1);
 
 
 private:

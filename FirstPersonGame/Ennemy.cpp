@@ -48,7 +48,7 @@ void Ennemy::Update()
 	}
 	else
 	{
-		//target = nullptr;
+		target = nullptr;
 	}
 
 	if (target) Shoot();//SI peut tirer et à une target tire
@@ -75,7 +75,7 @@ void Ennemy::Shoot()
 		(1 / unit) * v.z,
 	};
 
-	shootComponenet.Shoot(transform.translation, {direction.x*10,direction.y*10,direction.z*10});//++ToDo: faire en sorte que la direction soit vers la target
+	shootComponenet.Shoot(transform.translation,direction,20);//++ToDo: faire en sorte que la direction soit vers la target
 }
 
 void Ennemy::ReloadShoot()
