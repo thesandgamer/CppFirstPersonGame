@@ -106,7 +106,7 @@ private:
 	Vector3 GetForwardVector();
 	Vector3 GetVector(Vector3 dir);
 
-	AC_Shoot shootingComponent{};
+	AC_Shoot shootingComponent{2,Layer3};
 
 	//-----------Dash----------
 

@@ -4,6 +4,17 @@
 #include <math.h> 
 #include <vector>
 #include <string>
+#include "raylib.h"
+
+#include "rlgl.h"
+#include "raymath.h"      // Required for: MatrixPerspective(), MatrixLookAt()
+
+#if defined(PLATFORM_DESKTOP)
+#define GLSL_VERSION            330
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+#define GLSL_VERSION            100
+#endif
+
 
 #include "Ch_MainCharacter.h"
 #include "CollisionManager.h"
@@ -49,6 +60,7 @@ std::vector<Ennemy*> Ennemies; //Stoquage des acteurs obstacles et sol
 CubeActor* deathzone;
 
 
+
 int main(int argc, char* argv[])
 {
 
@@ -80,6 +92,9 @@ int main(int argc, char* argv[])
 
 void Start()
 {
+
+
+    //---------------------
     character.Start();
     CollisionManager::GetInstance()->Start();
 
@@ -229,3 +244,5 @@ void ResetGame()
 {
     character.SetPos({ 4,20,4 });
 }
+
+
