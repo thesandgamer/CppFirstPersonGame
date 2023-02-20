@@ -7,6 +7,7 @@ void Ch_MainCharacter::Start()
 
     //---------------
     bodyBox.SetParent(&transf);
+    bodyBox.id = 12;
     groundBox.SetParent(&transf);
 
     forwardRay.SetParent(&transf);//Ajoute le component

@@ -10,6 +10,7 @@ CubeActor::CubeActor(Vector3 posP, Vector3 sizeP,Color colorP): color(colorP)
 	transform.scale = sizeP;
 
 	collision.SetParent(&transform);
+	collision.id = 7;
 
 }
 

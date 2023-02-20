@@ -23,7 +23,7 @@ public:
 private:
 
 	SphereCollision collider;
-	AC_Shoot shootCOmponenet{2};
+	AC_Shoot shootComponenet{2};
 
 	void Shoot();
 	void ReloadShoot();
