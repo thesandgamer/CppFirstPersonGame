@@ -1,5 +1,4 @@
 #pragma once
-#include "Level.h"
 #include "Level0.h"
 
 class LevelManager
@@ -15,11 +14,15 @@ public:
 
 	void GoToNextLevel();
 
+	void ResetLevel();
+
 private:
 
-	int levelIndex = 1;
+	int levelIndex = 0;
 
 	std::vector<Level*> levels;
+
+
 
 
 };

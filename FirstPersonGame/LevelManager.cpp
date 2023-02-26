@@ -2,7 +2,7 @@
 
 void LevelManager::Init()
 {
-	levels.emplace_back(Level0());
+	levels.emplace_back(new Level0());
 }
 
 void LevelManager::Start()
@@ -30,4 +30,9 @@ void LevelManager::DrawUi()
 
 void LevelManager::GoToNextLevel()
 {
+}
+
+void LevelManager::ResetLevel()
+{
+	levels.at(levelIndex)->ResetLevel();
 }

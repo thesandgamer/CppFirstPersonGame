@@ -5,10 +5,13 @@ class Level0 :
     public Level
 {
 public:
-    void Start();
-    void Update();
-    void Draw();
-    void DrawUi();
+    Level0();
+    ~Level0();
+
+    void Start() override;
+    void Update()override;
+    void Draw()override;
+    void DrawUi()override;
 
 };
 

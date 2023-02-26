@@ -1,5 +1,13 @@
 #include "Level0.h"
 
+Level0::Level0()
+{
+}
+
+Level0::~Level0()
+{
+}
+
 void Level0::Start()
 {
     //---------------------
@@ -73,6 +81,8 @@ void Level0::Update()
 
 void Level0::Draw()
 {
+    BeginMode3D(character.GetCamera());
+
     CollisionManager::GetInstance()->Draw();
 
     for each (CubeActor * element in Terrain)
