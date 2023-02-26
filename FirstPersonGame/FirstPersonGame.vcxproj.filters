@@ -93,4 +93,9 @@
       <Filter>Levels</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="HowToCreateLevel.txt">
+      <Filter>Levels</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
