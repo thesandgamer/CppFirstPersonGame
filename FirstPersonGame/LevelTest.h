@@ -1,17 +1,16 @@
 #pragma once
 #include "Level.h"
 
-class Level0 :
+class LevelTest :
     public Level
 {
 public:
-    Level0();
-    ~Level0();
+    LevelTest();
+    ~LevelTest();
 
     void Start() override;
     void Update() override;
     void Draw() override;
-    void DrawUi() override;
-
+    void DrawUi()override;
 };
 

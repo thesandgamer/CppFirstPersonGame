@@ -16,10 +16,10 @@ class Level
 public:
 	Level() {};
 	~Level() {};
-	virtual void Start() {};
-	virtual void Update() {};
-	virtual void Draw() {};
-	virtual void DrawUi() {};
+	virtual void Start() ;
+	virtual void Update() ;
+	virtual void Draw() ;
+	virtual void DrawUi() ;
 
 	void ResetLevel();
 

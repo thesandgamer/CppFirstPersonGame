@@ -1,5 +1,6 @@
 #pragma once
 #include "Level0.h"
+#include "LevelTest.h"
 
 class LevelManager
 {
@@ -18,7 +19,7 @@ public:
 
 private:
 
-	int levelIndex = 0;
+	int levelIndex = 1;
 
 	std::vector<Level*> levels;
 

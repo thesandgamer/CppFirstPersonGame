@@ -34,6 +34,7 @@ using namespace std;
 
 //++ToDo: ajouter un timer qui se reset quand on reset le jeu: pour pousser le coté speerun
 //++ToDo: faire un system porte/intérupteur
+//++ToDo: passer au niveau suivant
 
 //Editor Variable
 void Update();
@@ -85,30 +86,7 @@ int main(int argc, char* argv[])
 
 void Start()
 {
-    levelManager.Start();
-
-
-    /*
-    const int MAX_COLUMNS = 30;
-
-    float heights[MAX_COLUMNS] = { 0 };
-    Vector3 positions[MAX_COLUMNS] = { 0 };
-    Color colors[MAX_COLUMNS] = { 0 };
-
-    for (int i = 0; i < MAX_COLUMNS; i++)
-    {
-        Vector3 scale = { GetRandomValue(1, 5), GetRandomValue(4, 15), GetRandomValue(1,8) };
-        Vector3 positions = { GetRandomValue(-15, 15), GetRandomValue(scale.y / 2.0f,scale.y ), GetRandomValue(-15, 15) };
-        Color color = { GetRandomValue(169, 122), GetRandomValue(109, 89), GetRandomValue(163, 128), 255 };
-        Terrain.push_back(new CubeActor(
-            positions,
-            scale,
-            color));
-
-    }*/
-    //-----------------------
-    
-    
+    levelManager.Start();    
 }
 
 void Update()
@@ -127,10 +105,7 @@ void Draw()
     BeginDrawing();
     ClearBackground({4,42,43,255});
 
-
-
     levelManager.Draw();
-
 
     EndMode3D();
 
@@ -141,7 +116,6 @@ void Draw()
 void DrawUi()
 {
     levelManager.DrawUi();
-
 }
 
 
