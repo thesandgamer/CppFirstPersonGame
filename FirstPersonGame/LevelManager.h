@@ -19,7 +19,7 @@ public:
 
 private:
 
-	int levelIndex = 1;
+	int levelIndex = 0;
 
 	std::vector<Level*> levels;
 

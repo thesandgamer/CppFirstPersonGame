@@ -34,7 +34,7 @@ using namespace std;
 
 //++ToDo: ajouter un timer qui se reset quand on reset le jeu: pour pousser le coté speerun
 //++ToDo: faire un system porte/intérupteur
-//++ToDo: passer au niveau suivant
+//++ToDo: passer au niveau suivant: objet avec collision qui amène au niveau suivant
 
 //Editor Variable
 void Update();
@@ -96,6 +96,10 @@ void Update()
     if (IsKeyPressed(KEY_R))
     {
         ResetGame();
+    }
+    if (IsKeyPressed(KEY_KP_ADD))
+    {
+        levelManager.GoToNextLevel();
     }
 
 }

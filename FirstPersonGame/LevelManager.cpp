@@ -31,6 +31,11 @@ void LevelManager::DrawUi()
 
 void LevelManager::GoToNextLevel()
 {
+	if (levelIndex + 1 < levels.size())
+	{
+		levelIndex++;
+		Start();
+	}
 }
 
 void LevelManager::ResetLevel()
