@@ -15,7 +15,6 @@ enum CharacterMovementState {
 	Grounded,
 	InAir,
 };
-//++ToDo: Dash System : Lorsque le joueur appuie sur [touche] Si le [cooldown] le permet le personnage parcourt une [distance] vers le point où regarde le joueur . 
 class Ch_MainCharacter
 {
 public:
@@ -43,6 +42,9 @@ public:
 
 	
 	void SetPos(Vector3 newPos) { pos = newPos; }
+
+	void Death();
+
 private:
 	//----------COmponenets---------
 	//++ToDo: vector de component parent*
@@ -62,7 +64,6 @@ private:
 
 	//Créer 4 boites de collisions 
 	std::uint8_t collisionDirection;
-	//++ToDo: faire en sorte de bloquer quand on arrive contre les murs
 
 	//----------- Transform ------------
 
@@ -106,11 +107,11 @@ private:
 	Vector3 GetForwardVector();
 	Vector3 GetVector(Vector3 dir);
 
-	AC_Shoot shootingComponent{2,Layer3};
+	AC_Shoot shootingComponent{1,Layer4};
 
 	//-----------Dash----------
 
-	//++ToDo: faire en sorte qu'on puisse dash quand on est au sol(pb avec gravity)
+	//++ToDo: faire en sorte qu'on puisse dash quand on est au sol(pb avec gravity) ou pas en fonction du design
 	void Dash();
 	float dashForce{ 20 };
 	bool canDash{ true };

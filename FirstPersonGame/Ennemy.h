@@ -2,7 +2,6 @@
 #include "SphereCollision.h"
 #include "AC_Shoot.h"
 
-//++ToDo: ennemi: neutre, quand quelque chose entre dans boite de collision va regarder et tirer sur ce qui rentre
 class Ennemy
 {
 public:
@@ -23,7 +22,7 @@ public:
 private:
 
 	SphereCollision collider;
-	AC_Shoot shootComponenet{2};
+	AC_Shoot shootComponenet{2,Layer4};
 
 	void Shoot();
 	void ReloadShoot();

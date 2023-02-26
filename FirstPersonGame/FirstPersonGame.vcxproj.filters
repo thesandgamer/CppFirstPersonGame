@@ -37,6 +37,9 @@
       <Filter>Collisions</Filter>
     </ClCompile>
     <ClCompile Include="AnticipateCollisions.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Level0.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -65,5 +68,8 @@
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="AnticipateCollisions.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="Level0.h" />
   </ItemGroup>
 </Project>

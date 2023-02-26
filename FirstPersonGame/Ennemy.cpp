@@ -39,7 +39,6 @@ void Ennemy::Update()
 	shootComponenet.Update();
 	if (collider.IsColliding())
 	{
-		//++ToDo: si il y a une collision, il va prendre le focus sur le premier acteur à être rentré	
 		//Si il peut lui tirer dessus il va lui lancer un projectile
 		P_Collision* tar = *std::prev(collider.collisions.end());
 		target = tar->Transform;
@@ -75,7 +74,7 @@ void Ennemy::Shoot()
 		(1 / unit) * v.z,
 	};
 
-	shootComponenet.Shoot(transform.translation,direction,30);//++ToDo: faire en sorte que la direction soit vers la target
+	shootComponenet.Shoot(transform.translation,direction,35);
 }
 
 void Ennemy::ReloadShoot()

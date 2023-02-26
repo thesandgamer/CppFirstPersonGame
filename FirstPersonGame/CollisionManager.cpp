@@ -134,7 +134,7 @@ void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToChec
 				colliderToCheck->GetCollider().Center, colliderToCheck->GetCollider().Radius);
 			if (collide)
 			{
-				std::cout << "col: "<< collider->layer << std::endl;
+				//std::cout << "col: "<< collider->layer << std::endl;
 			}
 			break;
 

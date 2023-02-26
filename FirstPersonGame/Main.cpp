@@ -15,11 +15,8 @@
 #define GLSL_VERSION            100
 #endif
 
+#include "LevelManager.h"
 
-#include "Ch_MainCharacter.h"
-#include "CollisionManager.h"
-#include "CubeActor.h"
-#include "Ennemy.h"
 using namespace std;
 
 
@@ -31,12 +28,12 @@ using namespace std;
 //++ToDo rajouter post process hachurer et le colorer pour rendu cool https://www.raylib.com/examples/shaders/loader.html?name=shaders_postprocessing
 //++ToDo rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
 
-//++ToDo: On à déjà: déplacement, saut, tir, il faudrait pour avoir un jeu: une carte, des ennemis, point de vie avec Ui, 
+//++ToDo: point de vie avec Ui, 
 //++ToDo: true game: main menu avec un bouton pour jouer, et un menu de fin
 
 
-//++ToDo: Dead zone
 //++ToDo: ajouter un timer qui se reset quand on reset le jeu: pour pousser le coté speerun
+//++ToDo: faire un system porte/intérupteur
 
 //Editor Variable
 void Update();
@@ -59,11 +56,11 @@ std::vector<Ennemy*> Ennemies; //Stoquage des acteurs obstacles et sol
 
 CubeActor* deathzone;
 
+LevelManager levelManager;
 
 
 int main(int argc, char* argv[])
 {
-
     //Créer un écran et on met les fps à 60
     string windowName = "FirstPersonGame";
     InitWindow(screenWidth, screenHeight, windowName.c_str());
@@ -99,8 +96,9 @@ void Start()
     CollisionManager::GetInstance()->Start();
 
     deathzone = new CubeActor({0,-50,0}, { 256, 10, 256 },BLACK);
+    deathzone->GetCollision()->layer = Layer5;
     deathzone->GetCollision()->collideWithLayer = Layer3;
-    //deathzone->GetCollision()->checkingCollision = true;
+    deathzone->GetCollision()->checkingCollision = true;
 
 
     
@@ -126,8 +124,6 @@ void Start()
 
     vector<Ennemy* > ennmis = {
        new Ennemy({ 15,5,10 }, 10)
-
-
     };
     Ennemies.assign(ennmis.begin(), ennmis.end());
 
@@ -202,7 +198,6 @@ void Draw()
 
     CollisionManager::GetInstance()->Draw();
 
-
     for each (CubeActor* element in Terrain)
     {
         element->Draw();
@@ -242,7 +237,7 @@ void DrawUi()
 
 void ResetGame()
 {
-    character.SetPos({ 4,20,4 });
+    character.Death();
 }
 
 
