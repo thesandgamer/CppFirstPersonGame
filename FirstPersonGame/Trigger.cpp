@@ -2,6 +2,8 @@
 
 Trigger::Trigger()
 {
+	collision.SetParent(&transform);
+	collision.id = 17;
 }
 
 Trigger::Trigger(Vector3 posP, Vector3 sizeP )
@@ -15,6 +17,7 @@ Trigger::Trigger(Vector3 posP, Vector3 sizeP )
 
 Trigger::~Trigger()
 {
+
 }
 
 void Trigger::Start()
@@ -50,9 +53,5 @@ void Trigger::triggered()
 	{
 		(*i)();
 	}
-	/*
-	for (int i = 0; i > functionsTriggered.size(); i++)
-	{
-		functionsTriggered.at(i)();
-	}*/
+	
 }

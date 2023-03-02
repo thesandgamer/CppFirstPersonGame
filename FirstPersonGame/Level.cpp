@@ -5,6 +5,19 @@ void Level::Start()
     character.Start();
     CollisionManager::GetInstance()->Start();
 
+    for each (CubeActor * element in Terrain)
+    {
+        element->Start();
+    }
+    for each (Ennemy * element in Ennemies)
+    {
+        element->Start();
+    }
+    for each (EndPortal * element in EndPortals)
+    {
+        element->Start();
+    }
+
     //Créer la death zone
     deathzone = new CubeActor({ 0,-50,0 }, { 256, 10, 256 }, BLACK);
     deathzone->GetCollision()->layer = Layer5;
@@ -28,6 +41,10 @@ void Level::Update()
     {
         element->Update();
     }
+    for each (EndPortal * element in EndPortals)
+    {
+        element->Update();
+    }
 
     if (deathzone->GetCollision()->IsColliding())
     {
@@ -47,6 +64,10 @@ void Level::Draw()
         element->Draw();
     }
     for each (Ennemy * element in Ennemies)
+    {
+        element->Draw();
+    }
+    for each (EndPortal * element in EndPortals)
     {
         element->Draw();
     }

@@ -14,6 +14,6 @@ public:
     void DrawUi()override;
 
 private:
-    Trigger endTrigger{ {-15,0,15},{3,3,3} };
+
 };
 

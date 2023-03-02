@@ -7,7 +7,7 @@ class Trigger
 public:
 
 	Trigger();
-	Trigger(Vector3 posP, Vector3 sizeP =  {1,1,1});
+	Trigger(Vector3 posP, Vector3 sizeP = {1,1,1});
 	~Trigger();
 
 	void Start();

@@ -11,7 +11,6 @@ LevelTest::~LevelTest()
 
 void LevelTest::Start()
 {
-    Level::Start();
 
     //-----------------------------------------
     Color color = { GetRandomValue(169, 122), GetRandomValue(109, 89), GetRandomValue(163, 128), 255 };
@@ -47,22 +46,22 @@ void LevelTest::Start()
             color));
 
     }*/
+    EndPortals.emplace_back(new EndPortal({ -15,0,15 }, { 3,3,3 }));
 
-    endTrigger.AddFunctionToTrigger((std::bind(&(LevelManager::GoToNextLevel), LevelManager::GetInstance())));
-    endTrigger.Start();
+    Level::Start();
+
+
 
 }
 
 void LevelTest::Update()
 {
     Level::Update();
-    endTrigger.Update();
 }
 
 void LevelTest::Draw()
 {
     Level::Draw();
-    endTrigger.Draw();
 }
 
 void LevelTest::DrawUi()

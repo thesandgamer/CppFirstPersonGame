@@ -9,7 +9,7 @@
 #include "CollisionManager.h"
 #include "CubeActor.h"
 #include "Ennemy.h"
-#include "Trigger.h"
+#include "EndPortal.h"
 
 
 class Level
@@ -32,6 +32,7 @@ protected:
 
 	std::vector<CubeActor*> Terrain; //Stoquage des acteurs obstacles et sol
 	std::vector<Ennemy*> Ennemies; //Stoquage des acteurs obstacles et sol
+	std::vector<EndPortal*> EndPortals;
 
 	CubeActor* deathzone;
 
