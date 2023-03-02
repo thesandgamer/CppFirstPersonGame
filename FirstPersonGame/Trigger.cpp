@@ -20,8 +20,8 @@ Trigger::~Trigger()
 void Trigger::Start()
 {
 	collision.trigger = true;
+	collision.checkingCollision = true;
 	collision.collideWithLayer = Layer3;
-	triggered();
 }
 
 void Trigger::Draw()
@@ -31,6 +31,10 @@ void Trigger::Draw()
 
 void Trigger::Update()
 {
+	if (collision.IsColliding())
+	{
+		triggered();
+	}
 }
 
 void Trigger::AddFunctionToTrigger(std::function<void()> function)

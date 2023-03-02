@@ -1,4 +1,5 @@
 #include "LevelTest.h"
+#include "LevelManager.h"
 
 LevelTest::LevelTest()
 {
@@ -47,7 +48,7 @@ void LevelTest::Start()
 
     }*/
 
-    endTrigger.AddFunctionToTrigger((std::bind(&(Ennemy::Test), Ennemies.at(0))));
+    endTrigger.AddFunctionToTrigger((std::bind(&(LevelManager::GoToNextLevel), LevelManager::GetInstance())));
     endTrigger.Start();
 
 }
