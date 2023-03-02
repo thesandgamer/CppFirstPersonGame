@@ -7,6 +7,7 @@ void Ch_MainCharacter::Start()
 
     //---------------
     bodyBox.SetParent(&transf);
+    bodyBox.id = 12;
     groundBox.SetParent(&transf);
 
     forwardRay.SetParent(&transf);//Ajoute le component
@@ -15,16 +16,19 @@ void Ch_MainCharacter::Start()
     leftRay.SetParent(&transf);//Ajoute le component
 
     //--------------
+
     groundBox.layer = Layer1;
-    bodyBox.layer = Layer3;
 
     forwardRay.layer = Layer1;
     rightRay.layer = Layer1;
     backwarddRay.layer = Layer1;
     leftRay.layer = Layer1;
+
     //-------------------
-    bodyBox.collideWithLayer = Layer5;//Il ne collisionne avec personne
+    bodyBox.layer = Layer3;
+    bodyBox.collideWithLayer = Layer4;//Il ne collisionne avec personne
    // bodyBox.trigger = true;
+
     
     //-------------//Offset des boites de collision //----------------------------
     groundBox.Offset.translation = { 0,-1.8f,0 };//Place le rayon au pieds
@@ -36,6 +40,7 @@ void Ch_MainCharacter::Start()
 
     //-----------------
     groundBox.checkingCollision = true;
+    bodyBox.checkingCollision = true;
 
     forwardRay.checkingCollision = true;
     rightRay.checkingCollision = true;
@@ -60,7 +65,7 @@ void Ch_MainCharacter::Draw()
    
 
     groundBox.Draw();
-    bodyBox.Draw();
+    //bodyBox.Draw();
 
     forwardRay.Draw();
     rightRay.Draw();
@@ -93,6 +98,12 @@ void Ch_MainCharacter::Update()
     transf.rotation = QuaternionFromMatrix(MatrixRotateXYZ({ 0, PI * 2 - camera.GetAngle().x, 0 }));
 
     //---------
+    if (bodyBox.IsColliding())
+    {
+        //++ToDo: takes damages
+        Death();
+        std::cout << "BodyCollide" << std::endl;
+    }
     
     //-------------
 
@@ -128,7 +139,7 @@ void Ch_MainCharacter::ProcessInputs()
 
     if (IsMouseButtonDown(0))
     {  
-        shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{20,20,20}));
+        shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{1,1,1}),50);
     }
     if (IsMouseButtonPressed(1))
     {
@@ -225,6 +236,11 @@ Vector3 Ch_MainCharacter::GetVector(Vector3 dir)
     Quaternion rotation = transf.rotation;
     rotation = QuaternionInvert(rotation);
     return Vector3RotateByQuaternion(dir, rotation);
+}
+
+void Ch_MainCharacter::Death()
+{
+    SetPos({ 4,20,4 });
 }
 
 void Ch_MainCharacter::ProcessCollisions()

@@ -62,6 +62,7 @@ public:
 	CollisionLayer layer{Layer0};
 	CollisionLayer collideWithLayer{Layer0};
 
+	double id{ -1 };
 
 
 };

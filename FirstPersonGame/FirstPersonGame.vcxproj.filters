@@ -7,6 +7,9 @@
     <Filter Include="Collisions">
       <UniqueIdentifier>{d82eb43a-3756-44a6-be47-4feabe73d1d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Levels">
+      <UniqueIdentifier>{74851116-2e34-490c-8ff4-80a1000c6d95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -37,6 +40,18 @@
       <Filter>Collisions</Filter>
     </ClCompile>
     <ClCompile Include="AnticipateCollisions.cpp" />
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Level0.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTest.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -65,5 +80,22 @@
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="AnticipateCollisions.h" />
+    <ClInclude Include="LevelManager.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Level0.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTest.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HowToCreateLevel.txt">
+      <Filter>Levels</Filter>
+    </Text>
   </ItemGroup>
 </Project>

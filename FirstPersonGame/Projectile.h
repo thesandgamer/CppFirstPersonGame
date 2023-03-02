@@ -3,7 +3,6 @@
 #include "BoxCollision.h"	
 #include "CubeActor.h"	
 
-//++ToDo: projectile
 //++ToDo: rempalcer par Sphere collision
 //++ToDo: Détruit quand touche : remplacer pointeurs par smart pointers
 
@@ -12,7 +11,7 @@
 class Projectile
 {
 public:
-	Projectile(Vector3 position, Vector3 launchForce);
+	Projectile(Vector3 position, Vector3 launchForce, CollisionLayer layer = Layer2);
 	~Projectile();
 
 	void Start();

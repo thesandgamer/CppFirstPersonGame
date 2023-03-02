@@ -180,6 +180,10 @@
     <ClCompile Include="CubeActor.cpp" />
     <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="Gravity.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Level0.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapCreator.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -204,11 +208,18 @@
     <ClInclude Include="CubeActor.h" />
     <ClInclude Include="Ennemy.h" />
     <ClInclude Include="Gravity.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="Level0.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LevelTest.h" />
     <ClInclude Include="MapCreator.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="P_Collision.h" />
     <ClInclude Include="RaycastCollision.h" />
     <ClInclude Include="SphereCollision.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HowToCreateLevel.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

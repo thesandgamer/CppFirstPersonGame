@@ -13,6 +13,11 @@ void CollisionManager::Draw()
 {
 }
 
+void CollisionManager::AddCollider(P_Collision* collider)
+{
+	 colliders.push_back(collider);
+}
+
 void CollisionManager::RemoveCollider(P_Collision* colliderToRemove)
 {
 	if (colliderToRemove == nullptr) return;
@@ -119,7 +124,7 @@ void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToChec
 	{
 		if (colliderToCheck == collider) continue;
 		if (colliderToCheck->collideWithLayer != collider->layer) continue;
-		bool collide = false;
+		bool collide{ false };
 
 		switch (collider->collisionType)
 		{
@@ -127,6 +132,10 @@ void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToChec
 		case BoxCollider:
 			collide = CheckCollisionBoxSphere(dynamic_cast<BoxCollision*>(collider)->GetBoundingBox(),
 				colliderToCheck->GetCollider().Center, colliderToCheck->GetCollider().Radius);
+			if (collide)
+			{
+				//std::cout << "col: "<< collider->layer << std::endl;
+			}
 			break;
 
 		case RayCollider:
@@ -152,15 +161,24 @@ void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToChec
 
 void CollisionManager::InsertCollision(bool insert, P_Collision* collider, P_Collision* colliderToCheck)
 {
+	bool colliderToCheckAlreadyInCollider = std::find(collider->collisions.begin(), collider->collisions.end(), colliderToCheck) != collider->collisions.end();
+	bool colliderAlreadyInColliderToCheck = std::find(colliderToCheck->collisions.begin(), colliderToCheck->collisions.end(), collider) != colliderToCheck->collisions.end();
 	if (insert)
 	{
-		colliderToCheck->collisions.insert(collider);
-		collider->collisions.insert(colliderToCheck);
+		if (!colliderAlreadyInColliderToCheck)
+		{
+			colliderToCheck->collisions.insert(collider);
+		}
+		if (!colliderToCheckAlreadyInCollider)
+		{
+			//collider->collisions.insert(colliderToCheck);
+		}
 	}
 	else
 	{
+		
 		colliderToCheck->collisions.erase(collider);
-		collider->collisions.erase(colliderToCheck);
+		//collider->collisions.erase(colliderToCheck);
 
 	}
 }

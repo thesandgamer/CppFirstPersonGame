@@ -2,9 +2,10 @@
 
 #include "CollisionManager.h"
 
-Projectile::Projectile(Vector3 position, Vector3 launchForce)
+Projectile::Projectile(Vector3 position, Vector3 launchForce, CollisionLayer layer)
 {
 	transform.translation = position;
+	collider.layer = layer;
 	Start();
 	AddForce(launchForce);
 }
@@ -20,7 +21,6 @@ void Projectile::Start()
 
 	collider.SetParent(&transform);
 	collider.checkingCollision = true;
-	collider.collideWithLayer = Layer2;
 }
 
 void Projectile::Draw()
@@ -33,7 +33,10 @@ void Projectile::Update()
 {
 	grav.Update();
 
-	//if (collider.IsColliding()) delete this;
+	if (collider.IsColliding())
+	{
+		std::cout << "Projectile Collide" << std::endl;
+	}
 }
 
 void Projectile::AddForce(Vector3 force)

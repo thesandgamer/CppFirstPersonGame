@@ -9,13 +9,13 @@ public:
 	AC_Shoot();
 	~AC_Shoot();
 	AC_Shoot(float cooldown);
-	AC_Shoot(float cooldown, CollisionLayer layerToProjectileCollide);
+	AC_Shoot(float cooldown, CollisionLayer layerToProjectileCollide= Layer2);
 
 	void Start();
 	void Update();
 	void Draw();
 
-	void Shoot(Vector3 position,Vector3 direction);
+	void Shoot(Vector3 position,Vector3 direction, float force = 1);
 
 
 private:
