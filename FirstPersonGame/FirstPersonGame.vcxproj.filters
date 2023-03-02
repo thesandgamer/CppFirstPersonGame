@@ -52,6 +52,7 @@
     <ClCompile Include="LevelTest.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Trigger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="LevelTest.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Trigger.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="HowToCreateLevel.txt">

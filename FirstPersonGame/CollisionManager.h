@@ -26,8 +26,6 @@ public:
 			instance = new CollisionManager();
 		}
 		return instance;
-		
-	
 	}
 
 //-------------------

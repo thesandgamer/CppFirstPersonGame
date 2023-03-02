@@ -4,6 +4,25 @@
 
 class LevelManager
 {
+	//--------------Make it a singleton------------------
+private:
+	LevelManager() {};
+	static LevelManager* instance;
+
+public:
+	LevelManager(const LevelManager& obj) = delete;
+	void operator=(const LevelManager&) = delete;
+
+	static LevelManager* GetInstance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new LevelManager();
+		}
+		return instance;
+	}
+
+
 public:
 
 	void Init();
@@ -19,7 +38,7 @@ public:
 
 private:
 
-	int levelIndex = 0;
+	int levelIndex{ 0 };
 
 	std::vector<Level*> levels;
 

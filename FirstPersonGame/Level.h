@@ -9,6 +9,7 @@
 #include "CollisionManager.h"
 #include "CubeActor.h"
 #include "Ennemy.h"
+#include "Trigger.h"
 
 
 class Level

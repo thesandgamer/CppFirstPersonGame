@@ -1,5 +1,7 @@
 #include "AC_Shoot.h"
+#include "Projectile.h"
 
+#include <assert.h>
 
 AC_Shoot::AC_Shoot()
 {
@@ -39,10 +41,16 @@ void AC_Shoot::Update()
 	{
 		if (*i)
 		{
-			(*i).get()->Update();
+			(*i)->Update();
 
 		}
 	}
+	for (Projectile* proj : projectilesToDestroy)
+	{
+		projectiles.erase(std::find(projectiles.begin(), projectiles.end(), proj));
+		delete proj;
+	}
+	projectilesToDestroy.clear();
 
 }
 
@@ -52,7 +60,7 @@ void AC_Shoot::Draw()
 	{
 		if (*i)
 		{
-			(*i).get()->Draw();
+			(*i)->Draw();
 		}
 	}
 }
@@ -63,7 +71,7 @@ void AC_Shoot::Shoot(Vector3 position, Vector3 direction, float force)
 	if (canShoot)
 	{
 		canShoot = false;
-		projectiles.emplace_back(new Projectile(position, { direction.x * force,direction.y * force ,direction.z * force }, projectileCollideWith));
+		projectiles.emplace_back(new Projectile(position, { direction.x * force,direction.y * force ,direction.z * force }, projectileCollideWith,this));
 		StartTimer();
 	}
 }
@@ -72,4 +80,22 @@ void AC_Shoot::StartTimer()
 {
 	timer = true;
 	currentCooldown = shootSpeed;
+}
+
+
+void AC_Shoot::RemoveProjectile(Projectile* projectile)
+{
+	assert(projectile);
+	for (auto i = projectiles.begin(); i != projectiles.end(); ++i)
+	{
+		if ((*i) == projectile)
+		{
+			//(*i).release();
+			projectilesToDestroy.push_back((*i));
+			//projectiles.erase(i);
+			break;
+		}
+
+	}
+
 }

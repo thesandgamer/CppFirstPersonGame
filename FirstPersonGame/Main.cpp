@@ -51,8 +51,7 @@ int const screenHeight = 540;
 
 CollisionManager* CollisionManager::instance{ nullptr };
 
-
-LevelManager levelManager;
+LevelManager* LevelManager::instance{ nullptr };
 
 
 int main(int argc, char* argv[])
@@ -65,7 +64,7 @@ int main(int argc, char* argv[])
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 
-    levelManager.Init();
+    LevelManager::GetInstance()->Init();
     Start();
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -74,7 +73,6 @@ int main(int argc, char* argv[])
         Update();
         // Draw
         Draw();       
-
     }
 
     CloseWindow();
@@ -86,12 +84,12 @@ int main(int argc, char* argv[])
 
 void Start()
 {
-    levelManager.Start();    
+    LevelManager::GetInstance()->Start();
 }
 
 void Update()
 {
-    levelManager.Update();
+    LevelManager::GetInstance()->Update();
 
     if (IsKeyPressed(KEY_R))
     {
@@ -99,7 +97,7 @@ void Update()
     }
     if (IsKeyPressed(KEY_KP_ADD))
     {
-        levelManager.GoToNextLevel();
+        LevelManager::GetInstance()->GoToNextLevel();
     }
 
 }
@@ -109,7 +107,7 @@ void Draw()
     BeginDrawing();
     ClearBackground({4,42,43,255});
 
-    levelManager.Draw();
+    LevelManager::GetInstance()->Draw();
 
     EndMode3D();
 
@@ -119,14 +117,14 @@ void Draw()
 
 void DrawUi()
 {
-    levelManager.DrawUi();
+    LevelManager::GetInstance()->DrawUi();
 }
 
 
 
 void ResetGame()
 {
-    levelManager.ResetLevel();
+    LevelManager::GetInstance()->ResetLevel();
 }
 
 

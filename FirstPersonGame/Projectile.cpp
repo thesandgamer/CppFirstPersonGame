@@ -1,8 +1,8 @@
 #include "Projectile.h"
-
 #include "CollisionManager.h"
+#include "AC_Shoot.h"
 
-Projectile::Projectile(Vector3 position, Vector3 launchForce, CollisionLayer layer)
+Projectile::Projectile(Vector3 position, Vector3 launchForce, CollisionLayer layer, AC_Shoot* parentP): parent{parentP}
 {
 	transform.translation = position;
 	collider.layer = layer;
@@ -12,6 +12,7 @@ Projectile::Projectile(Vector3 position, Vector3 launchForce, CollisionLayer lay
 
 Projectile::~Projectile()
 {
+	//CollisionManager::GetInstance()->RemoveCollider(&collider);
 	//delete &collider;
 }
 
@@ -36,6 +37,7 @@ void Projectile::Update()
 	if (collider.IsColliding())
 	{
 		std::cout << "Projectile Collide" << std::endl;
+		parent->RemoveProjectile((this));
 	}
 }
 

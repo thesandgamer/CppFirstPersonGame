@@ -26,14 +26,15 @@ void LevelTest::Start()
     Ennemies.assign(ennmis.begin(), ennmis.end());
 
     Terrain.push_back(new CubeActor({ 0,0,0 }, { 64.0f,0.5f, 64.0f }, { 239, 123, 69, 255 }));//Créer le sol
-
+    
+    /*
     const int MAX_COLUMNS = 30;
 
     float heights[MAX_COLUMNS] = { 0 };
     Vector3 positions[MAX_COLUMNS] = { 0 };
     Color colors[MAX_COLUMNS] = { 0 };
 
-    /*
+    
     for (int i = 0; i < MAX_COLUMNS; i++)
     {
         Vector3 scale = { GetRandomValue(1, 5), GetRandomValue(4, 15), GetRandomValue(1,8) };
@@ -46,18 +47,21 @@ void LevelTest::Start()
 
     }*/
 
+    endTrigger.AddFunctionToTrigger((std::bind(&(Ennemy::Test), Ennemies.at(0))));
+    endTrigger.Start();
+
 }
 
 void LevelTest::Update()
 {
     Level::Update();
-
+    endTrigger.Update();
 }
 
 void LevelTest::Draw()
 {
     Level::Draw();
-
+    endTrigger.Draw();
 }
 
 void LevelTest::DrawUi()
