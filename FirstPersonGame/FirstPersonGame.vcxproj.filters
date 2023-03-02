@@ -52,6 +52,9 @@
     <ClCompile Include="LevelTest.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Level01.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ch_MainCharacter.h" />
@@ -90,6 +93,9 @@
       <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="LevelTest.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Level01.h">
       <Filter>Levels</Filter>
     </ClInclude>
   </ItemGroup>

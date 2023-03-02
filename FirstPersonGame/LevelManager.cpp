@@ -2,8 +2,9 @@
 
 void LevelManager::Init()
 {
-	levels.emplace_back(new LevelTest());
-	levels.emplace_back(new Level0());
+	//levels.emplace_back(new LevelTest());
+	//levels.emplace_back(new Level0());
+	levels.emplace_back(new Level01());
 }
 
 void LevelManager::Start()
