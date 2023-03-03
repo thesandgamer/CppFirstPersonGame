@@ -17,6 +17,14 @@ void Level::Start()
     {
         element->Start();
     }
+    for each (MovableActor * element in MovablesActors)
+    {
+        element->Start();
+    }
+    for each (Interuptor * element in Interuptors)
+    {
+        element->Start();
+    }
 
     //Créer la death zone
     deathzone = new CubeActor({ 0,-50,0 }, { 256, 10, 256 }, BLACK);
@@ -28,7 +36,7 @@ void Level::Start()
 
 void Level::Update()
 {
-         character.Update();
+    character.Update();
     deathzone->Update();
 
     CollisionManager::GetInstance()->Update();//Check les collisions
@@ -42,6 +50,14 @@ void Level::Update()
         element->Update();
     }
     for each (EndPortal * element in EndPortals)
+    {
+        element->Update();
+    }
+    for each (MovableActor * element in MovablesActors)
+    {
+        element->Update();
+    }
+    for each (Interuptor * element in Interuptors)
     {
         element->Update();
     }
@@ -71,6 +87,14 @@ void Level::Draw()
     {
         element->Draw();
     }
+    for each (MovableActor * element in MovablesActors)
+    {
+        element->Draw();
+    }
+    for each (Interuptor * element in Interuptors)
+    {
+        element->Draw();
+    }
 
     deathzone->Draw();
     character.Draw();
@@ -79,6 +103,7 @@ void Level::Draw()
 
 void Level::DrawUi()
 {
+    character.DrawUi();
     /*
       DrawText(TextFormat("rot x: % 02.02f", QuaternionToEuler(character.transf.rotation).x), 10, 10, 10, WHITE);
       DrawText(TextFormat("rot y: % 02.02f", QuaternionToEuler(character.transf.rotation).y ), 10, 20 , 10, WHITE);

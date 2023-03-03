@@ -46,10 +46,18 @@ void LevelTest::Start()
             color));
 
     }*/
+
     EndPortals.emplace_back(new EndPortal({ -15,0,15 }, { 3,3,3 }));
 
-    Level::Start();
+    MovableActor* Door0 = new MovableActor({ -15,0,-15 }, { 7,7,4 }, YELLOW,{0,10,0},0.5f);
+    MovablesActors.emplace_back(Door0);
+    
+    Interuptor* Interuptor0 = new Interuptor({ -15,7,-15 }, { 2,2,2 });
+    Interuptor0->LinkTo(Door0);
+    Interuptors.emplace_back(Interuptor0);
 
+
+    Level::Start();
 
 
 }

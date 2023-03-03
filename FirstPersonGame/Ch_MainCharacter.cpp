@@ -1,4 +1,5 @@
 #include "Ch_MainCharacter.h"
+#include "Utility.h"  
 
 void Ch_MainCharacter::Start()
 {
@@ -80,6 +81,16 @@ void Ch_MainCharacter::Draw()
 
 }
 
+void Ch_MainCharacter::DrawUi()
+{
+    //Dessiner le curseur   
+    DrawTextureEx(Utility::GetInstance()->dotTexture, 
+        {(float)screenWidth / 2 ,
+        (float)screenHeight / 2  },
+        0, 0.02f, WHITE);
+    
+}
+
 void Ch_MainCharacter::Update()
 {
     //Process Gravity
@@ -139,7 +150,7 @@ void Ch_MainCharacter::ProcessInputs()
 
     if (IsMouseButtonDown(0))
     {  
-        shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{1,1,1}),50);
+        shootingComponent.Shoot(transf.translation, Vector3Multiply(GetForwardVector(),{1,1,1}),110);
     }
     if (IsMouseButtonPressed(1))
     {

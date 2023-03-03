@@ -10,6 +10,8 @@
 #include "CubeActor.h"
 #include "Ennemy.h"
 #include "EndPortal.h"
+#include "MovableActor.h"
+#include "Interuptor.h"
 
 
 class Level
@@ -28,11 +30,11 @@ protected:
 
 	Ch_MainCharacter character;
 
-
-
 	std::vector<CubeActor*> Terrain; //Stoquage des acteurs obstacles et sol
 	std::vector<Ennemy*> Ennemies; //Stoquage des acteurs obstacles et sol
 	std::vector<EndPortal*> EndPortals;
+	std::vector<MovableActor*> MovablesActors;
+	std::vector<Interuptor*> Interuptors;
 
 	CubeActor* deathzone;
 

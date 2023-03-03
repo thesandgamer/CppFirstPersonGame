@@ -11,8 +11,12 @@ Trigger::Trigger(Vector3 posP, Vector3 sizeP )
 	transform.translation = posP;
 	transform.scale = sizeP;
 
+	collision.trigger = true;
+	collision.checkingCollision = true;
+	collision.collideWithLayer = Layer3;
+
 	collision.SetParent(&transform);
-	collision.id = 17;
+	collision.id = 28;
 }
 
 Trigger::~Trigger()
@@ -22,9 +26,7 @@ Trigger::~Trigger()
 
 void Trigger::Start()
 {
-	collision.trigger = true;
-	collision.checkingCollision = true;
-	collision.collideWithLayer = Layer3;
+
 }
 
 void Trigger::Draw()

@@ -21,6 +21,7 @@ public:
 
 	void Start();
 	void Draw();
+	void DrawUi();
 	void Update();
 
 	Camera& GetCamera() { return camera.GetCamera(); }

@@ -16,6 +16,7 @@
 #endif
 
 #include "LevelManager.h"
+#include "Utility.h"
 
 using namespace std;
 
@@ -46,8 +47,8 @@ void Start();
 void ResetGame();
 
 //Setup la taille de l'écran
-int const screenWidth = 960;
-int const screenHeight = 540;
+
+Utility* Utility::instance{nullptr};
 
 CollisionManager* CollisionManager::instance{ nullptr };
 
@@ -64,6 +65,7 @@ int main(int argc, char* argv[])
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 
+    Utility::GetInstance()->Start();
     LevelManager::GetInstance()->Init();
     Start();
 
@@ -74,6 +76,8 @@ int main(int argc, char* argv[])
         // Draw
         Draw();       
     }
+
+    Utility::GetInstance()->Unload();
 
     CloseWindow();
 
