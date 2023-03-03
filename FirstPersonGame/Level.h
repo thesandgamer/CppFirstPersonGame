@@ -13,6 +13,9 @@
 #include "MovableActor.h"
 #include "Interuptor.h"
 
+#include "Utility.h"
+
+#include "rlights.h"
 
 class Level
 {
@@ -35,6 +38,8 @@ protected:
 	std::vector<EndPortal*> EndPortals;
 	std::vector<MovableActor*> MovablesActors;
 	std::vector<Interuptor*> Interuptors;
+
+	Light lights[MAX_LIGHTS] = { 0 };
 
 	CubeActor* deathzone;
 

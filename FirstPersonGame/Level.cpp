@@ -1,7 +1,15 @@
 #include "Level.h"
 
+
 void Level::Start()
 {
+    //                                      Position / Orientation / Couleur
+    lights[0] = CreateLight(LIGHT_POINT, { 0, 30, 0 }, {10,0,10}, WHITE, *Utility::GetInstance()->shader); // Create sun light
+    /*
+    lights[1] = CreateLight(LIGHT_POINT,  { 2, 1, 2 }, Vector3Zero(), RED, *Utility::GetInstance()->shader);
+    lights[2] = CreateLight(LIGHT_POINT,  { -2, 1, 2 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
+    lights[3] = CreateLight(LIGHT_POINT,  { 2, 1, -2 }, Vector3Zero(), BLUE, *Utility::GetInstance()->shader);*/
+
     character.Start();
     CollisionManager::GetInstance()->Start();
 
@@ -36,6 +44,7 @@ void Level::Start()
 
 void Level::Update()
 {
+
     character.Update();
     deathzone->Update();
 
@@ -67,13 +76,29 @@ void Level::Update()
         character.Death();
     }
 
+    //------Update lights
+
+    float cameraPos[3] = { character.GetCamera().position.x,
+        character.GetCamera().position.y,
+        character.GetCamera().position.z };
+    float cameraTarget[3] = { character.GetCamera().target.x, 
+        character.GetCamera().target.y,
+        character.GetCamera().target.z };
+
+    std::cout << cameraPos[0] << std::endl;
+    SetShaderValue(*Utility::GetInstance()->shader, Utility::GetInstance()->shader->locs[SHADER_LOC_VECTOR_VIEW],
+        &cameraPos, SHADER_UNIFORM_VEC3);
+
+    for (int i = 0; i < MAX_LIGHTS; i++) UpdateLightValues(*Utility::GetInstance()->shader, lights[i]);
+    
+
 }
 
 void Level::Draw()
 {
     BeginMode3D(character.GetCamera());
-    CollisionManager::GetInstance()->Draw();
 
+    CollisionManager::GetInstance()->Draw();
 
     for each (CubeActor * element in Terrain)
     {
@@ -99,11 +124,21 @@ void Level::Draw()
     deathzone->Draw();
     character.Draw();
 
+
+
+    //------Draw debug sphere to see where lights are
+    for (int i = 0; i < MAX_LIGHTS; i++)
+    {
+        if (lights[i].enabled) DrawSphereEx(lights[i].position, 0.2f, 8, 8, lights[i].color);
+        else DrawSphereWires(lights[i].position, 0.2f, 8, 8, ColorAlpha(lights[i].color, 0.3f));
+    }
+
 }
 
 void Level::DrawUi()
 {
     character.DrawUi();
+    DrawFPS(80, 80);
     /*
       DrawText(TextFormat("rot x: % 02.02f", QuaternionToEuler(character.transf.rotation).x), 10, 10, 10, WHITE);
       DrawText(TextFormat("rot y: % 02.02f", QuaternionToEuler(character.transf.rotation).y ), 10, 20 , 10, WHITE);

@@ -1,13 +1,15 @@
-#include "raylib.h"
 #include <iostream>
 #include <stdio.h>  
 #include <math.h> 
 #include <vector>
-#include <string>
-#include "raylib.h"
 
+#include "raylib.h"
 #include "rlgl.h"
 #include "raymath.h"      // Required for: MatrixPerspective(), MatrixLookAt()
+
+
+
+#define RLIGHTS_IMPLEMENTATION
 
 #if defined(PLATFORM_DESKTOP)
 #define GLSL_VERSION            330
@@ -38,6 +40,7 @@ using namespace std;
 //++ToDo: passer au niveau suivant: objet avec collision qui amène au niveau suivant
 
 //Editor Variable
+void Init();
 void Update();
 void Draw();
 void DrawUi();
@@ -58,8 +61,12 @@ LevelManager* LevelManager::instance{ nullptr };
 int main(int argc, char* argv[])
 {
     //Créer un écran et on met les fps à 60
+    SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
     string windowName = "FirstPersonGame";
     InitWindow(screenWidth, screenHeight, windowName.c_str());
+
+    Init();
+
 
     //ToggleFullscreen();
     SetWindowPosition(0, 10);
@@ -85,6 +92,35 @@ int main(int argc, char* argv[])
 
 
 }
+
+Shader shader;
+
+void Init()
+{
+   
+#pragma region Basic Lighting
+  // Load basic lighting shader
+  shader = LoadShader(TextFormat("../resources/shaders/glsl%i/lighting.vs", GLSL_VERSION),
+                       TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+  // Get some required shader locations
+  shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+  // NOTE: "matModel" location name is automatically assigned on shader loading,
+  // no need to get the location again if using that uniform name
+  //shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+
+   // Ambient light level (some basic lighting)
+  int ambientLoc = GetShaderLocation(shader, "ambient");
+  float values[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+  SetShaderValue(shader, ambientLoc, &values, SHADER_UNIFORM_VEC4);
+
+#pragma endregion
+
+
+    //Set the shader link in the utility
+    Utility::GetInstance()->shader = &shader;
+
+}
+
 
 void Start()
 {

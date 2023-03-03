@@ -1,9 +1,9 @@
 #pragma once
 #include "raylib.h"
+#include <vector>
+
 int const screenWidth = 1920;
 int const screenHeight = 1080;
-
-
 
 class Utility
 {
@@ -29,7 +29,12 @@ public:
 	void Start();
 
 	Texture2D dotTexture;// = LoadTexture("../resources/Dot.png");
+	std::vector<Model*> cubesModels;
 
-	void Unload() { UnloadTexture(dotTexture); }
+	Shader* shader;
+
+	void AddModel(Model* model);
+
+	void Unload();
 };
 
