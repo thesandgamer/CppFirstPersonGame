@@ -27,7 +27,6 @@ void LevelManager::Draw()
 void LevelManager::DrawUi()
 {
 	levels.at(levelIndex)->DrawUi();
-
 }
 
 void LevelManager::GoToNextLevel()

@@ -1,13 +1,15 @@
-#include "raylib.h"
 #include <iostream>
 #include <stdio.h>  
 #include <math.h> 
 #include <vector>
-#include <string>
-#include "raylib.h"
 
+#include "raylib.h"
 #include "rlgl.h"
 #include "raymath.h"      // Required for: MatrixPerspective(), MatrixLookAt()
+
+
+
+#define RLIGHTS_IMPLEMENTATION
 
 #if defined(PLATFORM_DESKTOP)
 #define GLSL_VERSION            330
@@ -16,6 +18,7 @@
 #endif
 
 #include "LevelManager.h"
+#include "Utility.h"
 
 using namespace std;
 
@@ -37,6 +40,7 @@ using namespace std;
 //++ToDo: passer au niveau suivant: objet avec collision qui amène au niveau suivant
 
 //Editor Variable
+void Init();
 void Update();
 void Draw();
 void DrawUi();
@@ -46,26 +50,30 @@ void Start();
 void ResetGame();
 
 //Setup la taille de l'écran
-int const screenWidth = 960;
-int const screenHeight = 540;
+
+Utility* Utility::instance{nullptr};
 
 CollisionManager* CollisionManager::instance{ nullptr };
 
-
-LevelManager levelManager;
+LevelManager* LevelManager::instance{ nullptr };
 
 
 int main(int argc, char* argv[])
 {
     //Créer un écran et on met les fps à 60
+    SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
     string windowName = "FirstPersonGame";
     InitWindow(screenWidth, screenHeight, windowName.c_str());
+
+    Init();
+
 
     //ToggleFullscreen();
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 
-    levelManager.Init();
+    Utility::GetInstance()->Start();
+    LevelManager::GetInstance()->Init();
     Start();
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -74,8 +82,9 @@ int main(int argc, char* argv[])
         Update();
         // Draw
         Draw();       
-
     }
+
+    Utility::GetInstance()->Unload();
 
     CloseWindow();
 
@@ -84,14 +93,43 @@ int main(int argc, char* argv[])
 
 }
 
+Shader shader;
+
+void Init()
+{
+   
+#pragma region Basic Lighting
+  // Load basic lighting shader
+  shader = LoadShader(TextFormat("../resources/shaders/glsl%i/lighting.vs", GLSL_VERSION),
+                       TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+  // Get some required shader locations
+  shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+  // NOTE: "matModel" location name is automatically assigned on shader loading,
+  // no need to get the location again if using that uniform name
+  //shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+
+   // Ambient light level (some basic lighting)
+  int ambientLoc = GetShaderLocation(shader, "ambient");
+  float values[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+  SetShaderValue(shader, ambientLoc, &values, SHADER_UNIFORM_VEC4);
+
+#pragma endregion
+
+
+    //Set the shader link in the utility
+    Utility::GetInstance()->shader = &shader;
+
+}
+
+
 void Start()
 {
-    levelManager.Start();    
+    LevelManager::GetInstance()->Start();
 }
 
 void Update()
 {
-    levelManager.Update();
+    LevelManager::GetInstance()->Update();
 
     if (IsKeyPressed(KEY_R))
     {
@@ -99,7 +137,7 @@ void Update()
     }
     if (IsKeyPressed(KEY_KP_ADD))
     {
-        levelManager.GoToNextLevel();
+        LevelManager::GetInstance()->GoToNextLevel();
     }
 
 }
@@ -109,7 +147,7 @@ void Draw()
     BeginDrawing();
     ClearBackground({4,42,43,255});
 
-    levelManager.Draw();
+    LevelManager::GetInstance()->Draw();
 
     EndMode3D();
 
@@ -119,14 +157,14 @@ void Draw()
 
 void DrawUi()
 {
-    levelManager.DrawUi();
+    LevelManager::GetInstance()->DrawUi();
 }
 
 
 
 void ResetGame()
 {
-    levelManager.ResetLevel();
+    LevelManager::GetInstance()->ResetLevel();
 }
 
 

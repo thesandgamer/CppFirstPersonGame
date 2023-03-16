@@ -1,7 +1,8 @@
 #pragma once
 #include "raylib.h"
-#include <set>
 #include "raymath.h"
+
+#include <set>
 #include <iostream>
 
 

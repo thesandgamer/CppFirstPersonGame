@@ -29,5 +29,8 @@ public:
 private:
 	BoxCollision collision{ transform.scale};
 	Color color{ PURPLE };
+
+	Model cubeModel;
+
 };
 

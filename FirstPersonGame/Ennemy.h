@@ -19,6 +19,8 @@ public:
 
 	Transform transform{ {0,0,0},{0,0,0,0},{1,1,1} };
 
+	void Test() { std::cout << "Ennemy functio ntest" << std::endl; }
+
 private:
 
 	SphereCollision collider;
