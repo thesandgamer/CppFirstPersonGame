@@ -24,13 +24,17 @@
         };
         Terrain.assign(cubes.begin(), cubes.end());
 
-       //Sol 
+       //Sol gauche U
         Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
-        Terrain.push_back(new CubeActor({ 30,3,30 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
-        Terrain.push_back(new CubeActor({ -30,3,30 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
-        Terrain.push_back(new CubeActor({ 0,6,30 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
-
-        Terrain.push_back(new CubeActor({ -30,3,60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ -30,-3,0 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ -60,0,0 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        //sol droite U
+        Terrain.push_back(new CubeActor({ -60,3,-30 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ -60,5,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ -30,7,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({  0,5,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        
+        Terrain.push_back(new CubeActor({ 0,8,-90 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
     }
 
 
