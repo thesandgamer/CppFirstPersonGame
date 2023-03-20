@@ -23,6 +23,11 @@
 
         };
         Terrain.assign(cubes.begin(), cubes.end());
+        std::vector<Ennemy* > ennmis = {
+            new Ennemy({ -25,10,-30 }, 10), // middle one
+            new Ennemy({ -25,15,-55 }, 10)
+        };
+        Ennemies.assign(ennmis.begin(), ennmis.end());
 
        //Sol gauche U
         Terrain.push_back(new CubeActor({ 0,0,0 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
