@@ -39,7 +39,11 @@
         Terrain.push_back(new CubeActor({ -30,7,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
        
         
-        Terrain.push_back(new CubeActor({ 15,7,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ 15,7,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 })); // after jump 
+        Terrain.push_back(new CubeActor({ 55,7,-70 }, { 10.0f,5.0f, 3.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ 75,8,-60 }, { 10.0f,5.0f, 3.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ 100,9,-75 }, { 10.0f,5.0f, 3.0f }, { 239, 123, 69, 255 }));
+        Terrain.push_back(new CubeActor({ 130,10,-60 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));
     }
 
 
