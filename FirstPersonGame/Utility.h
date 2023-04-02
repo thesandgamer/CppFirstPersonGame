@@ -26,6 +26,7 @@ public:
 	}
 
 public:
+
 	void Start();
 
 	Texture2D dotTexture;// = LoadTexture("../resources/Dot.png");
@@ -36,5 +37,8 @@ public:
 	void AddModel(Model* model);
 
 	void Unload();
+	
+
+	Sound jumpSound;
 };
 

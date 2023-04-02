@@ -321,6 +321,9 @@ void Ch_MainCharacter::Jump()
     groundBox.checkingCollision = false;
     groundBox.collisions = {};
 
+    Sound jmp = Utility::GetInstance()->jumpSound;
+   // PlaySound(jmp);
+
 }
 
 void Ch_MainCharacter::ProcessJump()

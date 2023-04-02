@@ -77,17 +77,13 @@ void Level::Update()
     }
 
     //------Update lights
-
     float cameraPos[3] = { character.GetCamera().position.x,
         character.GetCamera().position.y,
         character.GetCamera().position.z };
-    float cameraTarget[3] = { character.GetCamera().target.x, 
-        character.GetCamera().target.y,
-        character.GetCamera().target.z };
 
-    std::cout << cameraPos[0] << std::endl;
+    // Shader / Location de la valeur / Valeur qu'on fait passer / Type de variable
     SetShaderValue(*Utility::GetInstance()->shader, Utility::GetInstance()->shader->locs[SHADER_LOC_VECTOR_VIEW],
-        &cameraPos, SHADER_UNIFORM_VEC3);
+        &cameraPos, SHADER_UNIFORM_VEC3);   //Change la valeur de camera pos du shader
 
     for (int i = 0; i < MAX_LIGHTS; i++) UpdateLightValues(*Utility::GetInstance()->shader, lights[i]);
     
