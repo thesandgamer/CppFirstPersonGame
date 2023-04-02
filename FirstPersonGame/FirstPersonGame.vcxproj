@@ -185,6 +185,7 @@
     <ClCompile Include="Interuptor.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level0.cpp" />
+    <ClCompile Include="Level01.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Interuptor.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level0.h" />
+    <ClInclude Include="Level01.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelTest.h" />
     <ClInclude Include="MapCreator.h" />
