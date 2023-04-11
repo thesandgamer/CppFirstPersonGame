@@ -113,6 +113,7 @@ void Init()
         TextFormat("../resources/shaders/glsl%i/Phong.fs", GLSL_VERSION));
     
   */
+
   shader = LoadShader(TextFormat("../resources/shaders/glsl%i/base.vs", GLSL_VERSION),
       TextFormat("../resources/shaders/glsl%i/base.fs", GLSL_VERSION));
 
@@ -126,8 +127,8 @@ void Init()
   shader.locs[SHADER_LOC_MATRIX_NORMAL] = GetShaderLocation(shader, "matNormal");*/
 
    // Ambient light level (some basic lighting)
-  int ambientLoc = GetShaderLocation(shader, "ambient");    //récupère la location de l'ambiant du shader
-  float values[4] = { 0.1f, 0.1f, 0.1f, 1.0f };             //Change les valeurs de l'ambiant
+  int ambientLoc = GetShaderLocation(shader, "ambientColor");    //récupère la location de l'ambiant du shader
+  float values[4] = { 1.0f, 1.0f, 1.0f, 1.0f };             //Change les valeurs de l'ambiant
   SetShaderValue(shader, ambientLoc, &values, SHADER_UNIFORM_VEC4); //Set la valeur de l'ambiant du shader
 
 #pragma endregion
@@ -135,10 +136,6 @@ void Init()
 
     //Set the shader link in the utility
     Utility::GetInstance()->shader = &shader;
-
-
-
-
 }
 
 

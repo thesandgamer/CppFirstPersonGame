@@ -4,11 +4,11 @@
 void Level::Start()
 {
     //                                      Position / Orientation / Couleur
-    lights[0] = CreateLight(LIGHT_POINT, { 0, 30, 0 }, {10,0,10}, RED, *Utility::GetInstance()->shader); // Create sun light
-    /*
-    lights[1] = CreateLight(LIGHT_POINT,  { 2, 1, 2 }, Vector3Zero(), RED, *Utility::GetInstance()->shader);
-    lights[2] = CreateLight(LIGHT_POINT,  { -2, 1, 2 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
-    lights[3] = CreateLight(LIGHT_POINT,  { 2, 1, -2 }, Vector3Zero(), BLUE, *Utility::GetInstance()->shader);*/
+    lights[0] = CreateLight(LIGHT_POINT, { 0, 30, 0 }, {10,0,10}, WHITE, *Utility::GetInstance()->shader); // Create sun light
+    
+    lights[1] = CreateLight(LIGHT_POINT,  { 5, 10, 5}, Vector3Zero(), RED, *Utility::GetInstance()->shader);
+    //lights[2] = CreateLight(LIGHT_POINT,  { -2, 1, 2 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
+    //lights[3] = CreateLight(LIGHT_POINT,  { 2, 1, -2 }, Vector3Zero(), BLUE, *Utility::GetInstance()->shader);
 
     character.Start();
     CollisionManager::GetInstance()->Start();
