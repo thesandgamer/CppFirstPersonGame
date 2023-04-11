@@ -8,10 +8,11 @@ in vec4 fragColor;
 uniform sampler2D texture0;
 uniform vec4 colDiffuse;
 
+
 // Output fragment color
 out vec4 finalColor;
-
 // NOTE: Add here your custom variables
+uniform vec3 viewPos;
 
 void main()
 {

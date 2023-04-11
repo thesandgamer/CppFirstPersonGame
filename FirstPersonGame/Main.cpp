@@ -107,19 +107,23 @@ void Init()
     
     /*
   shader = LoadShader(TextFormat("../resources/shaders/glsl%i/lighting.vs", GLSL_VERSION),
-                       TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));*/
-
+                       TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+  
     shader = LoadShader(TextFormat("../resources/shaders/glsl%i/Phong.vs", GLSL_VERSION),
         TextFormat("../resources/shaders/glsl%i/Phong.fs", GLSL_VERSION));
-  /*
+    
+  */
   shader = LoadShader(TextFormat("../resources/shaders/glsl%i/base.vs", GLSL_VERSION),
-      TextFormat("../resources/shaders/glsl%i/base.fs", GLSL_VERSION));*/
+      TextFormat("../resources/shaders/glsl%i/base.fs", GLSL_VERSION));
 
   // Get some required shader locations
-  shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+  /*
+  shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "uCameraPos");
   // NOTE: "matModel" location name is automatically assigned on shader loading,
   // no need to get the location again if using that uniform name
- // shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+  shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+  shader.locs[SHADER_LOC_MATRIX_MVP] = GetShaderLocation(shader, "uViewProj");
+  shader.locs[SHADER_LOC_MATRIX_NORMAL] = GetShaderLocation(shader, "matNormal");*/
 
    // Ambient light level (some basic lighting)
   int ambientLoc = GetShaderLocation(shader, "ambient");    //récupère la location de l'ambiant du shader

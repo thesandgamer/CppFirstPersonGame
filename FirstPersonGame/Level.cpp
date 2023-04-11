@@ -4,7 +4,7 @@
 void Level::Start()
 {
     //                                      Position / Orientation / Couleur
-    lights[0] = CreateLight(LIGHT_POINT, { 0, 30, 0 }, {10,0,10}, WHITE, *Utility::GetInstance()->shader); // Create sun light
+    lights[0] = CreateLight(LIGHT_POINT, { 0, 30, 0 }, {10,0,10}, RED, *Utility::GetInstance()->shader); // Create sun light
     /*
     lights[1] = CreateLight(LIGHT_POINT,  { 2, 1, 2 }, Vector3Zero(), RED, *Utility::GetInstance()->shader);
     lights[2] = CreateLight(LIGHT_POINT,  { -2, 1, 2 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
@@ -39,6 +39,14 @@ void Level::Start()
     deathzone->GetCollision()->layer = Layer5;
     deathzone->GetCollision()->collideWithLayer = Layer3;
     deathzone->GetCollision()->checkingCollision = true;
+
+    //Pour le shader
+    float cameraPos[3] = { character.GetCamera().position.x,
+    character.GetCamera().position.y,
+    character.GetCamera().position.z };
+
+    SetShaderValue(*Utility::GetInstance()->shader, Utility::GetInstance()->shader->locs[SHADER_LOC_VECTOR_VIEW],
+        &cameraPos, SHADER_UNIFORM_VEC3);   //Change la valeur de camera pos du shader
 
 }
 
@@ -77,13 +85,10 @@ void Level::Update()
     }
 
     //------Update lights
-    float cameraPos[3] = { character.GetCamera().position.x,
-        character.GetCamera().position.y,
-        character.GetCamera().position.z };
+
 
     // Shader / Location de la valeur / Valeur qu'on fait passer / Type de variable
-    SetShaderValue(*Utility::GetInstance()->shader, Utility::GetInstance()->shader->locs[SHADER_LOC_VECTOR_VIEW],
-        &cameraPos, SHADER_UNIFORM_VEC3);   //Change la valeur de camera pos du shader
+
 
     for (int i = 0; i < MAX_LIGHTS; i++) UpdateLightValues(*Utility::GetInstance()->shader, lights[i]);
     
