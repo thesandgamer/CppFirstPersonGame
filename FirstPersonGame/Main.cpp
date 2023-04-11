@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 
 
     Init();
-   // ToggleFullscreen();
+    ToggleFullscreen();
 
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
@@ -107,13 +107,14 @@ void Init()
     
     /*
   shader = LoadShader(TextFormat("../resources/shaders/glsl%i/lighting.vs", GLSL_VERSION),
-                       TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));*/
-
+                      TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+  */
+    /*
     shader = LoadShader(TextFormat("../resources/shaders/glsl%i/Phong.vs", GLSL_VERSION),
-        TextFormat("../resources/shaders/glsl%i/Phong.fs", GLSL_VERSION));
-  /*
+                        TextFormat("../resources/shaders/glsl%i/Phong.fs", GLSL_VERSION));
+  */
   shader = LoadShader(TextFormat("../resources/shaders/glsl%i/base.vs", GLSL_VERSION),
-      TextFormat("../resources/shaders/glsl%i/base.fs", GLSL_VERSION));*/
+                      TextFormat("../resources/shaders/glsl%i/base.fs", GLSL_VERSION));
 
   // Get some required shader locations
   shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
