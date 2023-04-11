@@ -4,16 +4,17 @@ void AC_FirstPersonCamera::Start()
 {
     //-----------Setup les valeurs de la camera------------
 
-    //cam.position = Vector3Add(transform->translation, offsetTransform.translation);    //Sa position
-    cam.position = { 2.0f, 20.0f, 6.0f };
-    cam.target = { 0.0f, 10.0f, 0.0f };      //où elle regarde
+
+    /*
+    cam.position = Vector3Add(transform->translation, offsetTransform.translation);    //Sa position
+    cam.target = { 0.0f, 1.8f, 0.0f };      //où elle regarde
     cam.up = { 0.0f, 1.0f, 0.0f };          //son vecteur up(où est le haut)
-    cam.fovy = 45.0f;                       //son field of view
+    cam.fovy = 65;                       //son field of view
     cam.projection = CAMERA_PERSPECTIVE;    //type de projection
 
 
     //--------------Set la base de la camera ----------------
-    /*
+    
     Vector3 v1 = cam.position;
     Vector3 v2 = cam.target;
 
@@ -28,11 +29,19 @@ void AC_FirstPersonCamera::Start()
     camData.angle.y = atan2f(dy, sqrtf(dx * dx + dz * dz));      // Camera angle in plane XY (0 aligned with X, move positive CW)
 
     camData.playerEyesPosition = cam.position.y;
-    */
+    
     //-------
-    SetCameraMode(cam, CAMERA_ORBITAL);
 
     DisableCursor();
+    */
+
+    cam.position = { 2.0f, 20.0f, 6.0f };
+    cam.target = { 0.0f, 10.0f, 0.0f };      //où elle regarde
+    cam.up = { 0.0f, 1.0f, 0.0f };          //son vecteur up(où est le haut)
+    cam.fovy = 45.0;                       //son field of view
+    cam.projection = CAMERA_PERSPECTIVE;    //type de projection
+    SetCameraMode(cam, CAMERA_ORBITAL);
+
 }
 
 void AC_FirstPersonCamera::Draw()
@@ -42,10 +51,10 @@ void AC_FirstPersonCamera::Draw()
 
 void AC_FirstPersonCamera::Update()
 {
-    UpdateCamera(&cam);
+   UpdateCamera(&cam);
    // cam.position =Vector3Add( transform->translation ,offsetTransform.translation);
 
-   // CameraControl();
+    //CameraControl();
 }
 
 void AC_FirstPersonCamera::HeadShake(float strength)
