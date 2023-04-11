@@ -2,7 +2,7 @@
 
 // Input vertex attributes
 in vec3 vertexPosition;
-in vec2 vertexTexCoord;
+in vec2 vertexTexCoord;//For texture
 in vec3 vertexNormal;
 in vec4 vertexColor;
 
@@ -12,7 +12,7 @@ uniform mat4 view;
 uniform mat4 projection;
 
 // Output vertex attributes (to fragment shader)
-out vec2 fragTexCoord;
+out vec2 fragTexCoord;//For texture
 out vec4 fragColor;
 out vec3 fragPos;
 out vec3 fragNorm;
