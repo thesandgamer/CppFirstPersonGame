@@ -26,7 +26,7 @@ using namespace std;
 //++ToDo: Principe du jeu: homme de slime qui doit s'échapper, peut lancer des boules de slime
 
 //++ToDo Graphiques à faire:
-//++ToDo rajouter une skybox https://www.raylib.com/examples/models/loader.html?name=models_skybox
+//++ToDo rajouter une skybox https://www.raylib.com/examples/models/loader.html?name=models_skybox //Rajouter classe style skybox pour gérer tout ça
 //++ToDo rajouter lighting https://www.raylib.com/examples/shaders/loader.html?name=shaders_basic_lighting
 //++ToDo rajouter post process hachurer et le colorer pour rendu cool https://www.raylib.com/examples/shaders/loader.html?name=shaders_postprocessing
 //++ToDo rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
