@@ -13,7 +13,8 @@ BoxCollision::BoxCollision(Vector3 sizeP) : P_Collision()
 
 void BoxCollision::Draw()
 {
-	DrawBoundingBox(GetBoundingBox(), (IsColliding()) ? RED : GREEN);
+	if(showCollisions)
+		DrawBoundingBox(GetBoundingBox(), (IsColliding()) ? RED : GREEN);
 }
 
 BoundingBox BoxCollision::GetBoundingBox()

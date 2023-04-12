@@ -4,8 +4,6 @@ void AC_FirstPersonCamera::Start()
 {
     //-----------Setup les valeurs de la camera------------
 
-
-    /*
     cam.position = Vector3Add(transform->translation, offsetTransform.translation);    //Sa position
     cam.target = { 0.0f, 1.8f, 0.0f };      //où elle regarde
     cam.up = { 0.0f, 1.0f, 0.0f };          //son vecteur up(où est le haut)
@@ -33,14 +31,14 @@ void AC_FirstPersonCamera::Start()
     //-------
 
     DisableCursor();
-    */
-
+    
+    /*
     cam.position = { 2.0f, 20.0f, 6.0f };
     cam.target = { 0.0f, 10.0f, 0.0f };      //où elle regarde
     cam.up = { 0.0f, 1.0f, 0.0f };          //son vecteur up(où est le haut)
     cam.fovy = 45.0;                       //son field of view
     cam.projection = CAMERA_PERSPECTIVE;    //type de projection
-    SetCameraMode(cam, CAMERA_ORBITAL);
+    SetCameraMode(cam, CAMERA_ORBITAL);*/
 
 }
 
@@ -51,10 +49,10 @@ void AC_FirstPersonCamera::Draw()
 
 void AC_FirstPersonCamera::Update()
 {
-   UpdateCamera(&cam);
-   // cam.position =Vector3Add( transform->translation ,offsetTransform.translation);
+   //UpdateCamera(&cam);
+   cam.position =Vector3Add( transform->translation ,offsetTransform.translation);
 
-    //CameraControl();
+   CameraControl();
 }
 
 void AC_FirstPersonCamera::HeadShake(float strength)
