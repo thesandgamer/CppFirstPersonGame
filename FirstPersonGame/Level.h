@@ -27,6 +27,8 @@ public:
 	virtual void Draw() ;
 	virtual void DrawUi() ;
 
+	void Clean();
+
 	void ResetLevel();
 
 protected:

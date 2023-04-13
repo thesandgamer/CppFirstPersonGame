@@ -33,6 +33,7 @@ void LevelManager::GoToNextLevel()
 {
 	if (levelIndex + 1 < levels.size())
 	{
+		levels[levelIndex]->Clean();
 		levelIndex++;
 		Start();
 	}

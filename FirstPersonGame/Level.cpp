@@ -6,9 +6,11 @@ void Level::Start()
     //                                      Position / Orientation / Couleur
     lights[0] = CreateLight(LIGHT_DIRECTIONAL, { 0, 70, 0 }, {10,0,10}, WHITE, *Utility::GetInstance()->shader); // Create sun light
     
-    lights[1] = CreateLight(LIGHT_POINT,  { 5, 8, 5}, Vector3Zero(), RED, *Utility::GetInstance()->shader);
-    lights[2] = CreateLight(LIGHT_POINT,  { -50, 20, -50 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
+    //lights[1] = CreateLight(LIGHT_POINT,  { 5, 8, 5}, Vector3Zero(), RED, *Utility::GetInstance()->shader);
+    //lights[2] = CreateLight(LIGHT_POINT,  { -50, 20, -50 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
    // lights[3] = CreateLight(LIGHT_POINT,  { 20, 20, -20 }, Vector3Zero(), BLUE, *Utility::GetInstance()->shader);
+
+    lights[0].enabled = true;
 
     character.Start();
     CollisionManager::GetInstance()->Start();
@@ -151,6 +153,18 @@ void Level::DrawUi()
     //DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
 
     DrawText(TextFormat("Is grounded: % 02i", character.IsGrounded()), 100, 10, 10, WHITE);
+}
+
+void Level::Clean()
+{
+    for (CubeActor* cube : Terrain)
+    {
+        cube->~CubeActor();
+    }
+    for (Ennemy* ennemy : Ennemies)
+    {
+        ennemy->~Ennemy();
+    }
 }
 
 void Level::ResetLevel()

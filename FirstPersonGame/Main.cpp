@@ -37,6 +37,7 @@ using namespace std;
 //++ToDo: ajouter un timer qui se reset quand on reset le jeu: pour pousser le coté speerun
 //++ToDo: quand on meurt reset le niveau
 //++ToDo: rajouter des sons
+//++ToDo: rajouter un spawn point
 
 //Editor Variable
 void Init();
