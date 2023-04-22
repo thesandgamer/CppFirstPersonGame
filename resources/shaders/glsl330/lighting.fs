@@ -1,5 +1,6 @@
 #version 330
 
+
 // Input vertex attributes (from vertex shader)
 in vec3 fragPosition;
 in vec2 fragTexCoord;
@@ -35,8 +36,8 @@ struct Light {
 
 // Input lighting values
 uniform Light lights[MAX_LIGHTS];
-uniform vec4 ambient;
-uniform vec3 viewPos;
+uniform vec4 ambient;   //Ici l'ambiant qu'on va changer
+uniform vec3 viewPos;   //Ici la campos qu'on va changer dans le code
 
 void main()
 {

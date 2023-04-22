@@ -31,13 +31,12 @@ using namespace std;
 //++ToDo rajouter post process hachurer et le colorer pour rendu cool https://www.raylib.com/examples/shaders/loader.html?name=shaders_postprocessing
 //++ToDo rajouter un petit fog https://www.raylib.com/examples/shaders/loader.html?name=shaders_fog
 
-//++ToDo: point de vie avec Ui, 
 //++ToDo: true game: main menu avec un bouton pour jouer, et un menu de fin
 
 
 //++ToDo: ajouter un timer qui se reset quand on reset le jeu: pour pousser le coté speerun
-//++ToDo: faire un system porte/intérupteur
-//++ToDo: passer au niveau suivant: objet avec collision qui amène au niveau suivant
+//++ToDo: quand on meurt reset le niveau
+//++ToDo: rajouter des sons
 
 //Editor Variable
 void Init();
@@ -58,6 +57,7 @@ CollisionManager* CollisionManager::instance{ nullptr };
 LevelManager* LevelManager::instance{ nullptr };
 
 
+
 int main(int argc, char* argv[])
 {
     //Créer un écran et on met les fps à 60
@@ -65,10 +65,12 @@ int main(int argc, char* argv[])
     string windowName = "FirstPersonGame";
     InitWindow(screenWidth, screenHeight, windowName.c_str());
 
+    InitAudioDevice();      // Initialize audio device
+
+
     Init();
+    ToggleFullscreen();
 
-
-    //ToggleFullscreen();
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 
@@ -86,6 +88,8 @@ int main(int argc, char* argv[])
 
     Utility::GetInstance()->Unload();
 
+    CloseAudioDevice();
+
     CloseWindow();
 
     return 0;
@@ -98,26 +102,39 @@ Shader shader;
 void Init()
 {
    
-#pragma region Basic Lighting
+#pragma region Basic Lighting shader
   // Load basic lighting shader
+    
+    /*
   shader = LoadShader(TextFormat("../resources/shaders/glsl%i/lighting.vs", GLSL_VERSION),
-                       TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+                      TextFormat("../resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+  */
+    /*
+    shader = LoadShader(TextFormat("../resources/shaders/glsl%i/Phong.vs", GLSL_VERSION),
+                        TextFormat("../resources/shaders/glsl%i/Phong.fs", GLSL_VERSION));
+  */
+  shader = LoadShader(TextFormat("../resources/shaders/glsl%i/base.vs", GLSL_VERSION),
+                      TextFormat("../resources/shaders/glsl%i/base.fs", GLSL_VERSION));
+
   // Get some required shader locations
   shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
   // NOTE: "matModel" location name is automatically assigned on shader loading,
   // no need to get the location again if using that uniform name
-  //shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+ // shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
 
    // Ambient light level (some basic lighting)
-  int ambientLoc = GetShaderLocation(shader, "ambient");
-  float values[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
-  SetShaderValue(shader, ambientLoc, &values, SHADER_UNIFORM_VEC4);
+  int ambientLoc = GetShaderLocation(shader, "ambient");    //récupère la location de l'ambiant du shader
+  float values[4] = { 0.1f, 0.1f, 0.1f, 1.0f };             //Change les valeurs de l'ambiant
+  SetShaderValue(shader, ambientLoc, &values, SHADER_UNIFORM_VEC4); //Set la valeur de l'ambiant du shader
 
 #pragma endregion
 
 
     //Set the shader link in the utility
     Utility::GetInstance()->shader = &shader;
+
+
+
 
 }
 

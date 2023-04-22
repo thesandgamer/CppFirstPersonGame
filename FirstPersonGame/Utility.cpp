@@ -3,6 +3,8 @@
 void Utility::Start()
 {
 	dotTexture = LoadTexture("../resources/Dot.png");
+
+	jumpSound = LoadSound("../resources/Audio/Snd_Jump.wav");
 }
 
 void Utility::AddModel(Model* model)
@@ -20,4 +22,6 @@ void Utility::Unload()
 	}
 	UnloadTexture(dotTexture);
 	UnloadShader(*shader);
+
+	UnloadSound(jumpSound);
 }

@@ -93,8 +93,9 @@
     <ClCompile Include="MovableActor.cpp" />
     <ClCompile Include="IActivable.cpp" />
     <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="Level01.cpp" />
-    <ClCompile Include="Level03.cpp" />
+    <ClCompile Include="Level01.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="P_Collision.h">
@@ -169,8 +170,9 @@
     <ClInclude Include="MovableActor.h" />
     <ClInclude Include="IActivable.h" />
     <ClInclude Include="Utility.h" />
-    <ClInclude Include="Level01.h" />
-    <ClInclude Include="Level03.h" />
+    <ClInclude Include="Level01.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="HowToCreateLevel.txt">
