@@ -2,6 +2,7 @@
 #include "Level0.h"
 #include "LevelTest.h"
 #include "Level01.h"
+#include "Level03.h"
 
 class LevelManager
 {
@@ -39,7 +40,7 @@ public:
 
 private:
 
-	int levelIndex{ 0 };
+	int levelIndex{ 3 };
 
 	std::vector<Level*> levels;
 

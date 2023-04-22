@@ -24,8 +24,10 @@
         };
         Terrain.assign(cubes.begin(), cubes.end());
         std::vector<Ennemy* > ennmis = {
-            new Ennemy({ -25,10,-30 }, 10), // middle one
-            new Ennemy({ -25,15,-55 }, 10)
+            new Ennemy({ -60,10,0 },25),
+            new Ennemy({ -25,10,-30 }, 25), // middle one
+            new Ennemy({ -25,15,-55 }, 20),
+            new Ennemy({75,8,-70},25)
         };
         Ennemies.assign(ennmis.begin(), ennmis.end());
 
