@@ -15,6 +15,7 @@ enum CharacterMovementState {
 	Grounded,
 	InAir,
 };
+
 class Ch_MainCharacter
 {
 public:

@@ -16,6 +16,7 @@ RaycastCollision::~RaycastCollision()
 
 void RaycastCollision::Draw()
 {
+    if (showCollisions)
     DrawRay(GetRay(),length, (IsColliding()) ? RED : GREEN);
 }
 
