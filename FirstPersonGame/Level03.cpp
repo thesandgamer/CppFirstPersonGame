@@ -44,14 +44,19 @@ void Level03::Start()
     Terrain.push_back(new CubeActor({ -180,-20,-110 }, { 20.0f,50.0f, 20.0f }, { 239, 123, 69, 255 }));
     Terrain.push_back(new CubeActor({ -170,8,-80 }, { 3.0f,5.0f, 20.0f }, { 239, 123, 69, 255 }));
                                //mur de la salle 1 
-    Terrain.push_back(new CubeActor({ 0,5,10 }, { 32.0f,15.0f, 2.0f }, { 192, 192, 192, 255 }));// ici 0 = + tout droit , 5 = hauteur et 10 = plus gauche ou droite
+  /* Terrain.push_back(new CubeActor({0,5,10}, {32.0f,15.0f, 2.0f}, {192, 192, 192, 255}));// ici 0 = + tout droit , 5 = hauteur et 10 = plus gauche ou droite
     Terrain.push_back(new CubeActor({ -32,5,10 }, { 32.0f,15.0f, 2.0f }, { 192, 192, 192, 255 }));
     Terrain.push_back(new CubeActor({ 0,5,-10 }, { 32.0f,15.0f, 2.0f }, { 192, 192, 192, 255 }));
   //Terrain.push_back(new CubeActor({ -32,5,-10 }, { 32.0f,15.0f, 2.0f }, { 192, 192, 192, 255 }));
     //Terrain.push_back(new CubeActor({ 0,20,0 }, { 32.0f,10.0f, 32.0f }, { 239, 123, 69, 255 }));// roof but spawn in 
-                                //Corridor//
+                               */
+                               //Corridor//
     Terrain.push_back(new CubeActor({ -180,-20,-130 }, { 20.0f,50.0f, 20.0f }, { 0, 102, 204, 255 }));
-    Terrain.push_back(new CubeActor({ -180,-20,-150 }, { 20.0f,50.0f, 20.0f }, { 0, 102, 204, 255 }));
+    Terrain.push_back(new CubeActor({ -170,-20,-150 }, { 20.0f,50.0f, 20.0f }, { 0, 102, 204, 255 }));
+
+                             //Mur Corridor//
+    Terrain.push_back(new CubeActor({ -190,0,-140 }, { 2.0f,32.0f, 48.0f }, { 204 , 255, 255, 255 }));
+    Terrain.push_back(new CubeActor({ -100,0,-140 }, { 2.0f,32.0f, 48.0f }, { 204 , 255, 255, 255 }));
                                  //Pilliers//
     Terrain.push_back(new CubeActor({ -180,-20,-180 }, { 5.0f,50.0f, 5.0f }, { 153, 51, 255, 255 }));
     Terrain.push_back(new CubeActor({ -200,-20,-200 }, { 5.0f,50.0f, 5.0f }, { 153, 51, 255, 255 }));
