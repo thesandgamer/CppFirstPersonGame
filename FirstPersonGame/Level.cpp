@@ -4,11 +4,13 @@
 void Level::Start()
 {
     //                                      Position / Orientation / Couleur
-    lights[0] = CreateLight(LIGHT_POINT, { 0, 30, 0 }, {10,0,10}, WHITE, *Utility::GetInstance()->shader); // Create sun light
-    /*
-    lights[1] = CreateLight(LIGHT_POINT,  { 2, 1, 2 }, Vector3Zero(), RED, *Utility::GetInstance()->shader);
-    lights[2] = CreateLight(LIGHT_POINT,  { -2, 1, 2 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
-    lights[3] = CreateLight(LIGHT_POINT,  { 2, 1, -2 }, Vector3Zero(), BLUE, *Utility::GetInstance()->shader);*/
+    lights[0] = CreateLight(LIGHT_DIRECTIONAL, { 0, 70, 0 }, {10,0,10}, WHITE, *Utility::GetInstance()->shader); // Create sun light
+    
+    //lights[1] = CreateLight(LIGHT_POINT,  { 5, 8, 5}, Vector3Zero(), RED, *Utility::GetInstance()->shader);
+    //lights[2] = CreateLight(LIGHT_POINT,  { -50, 20, -50 }, Vector3Zero(), GREEN, *Utility::GetInstance()->shader);
+   // lights[3] = CreateLight(LIGHT_POINT,  { 20, 20, -20 }, Vector3Zero(), BLUE, *Utility::GetInstance()->shader);
+
+    lights[0].enabled = true;
 
     character.Start();
     CollisionManager::GetInstance()->Start();
@@ -39,6 +41,14 @@ void Level::Start()
     deathzone->GetCollision()->layer = Layer5;
     deathzone->GetCollision()->collideWithLayer = Layer3;
     deathzone->GetCollision()->checkingCollision = true;
+
+    //Pour le shader
+    float cameraPos[3] = { character.GetCamera().position.x,
+    character.GetCamera().position.y,
+    character.GetCamera().position.z };
+
+    SetShaderValue(*Utility::GetInstance()->shader, Utility::GetInstance()->shader->locs[SHADER_LOC_VECTOR_VIEW],
+        &cameraPos, SHADER_UNIFORM_VEC3);   //Change la valeur de camera pos du shader
 
 }
 
@@ -77,13 +87,10 @@ void Level::Update()
     }
 
     //------Update lights
-    float cameraPos[3] = { character.GetCamera().position.x,
-        character.GetCamera().position.y,
-        character.GetCamera().position.z };
+
 
     // Shader / Location de la valeur / Valeur qu'on fait passer / Type de variable
-    SetShaderValue(*Utility::GetInstance()->shader, Utility::GetInstance()->shader->locs[SHADER_LOC_VECTOR_VIEW],
-        &cameraPos, SHADER_UNIFORM_VEC3);   //Change la valeur de camera pos du shader
+
 
     for (int i = 0; i < MAX_LIGHTS; i++) UpdateLightValues(*Utility::GetInstance()->shader, lights[i]);
     
@@ -146,6 +153,18 @@ void Level::DrawUi()
     //DrawText(TextFormat("rb vel: % 02.02f", character.gravity.velocity.y), 10, 20, 10, WHITE);
 
     DrawText(TextFormat("Is grounded: % 02i", character.IsGrounded()), 100, 10, 10, WHITE);
+}
+
+void Level::Clean()
+{
+    for (CubeActor* cube : Terrain)
+    {
+        cube->~CubeActor();
+    }
+    for (Ennemy* ennemy : Ennemies)
+    {
+        ennemy->~Ennemy();
+    }
 }
 
 void Level::ResetLevel()
