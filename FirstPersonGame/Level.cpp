@@ -37,7 +37,7 @@ void Level::Start()
     }
 
     //Créer la death zone
-    deathzone = new CubeActor({ 0,-50,0 }, { 256, 10, 256 }, BLACK);
+    deathzone = new CubeActor({ 0,-50,0 }, { 800, 10, 800 }, BLACK);
     deathzone->GetCollision()->layer = Layer5;
     deathzone->GetCollision()->collideWithLayer = Layer3;
     deathzone->GetCollision()->checkingCollision = true;
