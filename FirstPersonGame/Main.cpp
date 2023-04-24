@@ -177,6 +177,8 @@ void Draw()
 void DrawUi()
 {
     LevelManager::GetInstance()->DrawUi();
+   // DrawFPS(80, 80);
+
 }
 
 

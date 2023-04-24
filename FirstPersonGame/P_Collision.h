@@ -65,7 +65,7 @@ public:
 
 	double id{ -1 };
 
-	bool showCollisions{ true };
+	bool showCollisions{ false };
 
 
 };
