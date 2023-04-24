@@ -38,6 +38,7 @@ using namespace std;
 //++ToDo: quand on meurt reset le niveau
 //++ToDo: rajouter des sons
 //++ToDo: rajouter un spawn point
+//++ToDo: rajouter timer + ecran score quand arrive à la fin
 
 //Editor Variable
 void Init();
